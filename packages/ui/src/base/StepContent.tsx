@@ -1,0 +1,1 @@
+export { default as StepContent } from "@mui/material/StepContent";

@@ -1,0 +1,1 @@
+export { default as SpeedDialAction } from "@mui/material/SpeedDialAction";

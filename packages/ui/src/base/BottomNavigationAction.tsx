@@ -1,0 +1,1 @@
+export { default as BottomNavigationAction } from "@mui/material/BottomNavigationAction";

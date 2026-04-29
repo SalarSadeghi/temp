@@ -1,0 +1,1 @@
+export { default as ImageListItemBar } from "@mui/material/ImageListItemBar";

@@ -1,0 +1,1 @@
+export { default as DialogContentText } from "@mui/material/DialogContentText";

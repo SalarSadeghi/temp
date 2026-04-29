@@ -1,0 +1,1 @@
+export { default as CardActionArea } from "@mui/material/CardActionArea";

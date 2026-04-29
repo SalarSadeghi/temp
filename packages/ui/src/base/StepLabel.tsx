@@ -1,0 +1,1 @@
+export { default as StepLabel } from "@mui/material/StepLabel";
