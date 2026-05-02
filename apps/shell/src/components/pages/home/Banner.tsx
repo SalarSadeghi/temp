@@ -1,8 +1,7 @@
-import React from 'react'
 
 const Banner = () => {
   return (
-    <div>
+    <div className="rounded-md bg-white h-28">
       
     </div>
   )

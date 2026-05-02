@@ -1,11 +1,15 @@
-import React from 'react'
+import ServiceBox from "@components/common/ServiceBox";
+import { LocalFireDepartment } from "@superapp/icons";
 
 const MainContent = () => {
   return (
-    <div>
-      
+    <div className="w-full">
+      <ServiceBox
+        title={"کارت سبز"}
+        icon={<LocalFireDepartment className="text-blue-600" />}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default MainContent
+export default MainContent;

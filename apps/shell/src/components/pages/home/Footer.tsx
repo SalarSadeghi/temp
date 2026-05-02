@@ -1,11 +1,13 @@
-import React from 'react'
+import ServiceBox from "@components/common/ServiceBox";
 
 const Footer = () => {
   return (
-    <div>
-      
+    <div className="h-full flex justify-between">
+      <ServiceBox title="کیف پول" />
+      <ServiceBox title="فیش حقوقی" />
+      <ServiceBox title="ثبت پیشنهاد" />
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
