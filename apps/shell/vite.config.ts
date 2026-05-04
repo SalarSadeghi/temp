@@ -12,7 +12,7 @@ export default defineConfig({
     federation({
       name: "shell",
       remotes: {
-        temp: "http://localhost:3001/assets/remoteEntry.js",
+        temp: "http://localhost:4173/assets/remoteEntry.js",
       },
       shared: ["react", "react-dom"],
     }),
@@ -46,6 +46,14 @@ export default defineConfig({
       {
         find: /^@pages/,
         replacement: path.resolve(__dirname, "src/pages"),
+      },
+      {
+        find: /^@hooks/,
+        replacement: path.resolve(__dirname, "src/hooks"),
+      },
+      {
+        find: /^@validations/,
+        replacement: path.resolve(__dirname, "src/validations"),
       },
     ],
   },

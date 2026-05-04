@@ -25,7 +25,9 @@
       "@store/*": ["src/store/*"],
       "@routing/*": ["src/routing/*"],
       "@utils/*": ["src/utils/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@validations/*": ["src/validations/*"],
     },
     "allowSyntheticDefaultImports": true
   },

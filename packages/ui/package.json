@@ -5,7 +5,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./components": "./src/base/index.ts",
-    "./theme": "./src/theme/index.ts"
+    "./theme": "./src/theme/index.ts",
+    "./inputs": "./src/inputs/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -35,6 +36,7 @@
     "date-fns": "^3.3.1",
     "date-fns-jalali": "2.13.0-0",
     "stylis": "^4.3.0",
-    "stylis-plugin-rtl": "^2.1.1"
+    "stylis-plugin-rtl": "^2.1.1",
+    "react-hook-form": "^7.48.2"
   }
 }

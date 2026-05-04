@@ -1,7 +1,5 @@
-import { lazy } from "react";
 import AppRouter from "@routing/index";
 
-const TempMFE = lazy(() => import("temp/Temp"));
 
 function App() {
   return (

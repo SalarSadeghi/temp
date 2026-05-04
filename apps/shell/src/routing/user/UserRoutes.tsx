@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import NotFound from "@components/common/NotFound";
 import ProtectedRoute from "@components/common/ProtectedRoute";
 import { lazy } from "react";
+const TempMFE = lazy(() => import("temp/Temp"));
 
 const HomePage = lazy(() => import("@pages/home/HomePage"));
 
