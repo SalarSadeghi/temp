@@ -1,1 +1,1 @@
-export { useUserStore, type User } from './stores/userStore';
+export { useAuthStore, type User } from "./stores/authStore.js";

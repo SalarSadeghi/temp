@@ -4,25 +4,31 @@ import { ReactNode } from "react";
 interface ServiceBoxProps {
   icon?: ReactNode;
   title?: string;
-  boxClassName?: string;
+  innerBoxClassName?: string;
   titleClassName?: string;
+  outerBoxClassName?: string;
 }
 
 const ServiceBox = ({
-  boxClassName = "",
+  innerBoxClassName = "",
   titleClassName = "",
   icon = <QuestionMark color="primary" />,
   title = "",
+  outerBoxClassName = "",
 }: ServiceBoxProps) => {
   return (
-    <div className="flex flex-col items-center gap-1 justify-center w-16 cursor-pointer">
+    <div className="flex flex-col items-center gap-1 justify-center  cursor-pointer p-1">
       <div
-        className={`h-14 w-14 rounded-full bg-white flex items-center justify-center ${boxClassName}`}
+        className={`bg-gradient-to-br rounded-md  from-[#9945FF] to-[#14F195] p-1 ${outerBoxClassName}`}
       >
-        {icon}
+        <div
+          className={`h-10 w-10 bg-white flex items-center justify-center ${innerBoxClassName}`}
+        >
+          {icon}
+        </div>
       </div>
       <div
-        className={`text-white font-semibold text-xs break-words ${titleClassName}`}
+        className={`font-semibold text-[10px] break-words ${titleClassName}`}
       >
         {title}
       </div>

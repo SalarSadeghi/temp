@@ -1,8 +1,8 @@
 {
-  "name": "@superapp/shared-store",
+  "name": "@superapp/shared-api",
   "version": "1.0.0",
   "type": "module",
-  "main": "./src/index.ts",
+  "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
@@ -13,13 +13,13 @@
     "dev": "vite build --watch"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "zustand": "^4.4.7"
+    "@superapp/shared-store": "workspace:*",
+    "axios": "^1.6.2",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
     "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.7.0",
-    "zustand": "^4.4.7"
+    "vite-plugin-dts": "^3.7.0"
   }
 }

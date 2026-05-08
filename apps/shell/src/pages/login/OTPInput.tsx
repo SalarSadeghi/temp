@@ -1,5 +1,5 @@
 // src/components/OtpInput.tsx
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 interface OtpInputProps {
   value: string;
@@ -27,7 +27,7 @@ export const OTPInput: React.FC<OtpInputProps> = ({
 
   const handleChange = (
     index: number,
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const newValue = e.target.value;
     if (newValue.length > 1) return;
@@ -50,7 +50,7 @@ export const OTPInput: React.FC<OtpInputProps> = ({
 
   const handleKeyDown = (
     index: number,
-    e: React.KeyboardEvent<HTMLInputElement>
+    e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     if (e.key === "Backspace" && !value[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -66,7 +66,7 @@ export const OTPInput: React.FC<OtpInputProps> = ({
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-row-reverse gap-2">
       {Array.from({ length }, (_, index) => (
         <input
           key={index}
@@ -78,7 +78,9 @@ export const OTPInput: React.FC<OtpInputProps> = ({
           onKeyDown={(e) => handleKeyDown(index, e)}
           onPaste={handlePaste}
           disabled={disabled}
-          className="w-10 h-10 font-semibold border-2 border-blue-600 text-center rounded-md"
+          className={`w-10 h-10 font-semibold 
+           ${value[index] ? "border-[#9945FF]" : "border-gray-300"} 
+            border-2 text-center rounded-md`}
           inputMode="numeric"
           pattern="[0-9]*"
         />

@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import NotFound from "@components/common/NotFound";
 import ProtectedRoute from "@components/common/ProtectedRoute";
 import { lazy } from "react";
-const TempMFE = lazy(() => import("temp/Temp"));
+import Loadable from "@components/common/Suspence";
 
-const HomePage = lazy(() => import("@pages/home/HomePage"));
+const TempMFE = Loadable(lazy(() => import("temp/Temp")));
+const HomePage = Loadable(lazy(() => import("@pages/home/HomePage")));
 
 const UserRoutes = () => {
   return (
@@ -13,11 +14,12 @@ const UserRoutes = () => {
       <Route
         path="/"
         element={
-          //   <ProtectedRoute>
-          <HomePage />
-          //    </ProtectedRoute>
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
         }
       />
+      <Route path="/temp/*" element={<TempMFE />} />
       <Route
         path="*"
         element={

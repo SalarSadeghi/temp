@@ -16,6 +16,13 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "dev:shell": {
+      "dependsOn": ["^build"],
+      "persistent": true
+    },
+    "preview": {
+      "dependsOn": ["build"]
     }
   }
 }

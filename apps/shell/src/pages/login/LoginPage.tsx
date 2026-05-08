@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { CustomButton, CustomTextInput } from "@superapp/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginFormSchema } from "@validations/loginPage/LoginFormSchema";
+import Login from "@components/pages/login/Login";
 // import "./LoginPage.css";
 // src/types/auth.types.ts
 export interface PhoneNumberRequest {
@@ -176,8 +177,25 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen p-4 bg-white">
-      <div className="flex bg-white border-blue-400 border-2 flex-col shadow-lg rounded-lg p-8 w-full gap-4">
+    <div className="flex justify-center items-center h-screen p-4 bg-gradient-to-br  to-[#9945FF] from-[#14F195]">
+      <div className="bg-white min-h-96 w-[90%] rounded-2xl shadow-lg p-4 flex flex-col justify-between items-center">
+        <div className="flex flex-col items-center gap-2">
+          <div className="rounded-full bg-gradient-to-br  to-[#9945FF] from-[#14F195] p-2">
+            <Lock sx={{ color: "white" }} />
+          </div>
+          <span className="font-semibold text-lg">خوش آمدید!</span>
+        </div>
+        <div>
+          <Login />
+        </div>
+        <div className="text-xs flex gap-2">
+          <span className="text-gray-400">عضو نیستید؟</span>
+          <span className="text-[#9945FF] cursor-pointer underline underline-offset-8">
+            ثبت‌نام
+          </span>
+        </div>
+      </div>
+      {/* <div className="flex bg-white border-blue-400 border-2 flex-col shadow-lg rounded-lg p-8 w-full gap-4">
         <div className="flex  justify-center">
           <Lock sx={{ color: "#764ba2" }} fontSize="large" />
         </div>
@@ -187,20 +205,6 @@ export const LoginPage: React.FC = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-4"
           >
-            {/* <div className="form-group">
-              <label htmlFor="phone">Phone Number</label>
-              <input
-                className="w-full p-3"
-                id="phone"
-                type="tel"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                // placeholder="Enter your 10-digit phone number"
-                disabled={status === "sending"}
-                autoComplete="off"
-              />
-            </div> */}
-
             <CustomTextInput
               type="tel"
               control={control}
@@ -211,13 +215,6 @@ export const LoginPage: React.FC = () => {
               <div className="error-message">{errors.form?.message}</div>
             )}
 
-            {/* <button
-              type="submit"
-              disabled={status === "sending" || !phoneNumber}
-              className="submit-btn"
-            >
-              {status === "sending" ? "Sending OTP..." : "Send OTP"}
-            </button> */}
             <CustomButton
               type="submit"
               disabled={status === "sending" || !phoneNumber}
@@ -265,7 +262,6 @@ export const LoginPage: React.FC = () => {
               )}
             </div>
 
-            {/* {error && <div className="error-message">{error}</div>} */}
 
             <button
               onClick={handleVerifyOtp}
@@ -282,7 +278,7 @@ export const LoginPage: React.FC = () => {
             Login successful! Redirecting...
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
