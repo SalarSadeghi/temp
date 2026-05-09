@@ -1,16 +1,14 @@
 {
   "name": "@superapp/shared-store",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
     "./stores/*": "./src/stores/*"
   },
   "scripts": {
-    "build": "vite build",
-    "dev": "vite build --watch"
+    "lint": "eslint . --max-warnings 0"
+
   },
   "peerDependencies": {
     "react": "^18.2.0",

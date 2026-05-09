@@ -17,7 +17,7 @@ const Footer = () => {
       {FooterItems?.map((item) => (
         <ServiceBox
           outerBoxClassName="border-0 p-0 bg-none"
-          innerBoxClassName="rounded-full"
+          innerBoxClassName="rounded-full h-8 w-8"
           title={item.title}
           icon={item.icon}
         />

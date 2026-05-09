@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 @font-face {
   font-family: IRANSans;
   src: url("assets/fonts/IRANSans-Light.ttf") format("truetype");
@@ -47,6 +50,12 @@
   font-family: IRANSans;
   src: url("assets/fonts/IRANSans-Bold.ttf") format("truetype");
   font-weight: bold;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {

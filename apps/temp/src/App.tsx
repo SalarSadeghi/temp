@@ -1,9 +1,12 @@
-
-import "./App.css";
+import AppRouter from "@routing/index";
 
 function App() {
-
-  return <>This is Temp Micro-FrontEnd</>;
+  return (
+    <>
+      <AppRouter />
+      
+    </>
+  );
 }
 
 export default App;
