@@ -1,8 +1,13 @@
 import { useAuthStore } from "@superapp/shared-store";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { user } = useAuthStore((state) => state);
+  const { user, setUser } = useAuthStore((state) => state);
+  useEffect(() => {
+    setUser({ name: "foo", family: "bar" });
+  }, []);
+
   return (
     <div className="flex flex-col h-screen justify-center items-center gap-4">
       <p>USER NAME IS: {user?.name ?? "-"}</p>

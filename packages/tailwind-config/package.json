@@ -1,0 +1,15 @@
+{
+  "name": "@superapp/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./tailwind.config.ts"
+  },
+  "scripts": {},
+  "devDependencies": {
+    "@superapp/typescript-config": "workspace:*",
+    "@types/node": "^20.14.9",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.3"
+  }
+}

@@ -11,6 +11,7 @@
   },
   "peerDependencies": {
     "@originjs/vite-plugin-federation": "^1.4.1",
+    "@superapp/tailwind-config": "workspace:*",
     "@superapp/icons": "workspace:*",
     "@superapp/ui": "workspace:*",
     "@superapp/shared-store": "workspace:*",

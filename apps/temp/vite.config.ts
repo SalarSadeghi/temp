@@ -6,6 +6,12 @@ import path from "path";
 export default defineConfig({
   server: {
     port: 3002,
+    cors: true,
+  },
+  preview: {
+    port: 4173,
+    host: true,
+    cors: true,
   },
   plugins: [
     react(),
@@ -16,10 +22,11 @@ export default defineConfig({
         "./Temp": "./src/App.tsx",
       },
       shared: {
-        react: {},
-        "react-dom": {},
-        zustand: {},
-        "react-router-dom": {},
+        react: { singleton: true, requiredVersion: "^18.2.0" },
+        "react-dom": { singleton: true, requiredVersion: "^18.2.0" },
+        zustand: { singleton: true, requiredVersion: "^4.4.7" },
+        "react-router-dom": { singleton: true, requiredVersion: "^6.22.0" },
+        "@superapp/shared-store": { version: "0.0.0", singleton: true },
       },
     }),
   ],

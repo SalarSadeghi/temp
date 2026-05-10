@@ -1,10 +1,12 @@
 import AppRouter from "@routing/index";
+import Layout from "@pages/layout/Layout";
 
 function App() {
   return (
     <>
-      <AppRouter />
-      
+      <Layout>
+        <AppRouter />
+      </Layout>
     </>
   );
 }

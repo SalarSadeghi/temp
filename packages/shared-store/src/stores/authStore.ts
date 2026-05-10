@@ -31,15 +31,15 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: "token",
-      partialize: (state) => ({
-        token: state.token,
-        user: state.user,
-      }),
+      // partialize: (state) => ({
+      //   token: state.token,
+      //   // user: state.user,
+      // }),
       onRehydrateStorage: () => (state) => {
         if (state?.token) {
           state.isAuthenticated = true;
         }
       },
-    },
-  ),
+    }
+  )
 );
