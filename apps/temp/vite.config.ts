@@ -22,17 +22,20 @@ export default defineConfig({
         "./Temp": "./src/App.tsx",
       },
       shared: {
-        react: { singleton: true, requiredVersion: "^18.2.0" },
-        "react-dom": { singleton: true, requiredVersion: "^18.2.0" },
-        zustand: { singleton: true, requiredVersion: "^4.4.7" },
-        "react-router-dom": { singleton: true, requiredVersion: "^6.22.0" },
-        "@superapp/shared-store": { version: "0.0.0", singleton: true },
+        react: { singleton: true, requiredVersion: "^18.2.0" } as any,
+        "react-dom": { singleton: true, requiredVersion: "^18.2.0" } as any,
+        zustand: { singleton: true, requiredVersion: "^4.4.7" } as any,
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: "^6.22.0",
+        } as any,
+        "@superapp/shared-store": { version: "0.0.0", singleton: true } as any,
+        "@superapp/tailwind-config": { singleton: true } as any,
       },
     }),
   ],
   build: {
     target: "esnext",
-    minify: false,
     cssCodeSplit: false,
   },
   resolve: {

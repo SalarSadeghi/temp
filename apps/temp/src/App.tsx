@@ -1,12 +1,15 @@
 import AppRouter from "@routing/index";
 import Layout from "@pages/layout/Layout";
+import { AppThemeProvider } from "@superapp/ui";
 
 function App() {
   return (
     <>
-      <Layout>
-        <AppRouter />
-      </Layout>
+      <AppThemeProvider>
+        <Layout>
+          <AppRouter />
+        </Layout>
+      </AppThemeProvider>
     </>
   );
 }

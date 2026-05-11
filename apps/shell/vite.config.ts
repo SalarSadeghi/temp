@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
 import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
+import { version } from "os";
 
 // const getRemoteUrl = () => {
 //   // Check if running on mobile/local network
@@ -76,19 +77,27 @@ export default defineConfig({
     federation({
       name: "shell",
       remotes: {
-        temp: "http://10.186.18.89:4173/assets/remoteEntry.js",
+        temp: "http://10.186.18.143:4173/assets/remoteEntry.js",
       },
       shared: {
-        react: { singleton: true, requiredVersion: "^18.2.0" },
-        "react-dom": { singleton: true, requiredVersion: "^18.2.0" },
-        zustand: { singleton: true, requiredVersion: "^4.4.7" },
-        "@superapp/shared-store": { version: "0.0.0", singleton: true },
-        "react-router-dom": { singleton: true, requiredVersion: "^6.22.0" },
+        react: { singleton: true, requiredVersion: "^18.2.0" } as any,
+        "react-dom": { singleton: true, requiredVersion: "^18.2.0" } as any,
+        zustand: { singleton: true, requiredVersion: "^4.4.7" } as any,
+        "@superapp/shared-store": { version: "0.0.0", singleton: true } as any,
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: "^6.22.0",
+        } as any,
+        "@superapp/tailwind-config": {
+          singleton: true,
+          version: "0.0.0",
+        } as any,
       },
     }),
   ],
   build: {
     target: "esnext",
+    cssCodeSplit: false,
   },
   resolve: {
     extensions: [".js", ".ts", ".jsx", ".tsx", ".json"],
