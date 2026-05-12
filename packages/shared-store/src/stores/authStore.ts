@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { produce } from "immer";
 
 export interface User {
   family: string;
@@ -13,8 +14,9 @@ const TempUser: User = {
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
-  setUser: (user: User | null) => void;
   token: string | null;
+  setUser: (user: User | null) => void;
+  setToken: (token: string | null) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -24,17 +26,27 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       token: null,
       setUser: (userData: User | null) =>
-        set({
-          user: userData,
-          isAuthenticated: !!userData,
-        }),
+        set(
+          produce((draft) => {
+            draft.user = userData;
+          }),
+          false
+        ),
+      setToken: (token: string | null) =>
+        set(
+          produce((draft) => {
+            draft.token = token;
+            draft.isAuthenticated = !!token;
+          }),
+          false
+        ),
     }),
     {
-      name: "token",
-      // partialize: (state) => ({
-      //   token: state.token,
-      //   // user: state.user,
-      // }),
+      name: "user-zstorage",
+      partialize: (state) => ({
+        token: state.token,
+        user: state.user,
+      }),
       onRehydrateStorage: () => (state) => {
         if (state?.token) {
           state.isAuthenticated = true;

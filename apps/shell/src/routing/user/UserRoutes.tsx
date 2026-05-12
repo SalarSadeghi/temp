@@ -14,9 +14,9 @@ const UserRoutes = () => {
       <Route
         path="/"
         element={
-          // <ProtectedRoute>
+          <ProtectedRoute>
             <HomePage />
-          // </ProtectedRoute>
+          </ProtectedRoute>
         }
       />
       <Route path="/temp/*" element={<TempMFE />} />

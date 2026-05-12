@@ -41,6 +41,9 @@ importers:
       axios:
         specifier: ^1.6.2
         version: 1.15.2
+      immer:
+        specifier: ^10.0.3
+        version: 10.2.0
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -67,7 +70,7 @@ importers:
         version: 1.7.1
       zustand:
         specifier: ^4.4.7
-        version: 4.5.7(@types/react@18.3.28)(react@18.3.1)
+        version: 4.5.7(@types/react@18.3.28)(immer@10.2.0)(react@18.3.1)
     devDependencies:
       '@originjs/vite-plugin-federation':
         specifier: ^1.4.1
@@ -137,7 +140,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       zustand:
         specifier: ^4.4.7
-        version: 4.5.7(@types/react@18.3.28)(react@18.3.1)
+        version: 4.5.7(@types/react@18.3.28)(immer@10.2.0)(react@18.3.1)
     devDependencies:
       '@originjs/vite-plugin-federation':
         specifier: ^1.4.1
@@ -285,6 +288,9 @@ importers:
 
   packages/shared-store:
     dependencies:
+      immer:
+        specifier: ^10.0.3
+        version: 10.2.0
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -300,7 +306,7 @@ importers:
         version: 3.9.1(@types/node@20.19.39)(rollup@4.60.2)(typescript@5.9.2)(vite@5.4.21(@types/node@20.19.39)(terser@5.46.2))
       zustand:
         specifier: ^4.4.7
-        version: 4.5.7(@types/react@18.3.28)(react@18.3.1)
+        version: 4.5.7(@types/react@18.3.28)(immer@10.2.0)(react@18.3.1)
 
   packages/tailwind-config:
     devDependencies:
@@ -2899,6 +2905,9 @@ packages:
   ignore@7.0.5:
     resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
+
+  immer@10.2.0:
+    resolution: {integrity: sha512-d/+XTN3zfODyjr89gM3mPq1WNX2B8pYsu7eORitdwyA2sBubnTl3laYlBk4sXY5FUa5qTZGBDPJICVbvqzjlbw==}
 
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
@@ -7419,6 +7428,8 @@ snapshots:
 
   ignore@7.0.5: {}
 
+  immer@10.2.0: {}
+
   import-fresh@3.3.1:
     dependencies:
       parent-module: 1.0.1
@@ -9127,9 +9138,10 @@ snapshots:
     optionalDependencies:
       commander: 9.5.0
 
-  zustand@4.5.7(@types/react@18.3.28)(react@18.3.1):
+  zustand@4.5.7(@types/react@18.3.28)(immer@10.2.0)(react@18.3.1):
     dependencies:
       use-sync-external-store: 1.6.0(react@18.3.1)
     optionalDependencies:
       '@types/react': 18.3.28
+      immer: 10.2.0
       react: 18.3.1

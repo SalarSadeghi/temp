@@ -8,11 +8,11 @@
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0"
-
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "zustand": "^4.4.7"
+    "zustand": "^4.4.7",
+    "immer": "^10.0.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

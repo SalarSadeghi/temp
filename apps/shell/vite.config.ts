@@ -77,7 +77,7 @@ export default defineConfig({
     federation({
       name: "shell",
       remotes: {
-        temp: "http://10.186.18.143:4173/assets/remoteEntry.js",
+        temp: "http://10.186.18.89:4173/assets/remoteEntry.js",
       },
       shared: {
         react: { singleton: true, requiredVersion: "^18.2.0" } as any,
