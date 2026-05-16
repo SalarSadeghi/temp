@@ -1,0 +1,60 @@
+# Dependencies
+node_modules
+**/node_modules
+
+# Build outputs
+**/dist
+**/build
+**/.next
+**/out
+**/.cache
+
+# Turbo
+.turbo
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs
+
+# Docker files (to avoid including in context)
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+**/coverage
+**/.nyc_output
+
+# TypeScript build info
+**/*.tsbuildinfo
+
+# Package manager files (optional - uncomment if needed)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Temporary files
+tmp
+temp
+*.tmp
+
+# READMEs and docs (optional)
+**/README.md
+docs/

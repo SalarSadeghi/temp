@@ -1,8 +1,8 @@
 import * as yup from "yup";
 // import Texts from '@assets/json/Texts.json';
-import { ValidationErrors } from "@validations/ValidationErrors";
+// import { ValidationErrors } from "@validations/ValidationErrors";
 
-const persianPhoneRegex = /^(0|۰)?(9|۹)[0-9۰-۹]{9}$/;
+// const persianPhoneRegex = /^(0|۰)?(9|۹)[0-9۰-۹]{9}$/;
 
 export const LoginFormSchema = yup.object().shape({
   phoneNumber: yup

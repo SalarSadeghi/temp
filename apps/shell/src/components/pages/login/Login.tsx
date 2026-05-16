@@ -1,5 +1,5 @@
 import OTPForm from "./OTPForm";
-import PhoneNumberForm from "./PhoneNumberForm";
+// import PhoneNumberForm from "./PhoneNumberForm";
 
 const Login = () => {
   return (

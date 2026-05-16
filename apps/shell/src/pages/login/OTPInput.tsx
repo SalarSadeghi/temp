@@ -1,5 +1,5 @@
 // src/components/OtpInput.tsx
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 
 interface OtpInputProps {
   value: string;
@@ -27,7 +27,7 @@ export const OTPInput: React.FC<OtpInputProps> = ({
 
   const handleChange = (
     index: number,
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const newValue = e.target.value;
     if (newValue.length > 1) return;
@@ -50,7 +50,7 @@ export const OTPInput: React.FC<OtpInputProps> = ({
 
   const handleKeyDown = (
     index: number,
-    e: React.KeyboardEvent<HTMLInputElement>,
+    e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (e.key === "Backspace" && !value[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();

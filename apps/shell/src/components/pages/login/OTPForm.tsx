@@ -14,10 +14,10 @@ const OTPForm = () => {
   const {
     handleSubmit,
     control,
-    reset,
-    setValue,
+    // reset,
+    // setValue,
     watch,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<FormValues | any>({
     defaultValues: {
       otp: "",
@@ -30,7 +30,7 @@ const OTPForm = () => {
     console.log(data);
   };
 
-  const { seconds, isActive, startTimer, resetTimer, formatTime } = useTimer(5);
+  const { isActive, startTimer, formatTime } = useTimer(5);
 
   useEffect(() => {
     startTimer();

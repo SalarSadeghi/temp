@@ -9,7 +9,6 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   const { token } = useAuthStore();
   // const token = getTokenFromLocalStorage();
   // also check the token’s validity later; for example expired tokens
-  
 
   if (!token) {
     // Redirect to login if there is no token

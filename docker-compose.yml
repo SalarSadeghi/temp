@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  shell:
+    build:
+      context: .
+      dockerfile: apps/shell/dockerfile
+    container_name: shell
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_TEMP_URL=http://localhost:3002
+    networks:
+      - superapp-network
+  temp:
+    build:
+      context: .
+      dockerfile: apps/temp/dockerfile
+    container_name: temp
+    depends_on:
+      - shell
+    ports:
+      - "3002:80"
+    networks:
+      - superapp-network
+
+networks:
+  superapp-network:
+    driver: bridge

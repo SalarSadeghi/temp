@@ -5,6 +5,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "dev:shell": "turbo dev --filter=shell",
+    "build:shell": "turbo run build --filter=shell",
+    "build:temp": "turbo run build --filter=temp",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"

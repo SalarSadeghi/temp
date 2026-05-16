@@ -12,9 +12,9 @@ const PhoneNumberForm = () => {
   const {
     handleSubmit,
     control,
-    reset,
-    setValue,
-    watch,
+    // reset,
+    // setValue,
+    // watch,
     formState: { errors },
   } = useForm<FormValues | any>({
     resolver: yupResolver(LoginFormSchema),

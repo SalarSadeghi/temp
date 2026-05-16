@@ -1,5 +1,5 @@
 type PrivacyLevel = "low" | "medium" | "high" | "custom";
-type ObfuscationChar = string;
+// type ObfuscationChar = string;
 
 // Configuration interface
 interface ObfuscationConfig {
