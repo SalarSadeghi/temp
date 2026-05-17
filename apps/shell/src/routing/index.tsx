@@ -10,11 +10,13 @@ import AdminRoutes from "@routing/admin/AdminRoutes";
 import UserRoutes from "@routing/user/UserRoutes";
 import ProtectedRoute from "@components/common/ProtectedRoute";
 import NotFound from "@components/common/NotFound";
+import { InstallPWABanner } from "@components/common/InstallPWABanner";
 
 const AppRouter = () => {
   return (
     <Router>
       <ErrorBoundary>
+        <InstallPWABanner />
         <Routes>
           {/* Redirect to '/user' path */}
           <Route path="/" element={<Navigate to="/user" replace />} />

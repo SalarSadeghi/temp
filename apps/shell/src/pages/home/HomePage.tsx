@@ -7,6 +7,7 @@ import Sidebar from "./sidebar/Sidebar";
 
 const HomePage = () => {
   const { isSidebarOpen, toggleSidebar } = useSidebarStore();
+
   return (
     <>
       {isSidebarOpen && (

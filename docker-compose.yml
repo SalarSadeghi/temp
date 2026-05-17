@@ -7,7 +7,7 @@ services:
       dockerfile: apps/shell/dockerfile
     container_name: shell
     ports:
-      - "3000:80"
+      - "3001:80"
     environment:
       - VITE_TEMP_URL=http://localhost:3002
     networks:

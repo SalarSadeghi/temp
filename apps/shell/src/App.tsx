@@ -1,6 +1,5 @@
 import AppRouter from "@routing/index";
 
-
 function App() {
   return (
     <>
