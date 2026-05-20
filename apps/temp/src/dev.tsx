@@ -5,8 +5,8 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
 if (import.meta.env.DEV) {
-    import('http://localhost:3000/src/index.css').catch(() => {
-    console.warn('Shell CSS not available, running in standalone mode');
+  import("http://localhost:3000/src/index.css").catch(() => {
+    console.warn("Shell CSS not available, running in standalone mode");
   });
 }
 

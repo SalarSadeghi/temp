@@ -1,6 +1,6 @@
 import AppRouter from "@routing/index";
 import Layout from "@pages/layout/Layout";
-import { AppThemeProvider } from "@superapp/ui";
+import { AppThemeProvider, ModalRenderer } from "@superapp/ui";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
         <Layout>
           <AppRouter />
         </Layout>
+        <ModalRenderer />
       </AppThemeProvider>
     </>
   );

@@ -17,9 +17,10 @@ import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  // const isDev = env.NODE_ENV === "development";
   return {
     server: {
-      port: 3001,
+      port: Number(env?.VITE_SHELL_URL) || 3000,
       host: true,
       cors: true,
     },
