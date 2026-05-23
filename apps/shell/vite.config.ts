@@ -88,6 +88,7 @@ export default defineConfig(({ mode }) => {
         name: "shell",
         remotes: {
           temp: `${env.VITE_TEMP_URL}/assets/remoteEntry.js`,
+          "mfe-soe-grn": `${env.VITE_SOE_GRN_URL}/assets/remoteEntry.js`,
         },
         shared: {
           react: { singleton: true, requiredVersion: "^18.2.0" } as any,

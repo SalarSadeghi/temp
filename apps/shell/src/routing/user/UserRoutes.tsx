@@ -7,6 +7,7 @@ import Loadable from "@components/common/Suspence";
 
 const TempMFE = Loadable(lazy(() => import("temp/Temp")));
 const HomePage = Loadable(lazy(() => import("@pages/home/HomePage")));
+const SOE_GRN = Loadable(lazy(() => import("mfe-soe-grn/App")));
 
 const UserRoutes = () => {
   return (
@@ -15,11 +16,12 @@ const UserRoutes = () => {
         path="/"
         element={
           // <ProtectedRoute>
-            <HomePage />
+          <HomePage />
           // </ProtectedRoute>
         }
       />
       <Route path="/temp/*" element={<TempMFE />} />
+      <Route path="/soe/*" element={<SOE_GRN />} />
       <Route
         path="*"
         element={
