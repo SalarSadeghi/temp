@@ -13,7 +13,8 @@ const initialState: ModalState = {
 };
 
 // Helper functions (outside store for performance)
-const generateModalId = (): string => Date.now().toString().substring(0, 8); // 8 char IDs are enough
+const generateModalId = (): string =>
+  Math.random().toString(36).substring(2, 10); // 8 char IDs are enough
 
 const calculateZIndex = (currentMaxZIndex: number): number => {
   return currentMaxZIndex + Z_INDEX_INCREMENT;
@@ -43,12 +44,12 @@ export const useModalStore = create<ModalStore>()(
       ...initialState,
 
       // Push modal - returns modal ID for reference
-      pushModal: <TProps extends Record<string, unknown>>(
-        type: string,
-        props: TProps
-      ): string => {
+      pushModal: <TProps extends Record<string, unknown>>(options: {
+        id: string;
+        type?: string;
+        props?: TProps;
+      }): string => {
         const { stack, maxZIndex, maxStackSize } = get();
-
         // Prevent stack overflow
         if (stack.length >= maxStackSize) {
           console.warn(
@@ -56,23 +57,19 @@ export const useModalStore = create<ModalStore>()(
           );
           return "";
         }
-
-        const modalId = generateModalId();
         const newZIndex = calculateZIndex(maxZIndex);
-
         const newEntry: ModalEntry<TProps> = {
-          id: modalId,
-          type,
-          props,
+          id: options.id,
+          type: options?.type,
+          props: options?.props,
           zIndex: newZIndex,
           timestamp: Date.now(),
         };
-
         set((state) => {
           state.stack.push(newEntry);
           state.maxZIndex = newZIndex;
         });
-        return modalId;
+        return options.id;
       },
 
       // Pop top modal
@@ -82,11 +79,8 @@ export const useModalStore = create<ModalStore>()(
         if (stack.length === 0) {
           return;
         }
-        // const popped = stack[stack.length - 1];
         set((state) => {
           state.stack.pop();
-          // Don't decrease maxZIndex - it's ok to keep growing
-          // Prevents z-index conflicts if same modal reopens
         });
       },
 
@@ -94,7 +88,6 @@ export const useModalStore = create<ModalStore>()(
       popToModal: (modalId: string) => {
         const { stack } = get();
         const targetIndex = findModalIndex(stack, modalId);
-
         if (targetIndex === -1) {
           return;
         }
@@ -132,27 +125,24 @@ export const useModalStore = create<ModalStore>()(
       },
 
       // Replace top modal without changing stack depth
-      replaceTopModal: <TProps extends Record<string, unknown>>(
-        type: string,
-        props: TProps
-      ) => {
+      replaceTopModal: <TProps extends Record<string, unknown>>(options: {
+        id: string;
+        type?: string;
+        props?: TProps;
+      }) => {
         const { stack, maxZIndex } = get();
-
         if (stack.length === 0) {
           console.warn("[Modal] Cannot replace top modal - stack is empty");
           return;
         }
-
-        const newId = generateModalId();
-
         set((state) => {
           // Remove top modal
           state.stack.pop();
           // Push new one with same z-index pattern
           state.stack.push({
-            id: newId,
-            type,
-            props,
+            id: options.id,
+            type: options?.type,
+            props: options?.props,
             zIndex: maxZIndex,
             timestamp: Date.now(),
           });
@@ -170,15 +160,15 @@ export const useModalStore = create<ModalStore>()(
       },
 
       // Update props of specific modal (useful for loading states inside modal)
-      updateModalProps: <TProps extends Record<string, unknown>>(
-        modalId: string,
-        newProps: Partial<TProps>
-      ) => {
-        const modalIndex = findModalIndex(get().stack, modalId);
+      updateModalProps: <TProps extends Record<string, unknown>>(options: {
+        modalId: string;
+        newProps: Partial<TProps>;
+      }) => {
+        const modalIndex = findModalIndex(get().stack, options.modalId);
 
         if (modalIndex === -1) {
           console.warn(
-            `[Modal] Cannot update props - modal ${modalId} not found`
+            `[Modal] Cannot update props - modal ${options.modalId} not found`
           );
           return;
         }
@@ -187,7 +177,7 @@ export const useModalStore = create<ModalStore>()(
           const modal = state.stack[modalIndex];
           if (modal) {
             // Merge props immutably
-            modal.props = { ...modal.props, ...newProps };
+            modal.props = { ...modal.props, ...options.newProps };
           }
         });
       },
@@ -200,8 +190,6 @@ export const useModalStore = create<ModalStore>()(
 
       // Check if any modal or specific modal is open
       isModalOpen: (modalId?: string) => {
-        console.log("is modal open called");
-        
         const { stack } = get();
         if (!modalId) return stack.length > 0;
         return stack.some((modal) => modal.id === modalId);
@@ -238,22 +226,6 @@ export const useModalStore = create<ModalStore>()(
 // Performance-optimized selectors (prevent unnecessary re-renders)
 // export const useModalStackLength = () =>
 //   useModalStore((state) => state.stack.length);
-
-// export const useModalStack = () =>
-//   useModalStore(
-//     (state) => state.stack,
-//     (prev, next) => {
-//       // Custom equality check - only re-render if stack reference changes or length changes
-//       if (prev.length !== next.length) return false;
-//       if (prev === next) return true;
-//       // Deep check first and last modal (most common changes)
-//       const prevFirst = prev[0];
-//       const nextFirst = next[0];
-//       const prevLast = prev[prev.length - 1];
-//       const nextLast = next[next.length - 1];
-//       return prevFirst?.id === nextFirst?.id && prevLast?.id === nextLast?.id;
-//     }
-//   );
 
 export const useTopModal = () =>
   useModalStore((state) => state.stack[state.stack.length - 1]);

@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
   // const isDev = env.NODE_ENV === "development";
   return {
     server: {
-      port: Number(env?.VITE_SHELL_URL) || 3000,
+      port: 3000,
       host: true,
       cors: true,
     },
@@ -81,7 +81,7 @@ export default defineConfig(({ mode }) => {
           // ],
         },
         devOptions: {
-          enabled: true, // Disable service worker in development for easier debugging
+          enabled: false, // Disable service worker in development for easier debugging
         },
       }),
       federation({

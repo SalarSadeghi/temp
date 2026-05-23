@@ -5,6 +5,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "dev:shell": "turbo dev --filter=shell",
+    "dev:temp": "turbo dev --filter=temp",
     "build:shell": "turbo run build --filter=shell",
     "build:temp": "turbo run build --filter=temp",
     "lint": "turbo run lint",

@@ -39,17 +39,18 @@ export const GenericModal: React.FC<
   isTopModal,
 }) => {
   return (
-    <BaseModal
-      modalId={modalId}
-      modalType="generic"
-      open={true}
-      title={title}
-      actions={actions}
-      closeOnBackdropClick={false}
-      onClose={onClose}
-      {...baseModalProps}
-    >
-      {children}
-    </BaseModal>
+    <></>
+    // <BaseModal
+    //   modalId={modalId}
+    //   modalType="generic"
+    //   open={true}
+    //   title={title}
+    //   actions={actions}
+    //   closeOnBackdropClick={false}
+    //   onClose={onClose}
+    //   {...baseModalProps}
+    // >
+    //   {children}
+    // </BaseModal>
   );
 };

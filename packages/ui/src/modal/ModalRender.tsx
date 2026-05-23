@@ -1,7 +1,8 @@
 // components/modals/ModalRenderer.tsx
-import React, { Suspense, lazy, ComponentType } from "react";
+import React, { Suspense, lazy, ComponentType, ReactNode } from "react";
 import { CircularProgress, Box } from "@mui/material";
-import { BaseModal, useModalRenderer } from "./BaseModal.js";
+import { BaseModal, BaseModalProps } from "./BaseModal.js";
+import { useModalActions } from "../../../shared-store/src/index.js";
 import { useModalStore } from "../../../shared-store/src/stores/modal/modalStore.js";
 
 // Registry of modal components (lazy loaded)
@@ -35,52 +36,20 @@ const ModalLoadingFallback: React.FC = () => (
   </Box>
 );
 
+interface ModalRendererProps extends BaseModalProps {}
+
 // Main Modal Renderer - place this once in your App component
-export const ModalRenderer: React.FC = () => {
-  const { modalsToRender, hasModals } = useModalRenderer();
-  const stack = useModalStore((state) => state.stack);
-
+export const ModalRenderer: React.FC<ModalRendererProps> = (
+  props: ModalRendererProps
+) => {
+  const hasModals = useModalStore((state) => state.stack.length > 0);
   if (!hasModals) return null;
-
+  const { modalType } = props;
   return (
     <>
-      {modalsToRender.map((modal) => {
-        const ModalComponent = modalRegistry[modal.type];
-
-        if (!ModalComponent) {
-          console.error(
-            `Modal type "${modal.type}" not registered in modalRegistry`
-          );
-          return null;
-        }
-
-        // Find the complete entry from stack (for z-index and other props)
-        const stackEntry = stack.find((s) => s.id === modal.id);
-        const baseModalProps = (modal.props as any)._baseModalProps || {};
-        return (
-          <Suspense key={modal.id} fallback={<ModalLoadingFallback />}>
-            <BaseModal
-              modalId={modal.id}
-              modalType={modal.type}
-              open={true}
-              // You can pass default props from preset
-              // Or let individual modals define their own BaseModal props
-              {...baseModalProps} // Extract base modal props from modal props
-            >
-              <ModalComponent
-                {...modal.props}
-                modalId={modal.id}
-                isTopModal={modal.isTop}
-                onClose={() => {
-                  // Default close behavior if modal doesn't provide its own
-                  const { popModal } = useModalStore.getState();
-                  popModal();
-                }}
-              />
-            </BaseModal>
-          </Suspense>
-        );
-      })}
+      <Suspense fallback={<ModalLoadingFallback />}>
+        <BaseModal {...props}>{props.children}</BaseModal>
+      </Suspense>
     </>
   );
 };

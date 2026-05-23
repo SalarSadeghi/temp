@@ -1,5 +1,5 @@
 // components/modals/BaseModal.tsx
-import React, { ReactNode, useEffect, useCallback, useRef } from "react";
+import React, { ReactNode, useEffect, useCallback, useRef, memo } from "react";
 import {
   Modal as MuiModal,
   Box,
@@ -23,8 +23,8 @@ import { useModalStore } from "../../../shared-store/src/stores/modal/modalStore
 export type BaseModalProps = {
   // Core
   modalId: string;
-  modalType: string;
-  open: boolean;
+  modalType?: string;
+  // open: boolean;
 
   // Content
   title?: string | ReactNode;
@@ -68,10 +68,10 @@ const modalStyles = {
   outline: "none", // Remove focus outline (MUI handles focus)
 };
 
-export const BaseModal: React.FC<BaseModalProps> = ({
+const BaseModal: React.FC<BaseModalProps> = ({
   modalId,
   modalType,
-  open,
+  // open,
   title,
   children,
   actions,
@@ -90,75 +90,66 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   onEntered,
   keepMounted = false,
 }) => {
-  const { popModal, getTopModal } = useModalActions();
+  const { popModal, getTopModal, isModalOpen } = useModalActions();
   const topModal = useTopModal();
 
   // Track if this modal is the topmost in stack
   const isTopModal = topModal?.id === modalId;
-
+  const open = isModalOpen(modalId);
   // Refs for animation
-  const hasExitedRef = useRef(false);
+  // const hasExitedRef = useRef(false);
 
   // Handle close - only if this modal is on top
-  const handleClose = useCallback(() => {
-    // Prevent closing if this modal isn't on top
+  const handleClose = useCallback(
+    (_event?: object, reason?: string) => {
+      // Prevent closing if this modal isn't on top
 
-    if (!isTopModal) {
-      console.warn(
-        `[Modal] Cannot close modal "${modalId}" - not on top of stack`
-      );
-      return;
-    }
-
-    // Custom close handler
-    onClose?.();
-
-    // Pop from store if closeOnModalPop is true
-    if (closeOnModalPop) {
-      popModal();
-    }
-  }, [isTopModal, modalId, onClose, closeOnModalPop, popModal]);
-
-  // Handle ESC key - respect disableEscapeKeyDown prop
-  const handleEscapeKeyDown = useCallback(() => {
-    if (!disableEscapeKeyDown && isTopModal) {
-      handleClose();
-    }
-  }, [disableEscapeKeyDown, isTopModal, handleClose]);
-
-  // Handle backdrop click
-  const handleBackdropClick = useCallback(() => {
-    if (closeOnBackdropClick && isTopModal) {
-      handleClose();
-    }
-  }, [closeOnBackdropClick, isTopModal, handleClose]);
-
-  // Auto-close when this modal is no longer in stack (safety mechanism)
-  useEffect(() => {
-    const currentTop = getTopModal();
-    const isStillInStack =
-      currentTop?.id === modalId ||
-      // Check if modal exists anywhere in stack (not just top)
-      false; // Would need full stack access
-
-    if (open && !isStillInStack && closeOnModalPop) {
-      // Modal was removed from stack externally
-      if (process.env.NODE_ENV === "development") {
-        console.warn(`[Modal] "${modalId}" closed due to stack removal`);
+      if (!isTopModal) {
+        console.warn(
+          `[Modal] Cannot close modal "${modalId}" - not on top of stack`
+        );
+        return;
       }
-    }
-  }, [open, modalId, closeOnModalPop, getTopModal]);
+
+      // If reason is 'backdropClick' and closeOnBackdropClick is false, don't close
+      if (reason === "backdropClick" && !closeOnBackdropClick) {
+        return;
+      }
+
+      // If reason is 'escapeKeyDown' and disableEscapeKeyDown is true, don't close
+      if (reason === "escapeKeyDown" && disableEscapeKeyDown) {
+        return;
+      }
+
+      // Custom close handler
+      onClose?.();
+
+      // Pop from store if closeOnModalPop is true
+      if (closeOnModalPop) {
+        popModal();
+      }
+    },
+    [
+      isTopModal,
+      modalId,
+      onClose,
+      closeOnModalPop,
+      popModal,
+      closeOnBackdropClick,
+      disableEscapeKeyDown,
+    ]
+  );
 
   // Handle animation complete
-  const handleExited = useCallback(() => {
-    hasExitedRef.current = true;
-    onExited?.();
-  }, [onExited]);
+  // const handleExited = useCallback(() => {
+  //   hasExitedRef.current = true;
+  //   onExited?.();
+  // }, [onExited]);
 
-  const handleEntered = useCallback(() => {
-    hasExitedRef.current = false;
-    onEntered?.();
-  }, [onEntered]);
+  // const handleEntered = useCallback(() => {
+  //   hasExitedRef.current = false;
+  //   onEntered?.();
+  // }, [onEntered]);
 
   // Determine z-index from store if needed (optional - MUI handles it)
   // We'll let MUI manage z-index automatically
@@ -167,10 +158,6 @@ export const BaseModal: React.FC<BaseModalProps> = ({
     <MuiModal
       open={open}
       onClose={handleClose}
-      // onBackdropClick={handleBackdropClick}
-      //   onEscapeKeyDown={handleEscapeKeyDown}
-      //   onExited={handleExited}
-      //   onEntered={handleEntered}
       disableEscapeKeyDown={disableEscapeKeyDown}
       disableScrollLock={disableScrollLock}
       hideBackdrop={hideBackdrop}
@@ -189,7 +176,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
       }}
       sx={{
         zIndex: (theme) => theme.zIndex.modal, // MUI default is 1300
-        ...sx,
+        // ...sx,
       }}
     >
       <Fade in={open} timeout={300}>
@@ -283,62 +270,45 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   );
 };
 
-// Custom hook for using BaseModal with store integration
-export const useModalRenderer = () => {
-  const stack = useModalStore((state) => state.stack);
-
-  // Get all modals to render (from stack)
-  const modalsToRender = stack.map((entry) => ({
-    id: entry.id,
-    type: entry.type,
-    props: entry.props,
-    zIndex: entry.zIndex,
-    isTop: entry.id === stack[stack.length - 1]?.id,
-  }));
-
-  return {
-    modalsToRender,
-    hasModals: stack.length > 0,
-    stackSize: stack.length,
-  };
-};
+const MemoizedBaseModal = memo(BaseModal);
+export { MemoizedBaseModal as BaseModal };
 
 // Optional: Preset configurations for common modal types
-export const modalPresets = {
-  // Small confirmation modal
-  confirm: {
-    maxWidth: "xs" as const,
-    fullWidth: true,
-    hideBackdrop: false,
-  },
+// export const modalPresets = {
+//   // Small confirmation modal
+//   confirm: {
+//     maxWidth: "xs" as const,
+//     fullWidth: true,
+//     hideBackdrop: false,
+//   },
 
-  // Large form modal
-  form: {
-    maxWidth: "md" as const,
-    fullWidth: true,
-    disableEscapeKeyDown: true, // Prevent accidental close
-  },
+//   // Large form modal
+//   form: {
+//     maxWidth: "md" as const,
+//     fullWidth: true,
+//     disableEscapeKeyDown: true, // Prevent accidental close
+//   },
 
-  // Full-screen modal (e.g., image editor)
-  fullscreen: {
-    fullScreen: true,
-    hideBackdrop: false,
-  },
+//   // Full-screen modal (e.g., image editor)
+//   fullscreen: {
+//     fullScreen: true,
+//     hideBackdrop: false,
+//   },
 
-  // Alert/notification modal
-  alert: {
-    maxWidth: "xs" as const,
-    fullWidth: true,
-    closeOnBackdropClick: true,
-    hideBackdrop: false,
-  },
+//   // Alert/notification modal
+//   alert: {
+//     maxWidth: "xs" as const,
+//     fullWidth: true,
+//     closeOnBackdropClick: true,
+//     hideBackdrop: false,
+//   },
 
-  // Loading modal (no close button)
-  loading: {
-    maxWidth: "xs" as const,
-    fullWidth: true,
-    disableEscapeKeyDown: true,
-    hideBackdrop: false,
-    showCloseButton: false, // You'll need to handle this separately
-  },
-};
+//   // Loading modal (no close button)
+//   loading: {
+//     maxWidth: "xs" as const,
+//     fullWidth: true,
+//     disableEscapeKeyDown: true,
+//     hideBackdrop: false,
+//     showCloseButton: false, // You'll need to handle this separately
+//   },
+// };

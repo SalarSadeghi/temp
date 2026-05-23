@@ -1,3 +1,4 @@
+import { useTempStore } from "@store/tempStore";
 import {
   useAuthStore,
   useModalActions,
@@ -6,38 +7,22 @@ import {
 import { Button } from "@superapp/ui";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import FirstModal from "./FirstModal";
+import SecondModal from "./SecondModal";
 
 const Home = () => {
   const { user, setUser } = useAuthStore((state) => state);
+  const { temp } = useTempStore();
   useEffect(() => {
     setUser({ name: "foo", family: "bar" });
   }, []);
 
   const { pushModal } = useModalActions();
   const handleOpenModal = () => {
-    const id = pushModal("generic", {
-      title: "first modal",
-
-      children: (
-        <>
-          <Button
-            onClick={() =>
-              pushModal("generic", {
-                title: "second modal",
-                children: <>Second modal</>,
-                baseModalProps: {
-                  maxWidth: "md",
-                },
-              })
-            }
-          >
-            Open Second Modal
-          </Button>
-        </>
-      ),
+    pushModal({
+      id: "FIRST_MODAL",
     });
   };
-
   return (
     <div className="flex flex-col h-screen justify-center items-center gap-4">
       <p>USER NAME IS: {user?.name ?? "-"}</p>
@@ -47,9 +32,12 @@ const Home = () => {
       <Link relative="path" to={"./about"}>
         About
       </Link>
+      <div>This is local store: {temp}</div>
       <div>
         <Button onClick={handleOpenModal}>Open Modal</Button>
       </div>
+      <FirstModal />
+      <SecondModal />
     </div>
   );
 };

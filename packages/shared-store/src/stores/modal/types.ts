@@ -3,8 +3,8 @@
 // Base modal entry - generic but type-safe
 export type ModalEntry<TProps = Record<string, unknown>> = {
   id: string;
-  type: string;
-  props: TProps;
+  type?: string;
+  props?: TProps;
   zIndex: number;
   timestamp: number; // for debugging and ordering
 };
@@ -19,25 +19,32 @@ export type ModalState = {
 // Store actions
 export type ModalActions = {
   // Core operations
-  pushModal: <TProps extends Record<string, unknown>>(
-    type: string,
-    props: TProps
-  ) => string;
+  // pushModal: <TProps extends Record<string, unknown>>(
+  //   type: string,
+  //   props: TProps
+  // ) => string;
+  pushModal: <TProps extends Record<string, unknown>>(options: {
+    id: string;
+    type?: string;
+    props?: TProps;
+  }) => string;
 
   popModal: () => void;
   popToModal: (modalId: string) => void;
   popUntilModal: (predicate: (entry: ModalEntry) => boolean) => void;
-  replaceTopModal: <TProps extends Record<string, unknown>>(
-    type: string,
-    props: TProps
-  ) => void;
+  replaceTopModal: <TProps extends Record<string, unknown>>(options: {
+    id: string;
+    type?: string;
+    props?: TProps;
+  }) => void;
   clearStack: () => void;
 
   // Utilities
-  updateModalProps: <TProps extends Record<string, unknown>>(
-    modalId: string,
-    newProps: Partial<TProps>
-  ) => void;
+  // Type is not changed
+  updateModalProps: <TProps extends Record<string, unknown>>(options: {
+    modalId: string;
+    newProps: Partial<TProps>;
+  }) => void;
 
   getTopModal: () => ModalEntry | undefined;
   isModalOpen: (modalId?: string) => boolean;
