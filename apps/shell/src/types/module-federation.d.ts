@@ -1,11 +1,11 @@
 declare module "temp/Temp" {
   import { ComponentType } from "react";
-  const Temp: ComponentType;
-  export default Temp;
+  const Component: ComponentType;
+  export default Component;
 }
 
-declare module "mfe-soe-grn/App" {
+declare module "soe-grn/App" {
   import { ComponentType } from "react";
-  const Temp: ComponentType;
-  export default Temp;
+  const Component: ComponentType;
+  export default Component;
 }

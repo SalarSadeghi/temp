@@ -7,7 +7,8 @@
     ".": "./src/index.ts",
     "./components": "./src/base/index.ts",
     "./theme": "./src/theme/index.ts",
-    "./inputs": "./src/inputs/index.ts"
+    "./inputs": "./src/inputs/index.ts",
+    "./common": "./src/common/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

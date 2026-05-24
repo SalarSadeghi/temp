@@ -7,7 +7,7 @@ import Loadable from "@components/common/Suspence";
 
 const TempMFE = Loadable(lazy(() => import("temp/Temp")));
 const HomePage = Loadable(lazy(() => import("@pages/home/HomePage")));
-const SOE_GRN = Loadable(lazy(() => import("mfe-soe-grn/App")));
+const SOE_GRN = Loadable(lazy(() => import("soe-grn/App")));
 
 const UserRoutes = () => {
   return (

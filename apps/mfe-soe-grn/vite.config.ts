@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       federation({
-        name: "mfe-soe-grn",
+        name: "soe-grn",
         filename: "remoteEntry.js",
         exposes: {
           "./App": "./src/App.tsx",

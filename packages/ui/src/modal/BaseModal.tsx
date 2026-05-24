@@ -1,5 +1,5 @@
 // components/modals/BaseModal.tsx
-import React, { ReactNode, useEffect, useCallback, useRef, memo } from "react";
+import React, { ReactNode, useEffect, useCallback,  memo } from "react";
 import {
   Modal as MuiModal,
   Box,
@@ -17,7 +17,6 @@ import {
   useTopModal,
 } from "../../../shared-store/src/index.js";
 import { Close } from "../../../icons/src/index.js";
-import { useModalStore } from "../../../shared-store/src/stores/modal/modalStore.js";
 
 // Types
 export type BaseModalProps = {

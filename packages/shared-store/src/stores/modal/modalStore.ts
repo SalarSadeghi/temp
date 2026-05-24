@@ -12,9 +12,7 @@ const initialState: ModalState = {
   maxStackSize: DEFAULT_MAX_STACK_SIZE,
 };
 
-// Helper functions (outside store for performance)
-const generateModalId = (): string =>
-  Math.random().toString(36).substring(2, 10); // 8 char IDs are enough
+
 
 const calculateZIndex = (currentMaxZIndex: number): number => {
   return currentMaxZIndex + Z_INDEX_INCREMENT;

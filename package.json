@@ -6,7 +6,7 @@
     "dev": "turbo run dev",
     "dev:shell": "turbo dev --filter=shell",
     "dev:temp": "turbo dev --filter=temp",
-    "dev:soe-grn": "turbo dev --filter=soe-grn",
+    "dev:mfe-soe-grn": "turbo dev --filter=mfe-soe-grn",
     "build:shell": "turbo run build --filter=shell",
     "build:temp": "turbo run build --filter=temp",
     "lint": "turbo run lint",

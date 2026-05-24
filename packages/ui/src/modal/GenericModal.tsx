@@ -1,5 +1,4 @@
 // types/generic-modal.types.ts
-import { ReactNode } from "react";
 import { BaseModal, BaseModalProps } from "./BaseModal.js";
 
 export type GenericModalProps = {
