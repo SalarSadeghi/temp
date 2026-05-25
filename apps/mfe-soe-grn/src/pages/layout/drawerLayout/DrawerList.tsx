@@ -1,4 +1,9 @@
-import { AppRegistrationOutlined, ArticleOutlined } from "@superapp/icons";
+import { useDrawerStore } from "@store/drawerStore";
+import {
+  AppRegistrationOutlined,
+  ArticleOutlined,
+  SendOutlined,
+} from "@superapp/icons";
 import {
   Box,
   Divider,
@@ -20,24 +25,32 @@ interface DrawerItem {
 
 const ITEMS: DrawerItem[] = [
   {
-    title: "ثبت فرم",
+    title: "ثبت فرم کارت سبز",
     icon: <AppRegistrationOutlined />,
     href: "register",
     hidden: false,
   },
   {
-    title: "پیش نویس‌ها",
+    title: "پیش نویس‌های کارت سبز",
     icon: <ArticleOutlined />,
     hidden: false,
     href: "draft",
   },
+  {
+    title: "کارت سبز‌های ارسال شده",
+    icon: <SendOutlined />,
+    hidden: false,
+    href: "sent",
+  },
 ];
 
 const DrawerList = () => {
+  const { changeOpenDrawer } = useDrawerStore();
   const navigate = useNavigate();
   const handleNavigate = (item: DrawerItem) => {
     if (item?.href) {
       navigate(item?.href);
+      changeOpenDrawer(false);
     }
   };
   return (
@@ -61,7 +74,9 @@ const DrawerList = () => {
             >
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.title} />
+                <ListItemText
+                  primary={<span className="text-xs">{item.title}</span>}
+                />
               </ListItemButton>
             </ListItem>
           ))}

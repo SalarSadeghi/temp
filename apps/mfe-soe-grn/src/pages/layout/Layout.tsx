@@ -8,7 +8,7 @@ const Layout = (props: Props) => {
   return (
     <div className="flex flex-col h-screen w-full overflow-hidden">
       <Header />
-      <div>{props.children}</div>
+      <div className="overflow-auto">{props.children}</div>
     </div>
   );
 };

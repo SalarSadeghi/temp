@@ -1,12 +1,18 @@
 import DrawerLayout from "@pages/layout/drawerLayout/DrawerLayout";
-import { NotFound } from "@superapp/ui";
-import { Route, Routes } from "react-router-dom";
+import { Loadable, NotFound } from "@superapp/ui";
+import { lazy } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+
+const RegisterGreenCardForm = Loadable(
+  lazy(() => import("@components/pages/greenCardForm/RegisterGreenCardForm"))
+);
 
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path="greenCard" element={<DrawerLayout />} >
-        <Route index path="register" element={<h1>hi</h1>} />
+      <Route path="greenCard" element={<DrawerLayout />}>
+        <Route index element={<Navigate to="register" replace />} />
+        <Route path="register" element={<RegisterGreenCardForm />} />
         <Route path="draft" element={"draft green card"} />
         <Route path="sent" element={"sent green card"} />
       </Route>

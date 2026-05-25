@@ -8,7 +8,9 @@
     "./components": "./src/base/index.ts",
     "./theme": "./src/theme/index.ts",
     "./inputs": "./src/inputs/index.ts",
-    "./common": "./src/common/index.ts"
+    "./common": "./src/common/index.ts",
+    "./date-time-picker": "./src/date-time-picker/index.ts",
+    "./shared-texts": "./src/Texts/texts.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

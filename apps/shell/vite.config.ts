@@ -94,6 +94,10 @@ export default defineConfig(({ mode }) => {
           react: { singleton: true, requiredVersion: "^18.2.0" } as any,
           "react-dom": { singleton: true, requiredVersion: "^18.2.0" } as any,
           zustand: { singleton: true, requiredVersion: "^4.4.7" } as any,
+          "react-hook-form": {
+            singleton: true,
+            requiredVersion: "^7.48.2",
+          } as any,
           "@superapp/shared-store": {
             version: "0.0.0",
             singleton: true,

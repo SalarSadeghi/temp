@@ -48,6 +48,10 @@ export default defineConfig(({ mode }) => {
             singleton: true,
           } as any,
           "@superapp/tailwind-config": { singleton: true } as any,
+          "react-hook-form": {
+            singleton: true,
+            requiredVersion: "^7.48.2",
+          } as any,
         },
       }),
     ],

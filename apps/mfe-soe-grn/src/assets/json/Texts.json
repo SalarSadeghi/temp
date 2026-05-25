@@ -1,0 +1,24 @@
+{
+  "greenCardForm": {
+    "registerTitle": "ثبت فرم کارت سبز",
+    "editTitle": "ویرایش کارت سبز",
+    "draftTitle": "پیش نویس کارت سبز",
+    "sentTitle": "ارسالی‌های کارت سبز",
+    "unitCode": "مکان مشاهده",
+    "greenCardType": "نوع کارت سبز",
+    "placeAdditionalDescription": "توضیحات تکمیلی مکان مشاهده",
+    "placeAdditionalDescriptionHelpMSG": "حداکثر 256 کاراکتر",
+    "seenTime": "ساعت مشاهده",
+    "placeViewDescription": "شرح مشاهده",
+    "placeViewDescriptionHelpMSG": "حداکثر 500 کاراکتر",
+    "suggestionDescription": "اقدام اصلاحی (کنترلی) و یا پیشگیرانه پیشنهادی",
+    "suggestionDescriptionHelpMSG": "حداکثر 2000 کاراکتر",
+    "successPostGreenCardMSG": "کاربر گرامی کارت سبز شما با موفقیت در صف ارسال قرار گرفت. کد کارت سبز شما به محض ثبت شدن برای شما ارسال میگردد.",
+    "confirmModalRegeisterText": "آیا از ارسال فرم کارت سبز اطمینان دارید؟",
+    "greenCardTypeOptions": {
+      "ACC": "خطر",
+      "SEMACC": "شبه حادثه",
+      "MINORACC": "حادثه جزِئی"
+    }
+  }
+}

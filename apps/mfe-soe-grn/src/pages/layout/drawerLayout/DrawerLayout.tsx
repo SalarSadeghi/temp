@@ -1,26 +1,27 @@
 import { Menu } from "@superapp/icons";
 import { Drawer, IconButton } from "@superapp/ui";
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import DrawerList from "./DrawerList";
+import { useDrawerStore } from "@store/drawerStore";
 
 const DrawerLayout = () => {
-  const [open, setOpen] = useState(false);
-
+  const { isOpenDrawer, changeOpenDrawer } = useDrawerStore();
   const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+    changeOpenDrawer(newOpen);
   };
+
   return (
-    <div className="flex flex-col">
-      <div className="flex justify-center">
+    <div className="flex flex-col relative">
+      <div className="flex justify-center items-center bg-green-50 sticky z-10 shadow-md top-0 right-0">
         <IconButton onClick={toggleDrawer(true)}>
           <Menu />
         </IconButton>
+        <span>عنوان</span>
       </div>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer open={isOpenDrawer} onClose={toggleDrawer(false)}>
         <DrawerList />
       </Drawer>
-      <div>
+      <div className="p-4">
         <Outlet />
       </div>
     </div>

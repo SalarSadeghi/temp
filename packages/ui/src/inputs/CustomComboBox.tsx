@@ -36,7 +36,7 @@ type Props = {
 };
 
 // This component manages a combobox such that compatible with react-hook-form
-export function ComboBox({
+export const CustomComboBox = ({
   label,
   // value,
   defaultValue,
@@ -57,7 +57,7 @@ export function ComboBox({
   control,
   name,
   shrink,
-}: Props) {
+}: Props) => {
   return (
     <Controller
       name={name}
@@ -72,7 +72,7 @@ export function ComboBox({
             value={field.value} // Bind to react-hook-form value
             aria-label="combo-box"
             options={options || []}
-            noOptionsText={noOptionText ?? undefined}
+            noOptionsText={noOptionText ?? <span>موردی یافت نشد</span>}
             sx={{
               ...sx,
             }}
@@ -136,4 +136,4 @@ export function ComboBox({
       }}
     />
   );
-}
+};
