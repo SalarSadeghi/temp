@@ -1,4 +1,3 @@
-
 const sharedConfig = require("@superapp/tailwind-config");
 export default {
   ...sharedConfig,
@@ -7,6 +6,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     "../temp/src/**/*.{js, ts, jsx, tsx}",
+    "../../packages/ui/src/**/*.{js, ts, jsx, tsx}",
     // Or use a pattern for all MFEs
     "../mfe-*/src/**/*.{js,ts,jsx,tsx}",
   ],
