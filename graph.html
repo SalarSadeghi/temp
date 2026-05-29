@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Graph</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2-pre.1/viz.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2-pre.1/full.render.js"></script>
+  <script>
+const s = "\ndigraph {\n\tcompound = \"true\"\n\tnewrank = \"true\"\n\tsubgraph \"root\" {\n\t\t\"[root] @superapp/eslint-config#build\" -\u003E \"[root] ___ROOT___\"\n\t\t\"[root] @superapp/icons#build\" -\u003E \"[root] @superapp/eslint-config#build\"\n\t\t\"[root] @superapp/icons#build\" -\u003E \"[root] @superapp/typescript-config#build\"\n\t\t\"[root] @superapp/shared-api#build\" -\u003E \"[root] @superapp/shared-store#build\"\n\t\t\"[root] @superapp/shared-store#build\" -\u003E \"[root] ___ROOT___\"\n\t\t\"[root] @superapp/tailwind-config#build\" -\u003E \"[root] @superapp/typescript-config#build\"\n\t\t\"[root] @superapp/typescript-config#build\" -\u003E \"[root] ___ROOT___\"\n\t\t\"[root] @superapp/ui#build\" -\u003E \"[root] @superapp/eslint-config#build\"\n\t\t\"[root] @superapp/ui#build\" -\u003E \"[root] @superapp/typescript-config#build\"\n\t\t\"[root] mfe-soe-grn#build\" -\u003E \"[root] @superapp/icons#build\"\n\t\t\"[root] mfe-soe-grn#build\" -\u003E \"[root] @superapp/shared-store#build\"\n\t\t\"[root] mfe-soe-grn#build\" -\u003E \"[root] @superapp/tailwind-config#build\"\n\t\t\"[root] mfe-soe-grn#build\" -\u003E \"[root] @superapp/ui#build\"\n\t\t\"[root] shell#build\" -\u003E \"[root] @superapp/icons#build\"\n\t\t\"[root] shell#build\" -\u003E \"[root] @superapp/shared-store#build\"\n\t\t\"[root] shell#build\" -\u003E \"[root] @superapp/tailwind-config#build\"\n\t\t\"[root] shell#build\" -\u003E \"[root] @superapp/ui#build\"\n\t\t\"[root] temp#build\" -\u003E \"[root] @superapp/icons#build\"\n\t\t\"[root] temp#build\" -\u003E \"[root] @superapp/shared-store#build\"\n\t\t\"[root] temp#build\" -\u003E \"[root] @superapp/tailwind-config#build\"\n\t\t\"[root] temp#build\" -\u003E \"[root] @superapp/ui#build\"\n\t}\n}\n\n".replace(/\_\_\_ROOT\_\_\_/g, "Root").replace(/\[root\]/g, "");new Viz().renderSVGElement(s).then(el => document.body.appendChild(el)).catch(e => console.error(e));
+  </script>
+</body>
+</html>

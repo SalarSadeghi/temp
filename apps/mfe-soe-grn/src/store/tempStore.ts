@@ -6,7 +6,7 @@ interface TempState {
 }
 
 export const useTempStore = create<TempState>()(
-  immer((set, get) => ({
+  immer((_set, _get) => ({
     temp: "test",
   }))
 );

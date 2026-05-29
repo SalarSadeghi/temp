@@ -2,14 +2,18 @@ import { useTempStore } from "@store/tempStore";
 import {
   useAuthStore,
   useModalActions,
-  useIsModalOpen,
+  // useIsModalOpen,
 } from "@superapp/shared-store";
 import { Button } from "@superapp/ui";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import FirstModal from "./FirstModal";
 import SecondModal from "./SecondModal";
-
+import {
+  CustomDatePicker,
+  CustomDateTimePicker,
+  CustomTimePicker,
+} from "@superapp/ui/date-time-picker";
 const Home = () => {
   const { user, setUser } = useAuthStore((state) => state);
   const { temp } = useTempStore();
@@ -35,6 +39,15 @@ const Home = () => {
       <div>This is local store: {temp}</div>
       <div>
         <Button onClick={handleOpenModal}>Open Modal</Button>
+      </div>
+      <div className="">
+        <CustomDatePicker />
+      </div>
+      <div>
+        <CustomTimePicker />
+      </div>
+      <div>
+        <CustomDateTimePicker />
       </div>
       <FirstModal />
       <SecondModal />

@@ -1,8 +1,9 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
+// import {federation} from "@module-federation/vite";
 import path from "path";
-
+import pkg from "./package.json";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
@@ -24,7 +25,7 @@ export default defineConfig(({ mode }) => {
       host: true,
       cors: {
         origin: "*",
-        credentials: true,
+        credentials: false,
       },
     },
     plugins: [
@@ -36,12 +37,21 @@ export default defineConfig(({ mode }) => {
           "./Temp": "./src/App.tsx",
         },
         shared: {
-          react: { singleton: true, requiredVersion: "^18.2.0" } as any,
-          "react-dom": { singleton: true, requiredVersion: "^18.2.0" } as any,
-          zustand: { singleton: true, requiredVersion: "^4.4.7" } as any,
+          react: {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies.react,
+          } as any,
+          "react-dom": {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies["react-dom"],
+          } as any,
+          zustand: {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies.zustand,
+          } as any,
           "react-router-dom": {
             singleton: true,
-            requiredVersion: "^6.22.0",
+            requiredVersion: pkg.peerDependencies["react-router-dom"],
           } as any,
           "@superapp/shared-store": {
             version: "0.0.0",
@@ -53,7 +63,7 @@ export default defineConfig(({ mode }) => {
     ],
     build: {
       target: "esnext",
-      cssCodeSplit: false,
+      cssCodeSplit: true,
     },
     resolve: {
       extensions: [".js", ".ts", ".jsx", ".tsx", ".json"],

@@ -1,26 +1,28 @@
 // components/modals/ModalRenderer.tsx
-import React, { Suspense, lazy, ComponentType } from "react";
+import React, { Suspense, 
+ // lazy, ComponentType
+ } from "react";
 import { CircularProgress, Box } from "@mui/material";
 import { BaseModal, BaseModalProps } from "./BaseModal.js";
-import { useModalActions } from "../../../shared-store/src/index.js";
+//import { useModalActions } from "../../../shared-store/src/index.js";
 import { useModalStore } from "../../../shared-store/src/stores/modal/modalStore.js";
 
 // Registry of modal components (lazy loaded)
-const modalRegistry: Record<
-  string,
-  React.LazyExoticComponent<ComponentType<any>>
-> = {
-  // Example modals - you'll add these later
-  // confirm: lazy(() => import('./modals/ConfirmModal')),
-  // form: lazy(() => import('./modals/FormModal')),
-  // alert: lazy(() => import('./modals/AlertModal')),
-  // loading: lazy(() => import('./modals/LoadingModal')),
-  generic: lazy(() =>
-    import("./GenericModal.js").then((module) => ({
-      default: module.GenericModal,
-    }))
-  ),
-};
+// const modalRegistry: Record<
+//   string,
+//   React.LazyExoticComponent<ComponentType<any>>
+// > = {
+//   // Example modals - you'll add these later
+//   // confirm: lazy(() => import('./modals/ConfirmModal')),
+//   // form: lazy(() => import('./modals/FormModal')),
+//   // alert: lazy(() => import('./modals/AlertModal')),
+//   // loading: lazy(() => import('./modals/LoadingModal')),
+//   generic: lazy(() =>
+//     import("./GenericModal.js").then((module) => ({
+//       default: module.GenericModal,
+//     }))
+//   ),
+// };
 
 // Loading fallback component
 const ModalLoadingFallback: React.FC = () => (
@@ -44,7 +46,7 @@ export const ModalRenderer: React.FC<ModalRendererProps> = (
 ) => {
   const hasModals = useModalStore((state) => state.stack.length > 0);
   if (!hasModals) return null;
-  const { modalType } = props;
+  // const { modalType } = props;
   return (
     <>
       <Suspense fallback={<ModalLoadingFallback />}>

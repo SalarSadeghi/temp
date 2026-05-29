@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -17,21 +17,21 @@ class ErrorBoundary extends Component<Props, State> {
     super(props);
     this.state = {
       hasError: false,
-      error: null
+      error: null,
     };
   }
 
   static getDerivedStateFromError(error: Error): State {
     return {
       hasError: true,
-      error
+      error,
     };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     // Log error to monitoring service
-    console.error('Error caught by boundary:', error, errorInfo);
-    
+    console.error("Error caught by boundary:", error, errorInfo);
+
     // Call custom error handler if provided
     this.props.onError?.(error, errorInfo);
   }
@@ -42,7 +42,9 @@ class ErrorBoundary extends Component<Props, State> {
       this.state.hasError &&
       this.props.resetKeys &&
       prevProps.resetKeys &&
-      this.props.resetKeys.some((key, index) => key !== prevProps.resetKeys?.[index])
+      this.props.resetKeys.some(
+        (key, index) => key !== prevProps.resetKeys?.[index],
+      )
     ) {
       this.reset();
     }
@@ -51,7 +53,7 @@ class ErrorBoundary extends Component<Props, State> {
   reset = (): void => {
     this.setState({
       hasError: false,
-      error: null
+      error: null,
     });
   };
 
@@ -61,10 +63,10 @@ class ErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) {
         return this.props.fallback;
       }
-      
+
       return (
-        <DefaultErrorFallback 
-          error={this.state.error} 
+        <DefaultErrorFallback
+          error={this.state.error}
           resetErrorBoundary={this.reset}
         />
       );
@@ -80,20 +82,21 @@ interface DefaultErrorFallbackProps {
   resetErrorBoundary: () => void;
 }
 
-const DefaultErrorFallback: React.FC<DefaultErrorFallbackProps> = ({ 
-  error, 
-  resetErrorBoundary 
+const DefaultErrorFallback: React.FC<DefaultErrorFallbackProps> = ({
+  error,
+  resetErrorBoundary,
 }) => {
   return (
-    <div role="alert" className="error-boundary">
+    <div
+      role="alert"
+      className="error-boundary flex flex-col justify-center items-center h-screen"
+    >
       <h2>Something went wrong</h2>
-      <details style={{ whiteSpace: 'pre-wrap' }}>
+      <details style={{ whiteSpace: "pre-wrap" }}>
         <summary>Error details</summary>
         {error && error.toString()}
       </details>
-      <button onClick={resetErrorBoundary}>
-        Try again
-      </button>
+      <button onClick={resetErrorBoundary}>Try again</button>
     </div>
   );
 };

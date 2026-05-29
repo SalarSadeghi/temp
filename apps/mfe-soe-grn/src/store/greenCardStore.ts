@@ -26,7 +26,7 @@ const initialState = {
   pageTitle: "",
 };
 
-const useGreenCardStore = create<StoreState>()(
+export const useGreenCardStore = create<StoreState>()(
   immer((set, _get) => ({
     ...initialState,
     changeMode: (mode) => {

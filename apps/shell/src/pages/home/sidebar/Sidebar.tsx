@@ -7,7 +7,7 @@ const Sidebar = () => {
   return (
     <div
       //   onClick={(e) => e.stopPropagation()}
-      className={`absolute right-0 top-0  rounded-l-lg h-screen z-10  bg-gradient-to-bl  from-[#9945FF] to-[#14F195]  transition-all duration-300 ease-in-out flex-col  ${isSidebarOpen ? "w-1/2" : "w-0 "}`}
+      className={`absolute right-0 top-0  rounded-l-lg h-screen z-10  bg-gradient-to-t  from-[#432b6f] to-[#00807e]  transition-all duration-300 ease-in-out flex-col  ${isSidebarOpen ? "w-1/2" : "w-0 "}`}
     >
       {isSidebarOpen && (
         <>

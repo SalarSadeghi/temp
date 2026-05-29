@@ -10,8 +10,9 @@ import {
 } from "@superapp/ui";
 import Texts from "@assets/json/Texts.json";
 import { CustomeFileUploader } from "@superapp/ui/common";
-import { Controller, useForm } from "react-hook-form";
-import { DatePicker, TimePicker } from "@superapp/ui/date-time-picker";
+import {
+  //  Controller,
+    useForm } from "react-hook-form";
 import { useState } from "react";
 import { DeleteOutline } from "@superapp/icons";
 
@@ -28,6 +29,8 @@ interface FormValues {
   id: string;
 }
 const RegisterGreenCardForm = () => {
+  console.log("register is called");
+  
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   const [localFiles, setLocalFiles] = useState<File[]>([]);
@@ -45,10 +48,10 @@ const RegisterGreenCardForm = () => {
   const {
     handleSubmit,
     control,
-    watch,
-    reset,
-    setValue,
-    formState: { isDirty, dirtyFields },
+    // watch,
+    // reset,
+    // setValue,
+    // formState: { isDirty, dirtyFields },
   } = useForm<FormValues | any>({
     // resolver: yupResolver(RegisterGreenCardFormSchema),
     defaultValues,
@@ -86,7 +89,7 @@ const RegisterGreenCardForm = () => {
             // }))}
           />
         </div>
-        <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
+        {/* <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
           <Controller
             control={control}
             name="date"
@@ -111,12 +114,12 @@ const RegisterGreenCardForm = () => {
               />
             )}
           />
-        </div>
+        </div> */}
       </div>
       <div
         className={`flex ${isDesktop ? "flex-row" : "flex-col"} w-full gap-4`}
       >
-        <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
+        {/* <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
           <Controller
             control={control}
             name="time"
@@ -151,7 +154,7 @@ const RegisterGreenCardForm = () => {
               />
             )}
           />
-        </div>
+        </div> */}
         <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
           <CustomTextInput
             label={Texts.greenCardForm.placeAdditionalDescription}

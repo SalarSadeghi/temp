@@ -5,6 +5,8 @@ interface Props {
 }
 
 const Layout = (props: Props) => {
+  console.log("layout is called");
+  
   return (
     <div className="flex flex-col h-screen w-full overflow-hidden">
       <Header />

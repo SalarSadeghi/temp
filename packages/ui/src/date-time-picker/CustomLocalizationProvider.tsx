@@ -1,93 +1,31 @@
-"use client";
-
-import { ReactNode } from "react";
-import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali/AdapterDateFnsJalali.js";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import * as locale from "@mui/x-date-pickers/locales";
-import {
-  arSA as arSAAdapter,
-  enUS as enUSAdapter,
-  fajalaliIR as faJalaliIRAdapter,
-} from "date-fns-jalali/locale";
-
-interface IProps {
-  children: ReactNode;
-  language?: "fa" | "ar" | "en";
-  calendar?: "shamsi" | "qamari" | "miladi";
-  fullMonth?: boolean;
+import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
+import { faIR } from "date-fns-jalali/locale";
+import { createCustomLocaleText } from "./CustomLocaleText";
+import { useCallback, useMemo } from "react";
+// import { faIR } from "date-fns/locale";
+interface CustomLocalizationProviderProps {
+  children: React.ReactNode;
 }
 
-const persianFullMonths = [
-  "فروردین",
-  "اردیبهشت",
-  "خرداد",
-  "تیر",
-  "مرداد",
-  "شهریور",
-  "مهر",
-  "آبان",
-  "آذر",
-  "دی",
-  "بهمن",
-  "اسفند",
-];
-
-const arabicLocaleText: Partial<locale.PickersLocaleText<unknown>> = {
-  okButtonLabel: "موافق",
-  cancelButtonLabel: "الغاء",
-  clearButtonLabel: "مسح",
-  datePickerToolbarTitle: "اختر التاريخ",
-  dateTimePickerToolbarTitle: "اختر التاريخ والوقت",
-  timePickerToolbarTitle: "اختر الوقت",
-  dateRangePickerToolbarTitle: "اختر نطاق التاريخ",
-};
-
-const languageToLocaleText: Record<NonNullable<IProps["language"]>, any> = {
-  fa: locale.faIR,
-  ar: locale.enUS,
-  en: locale.enUS,
-};
-const calendarToAdapter: Record<NonNullable<IProps["calendar"]>, any> = {
-  shamsi: AdapterDateFnsJalali,
-  qamari: AdapterDateFns,
-  miladi: AdapterDateFns,
-};
-const languageToAdapterLocale: Record<NonNullable<IProps["language"]>, any> = {
-  fa: faJalaliIRAdapter,
-  ar: arSAAdapter,
-  en: enUSAdapter,
-};
-
 export const CustomLocalizationProvider = ({
-  language = "fa",
-  calendar = "shamsi",
-  fullMonth = true,
-  ...props
-}: IProps) => {
-  console.log();
+  children,
+}: CustomLocalizationProviderProps) => {
+  const localeText = useMemo(() => createCustomLocaleText(), []);
+
   return (
     <LocalizationProvider
-      dateAdapter={calendarToAdapter[calendar]}
-      localeText={{
-        ...languageToLocaleText[language].components.MuiLocalizationProvider
-          .defaultProps.localeText,
-        ...(language === "fa" && { okButtonLabel: "تایید" }),
-        ...(language === "ar" && arabicLocaleText),
-      }}
-      adapterLocale={{
-        ...languageToAdapterLocale[language],
-        // @ts-ignore
-        localize: {
-          ...languageToAdapterLocale[language].localize,
-          ...(language === "fa" &&
-            fullMonth && {
-              month: (month: number) => persianFullMonths[month],
-            }),
-        },
-      }}
+      // Purpose: Defines HOW dates are calculated and manipulated
+      // Responsibility: Date math, calendar system, date parsing/formatting logic (Gregorian vs Jalali calendar systems)
+      dateAdapter={AdapterDateFnsJalali}
+      // Purpose: Defines the LANGUAGE for date-related text
+      // Month names, day names, number formatting, date formats patterns
+      adapterLocale={faIR}
+      // Purpose: Defines UI TEXT for the picker components themselves
+      // Responsibility: Button labels, tooltips, placeholder texts, error messages
+      localeText={localeText}
     >
-      {props.children}
+      {children}
     </LocalizationProvider>
   );
 };

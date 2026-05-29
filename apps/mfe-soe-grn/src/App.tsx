@@ -3,6 +3,8 @@ import Layout from "@pages/layout/Layout";
 import { AppThemeProvider } from "@superapp/ui";
 
 function App() {
+  // Run in both shell and MFE
+
   return (
     <>
       <AppThemeProvider>

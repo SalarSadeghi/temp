@@ -9,7 +9,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full h-16 bg-gradient-to-bl  from-[#9945FF] to-[#14F195] p-4 flex justify-between items-center rounded-tr-md rounded-tl-md">
+    <div className="w-full h-16 bg-gradient-to-r  from-[#432b6f] to-[#00807e] p-4 flex justify-between items-center rounded-tr-md rounded-tl-md">
       <div>
         <IconButton onClick={handleToggleSdebar}>
           <Menu className="text-white cursor-pointer" />

@@ -29,13 +29,13 @@ export const GenericModal: React.FC<
     isTopModal: boolean;
   }
 > = ({
-  children,
-  title,
-  actions,
-  baseModalProps = {},
-  onClose,
-  modalId,
-  isTopModal,
+  // children,
+  // title,
+  // actions,
+  // baseModalProps = {},
+  // onClose,
+  // modalId,
+  // isTopModal,
 }) => {
   return (
     <></>

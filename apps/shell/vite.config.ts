@@ -1,9 +1,10 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
+// import { federation } from "@module-federation/vite";
 import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
-
+import pkg from "./package.json";
 // const getRemoteUrl = () => {
 //   // Check if running on mobile/local network
 //   const isDev = process.env.NODE_ENV === "development";
@@ -91,12 +92,21 @@ export default defineConfig(({ mode }) => {
           "soe-grn": `${env.VITE_SOE_GRN_URL}/assets/remoteEntry.js`,
         },
         shared: {
-          react: { singleton: true, requiredVersion: "^18.2.0" } as any,
-          "react-dom": { singleton: true, requiredVersion: "^18.2.0" } as any,
-          zustand: { singleton: true, requiredVersion: "^4.4.7" } as any,
+          react: {
+            singleton: true,
+            requiredVersion: pkg.dependencies.react,
+          } as any,
+          "react-dom": {
+            singleton: true,
+            requiredVersion: pkg.dependencies["react-dom"],
+          } as any,
+          zustand: {
+            singleton: true,
+            requiredVersion: pkg.dependencies.zustand,
+          } as any,
           "react-hook-form": {
             singleton: true,
-            requiredVersion: "^7.48.2",
+            requiredVersion: pkg.dependencies["react-hook-form"],
           } as any,
           "@superapp/shared-store": {
             version: "0.0.0",
@@ -104,7 +114,7 @@ export default defineConfig(({ mode }) => {
           } as any,
           "react-router-dom": {
             singleton: true,
-            requiredVersion: "^6.22.0",
+            requiredVersion: pkg.dependencies["react-router-dom"],
           } as any,
           "@superapp/tailwind-config": {
             singleton: true,

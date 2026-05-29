@@ -1,5 +1,5 @@
 // src/components/OtpInput.tsx
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 
 interface OtpInputProps {
   value: string;
@@ -16,18 +16,30 @@ export const OTPInput: React.FC<OtpInputProps> = ({
   disabled = false,
   onComplete,
 }) => {
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const inputRefs = useRef<Map<number, HTMLInputElement>>(new Map());
+
+  const setRef = useCallback(
+    (index: number) => (el: HTMLInputElement | null) => {
+      if (el) {
+        inputRefs.current.set(index, el);
+      } else {
+        inputRefs.current.delete(index);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     // Auto-focus first input on mount
-    if (inputRefs.current[0] && !disabled) {
-      inputRefs.current[0].focus();
+    const firstInput = inputRefs.current.get(0);
+    if (firstInput && !disabled) {
+      firstInput.focus();
     }
   }, [disabled]);
 
   const handleChange = (
     index: number,
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const newValue = e.target.value;
     if (newValue.length > 1) return;
@@ -38,8 +50,8 @@ export const OTPInput: React.FC<OtpInputProps> = ({
     onChange(newOtp);
 
     // Auto-focus next input
-    if (newValue && index < length - 1 && inputRefs.current[index + 1]) {
-      inputRefs.current[index + 1]?.focus();
+    if (newValue && index < length - 1) {
+      inputRefs.current.get(index + 1)?.focus();
     }
 
     // Check if OTP is complete
@@ -50,10 +62,10 @@ export const OTPInput: React.FC<OtpInputProps> = ({
 
   const handleKeyDown = (
     index: number,
-    e: React.KeyboardEvent<HTMLInputElement>
+    e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     if (e.key === "Backspace" && !value[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
+      inputRefs.current.get(index - 1)?.focus();
     }
   };
 
@@ -70,7 +82,7 @@ export const OTPInput: React.FC<OtpInputProps> = ({
       {Array.from({ length }, (_, index) => (
         <input
           key={index}
-          ref={(el) => (inputRefs.current[index] = el)}
+          ref={setRef(index)}
           type="tel"
           maxLength={1}
           value={value[index] || ""}

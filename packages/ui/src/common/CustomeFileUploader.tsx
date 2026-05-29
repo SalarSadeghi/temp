@@ -22,7 +22,7 @@ export enum MIMES {
   avi = "video/x-msvideo",
 }
 
-enum FILE_ERROR_CODES {}
+// enum FILE_ERROR_CODES {}
 
 interface FileUploaderProps {
   onFilesAccepted: (files: File[]) => void;
@@ -78,10 +78,10 @@ export const CustomeFileUploader: React.FC<FileUploaderProps> = ({
   const {
     getRootProps,
     getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-    fileRejections,
+    // isDragActive,
+    // isDragAccept,
+    // isDragReject,
+    // fileRejections,
     acceptedFiles,
   } = useDropzone(dropzoneOptions);
 

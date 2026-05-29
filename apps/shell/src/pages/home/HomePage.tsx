@@ -26,9 +26,9 @@ const HomePage = () => {
             <MainContent />
           </div>
         </div>
-        <div className="w-[85%] rounded-3xl fixed bottom-0 left-0 right-0 mb-4 mx-auto flex h-16 bg-gradient-to-br from-[#9945FF] to-[#14F195] px-4">
+        {/* <div className="w-[85%] rounded-3xl fixed bottom-0 left-0 right-0 mb-4 mx-auto flex h-16 bg-gradient-to-br from-[#9945FF] to-[#14F195] px-4">
           <Footer />
-        </div>
+        </div> */}
       </div>
       <Sidebar />
     </>

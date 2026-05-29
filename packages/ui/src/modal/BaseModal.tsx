@@ -1,5 +1,5 @@
 // components/modals/BaseModal.tsx
-import React, { ReactNode, useEffect, useCallback,  memo } from "react";
+import React, { ReactNode,  useCallback,  memo } from "react";
 import {
   Modal as MuiModal,
   Box,
@@ -69,12 +69,12 @@ const modalStyles = {
 
 const BaseModal: React.FC<BaseModalProps> = ({
   modalId,
-  modalType,
+  //modalType,
   // open,
   title,
   children,
   actions,
-  maxWidth = "sm",
+  //maxWidth = "sm",
   fullWidth = true,
   fullScreen = false,
   sx,
@@ -85,11 +85,11 @@ const BaseModal: React.FC<BaseModalProps> = ({
   closeOnModalPop = true,
   hideBackdrop = false,
   onClose,
-  onExited,
-  onEntered,
+  //onExited,
+  //onEntered,
   keepMounted = false,
 }) => {
-  const { popModal, getTopModal, isModalOpen } = useModalActions();
+  const { popModal,  isModalOpen } = useModalActions();
   const topModal = useTopModal();
 
   // Track if this modal is the topmost in stack

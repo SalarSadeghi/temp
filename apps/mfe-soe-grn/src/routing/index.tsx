@@ -3,7 +3,7 @@ import { Loadable, NotFound } from "@superapp/ui";
 import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-const RegisterGreenCardForm = Loadable(
+export const RegisterGreenCardForm = Loadable(
   lazy(() => import("@components/pages/greenCardForm/RegisterGreenCardForm"))
 );
 
@@ -12,7 +12,10 @@ const AppRouter = () => {
     <Routes>
       <Route path="greenCard" element={<DrawerLayout />}>
         <Route index element={<Navigate to="register" replace />} />
-        <Route path="register" element={<RegisterGreenCardForm />} />
+        <Route path="register" 
+        // element={<RegisterGreenCardForm />} 
+        element={<h1>hiiiii</h1>}
+        />
         <Route path="draft" element={"draft green card"} />
         <Route path="sent" element={"sent green card"} />
       </Route>

@@ -9,6 +9,7 @@ const DrawerLayout = () => {
   const toggleDrawer = (newOpen: boolean) => () => {
     changeOpenDrawer(newOpen);
   };
+  console.log("drawer layout is called");
 
   return (
     <div className="flex flex-col relative">

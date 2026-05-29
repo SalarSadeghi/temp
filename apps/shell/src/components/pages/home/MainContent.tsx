@@ -5,12 +5,13 @@ import {
   LocalFireDepartmentOutlined,
 } from "@superapp/icons";
 import { Link } from "react-router-dom";
+import { Button } from "@superapp/ui/components";
 
 const MainContentItems = [
   {
     title: "کارت سبز",
     icon: <LocalFireDepartmentOutlined />,
-    href: "temp",
+    href: "soe/greencard/register",
   },
 
   {
@@ -83,6 +84,27 @@ const MainContent = () => {
           </Link>
         </div>
       ))}
+      <div className="flex gap-4">
+        <Button variant="contained" color="primary">
+          ثبت پیشنهاد
+        </Button>
+        <Button variant="contained" color="secondary">
+          ثبت پیشنهاد
+        </Button>
+        <Button variant="contained" color="success">
+          ثبت پیشنهاد
+        </Button>
+        <Button className="" variant="contained" color="error">
+          ثبت پیشنهاد
+        </Button>
+
+        <Button variant="contained" color="info">
+          ثبت پیشنهاد
+        </Button>
+        <Button variant="contained" color="warning">
+          ثبت پیشنهاد
+        </Button>
+      </div>
     </div>
   );
 };

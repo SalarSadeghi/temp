@@ -66,7 +66,7 @@ export * from "./Toolbar";
 export * from "./Snackbar";
 export * from "./Button";
 export * from "./Skeleton";
-export * from "./Hidden";
+// export * from "./Hidden";
 export * from "./colors";
 export * from "./TableContainer";
 export * from "./InputBase";
