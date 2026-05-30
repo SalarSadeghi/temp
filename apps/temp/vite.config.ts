@@ -56,7 +56,13 @@ export default defineConfig(({ mode }) => {
           "@superapp/shared-store": {
             version: "0.0.0",
             singleton: true,
+            eager: true,
           } as any,
+          // "@superapp/shared-api": {
+          //   version: "0.0.0",
+          //   singleton: true,
+          // eager: true,
+          // } as any,
           "@superapp/tailwind-config": { singleton: true } as any,
         },
       }),

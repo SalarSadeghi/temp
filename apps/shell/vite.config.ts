@@ -108,9 +108,23 @@ export default defineConfig(({ mode }) => {
             singleton: true,
             requiredVersion: pkg.dependencies["react-hook-form"],
           } as any,
+          "@hookform/resolvers": {
+            singleton: false,
+            requiredVersion: pkg.dependencies["@hookform/resolvers"],
+          },
+          yup: {
+            singleton: false,
+            requiredVersion: pkg.dependencies.yup,
+          },
           "@superapp/shared-store": {
             version: "0.0.0",
             singleton: true,
+            eager: true,
+          } as any,
+          "@superapp/shared-api": {
+            version: "0.0.0",
+            singleton: true,
+            eager: true,
           } as any,
           "react-router-dom": {
             singleton: true,
@@ -123,6 +137,16 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
+    optimizeDeps: {
+      include: [
+        "react",
+        "react-dom",
+        "react-router-dom",
+        "zustand",
+        "react-hook-form",
+      ],
+      // exclude: ['@superapp/shared-store', '@superapp/tailwind-config'],
+    },
     build: {
       target: "esnext",
       cssCodeSplit: false,

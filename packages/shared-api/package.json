@@ -1,12 +1,10 @@
 {
   "name": "@superapp/shared-api",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
-  "main": "./src/index.js",
-  "types": "./src/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./stores/*": "./src/stores/*"
+    "./axios/*": "./src/axios/*"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0"

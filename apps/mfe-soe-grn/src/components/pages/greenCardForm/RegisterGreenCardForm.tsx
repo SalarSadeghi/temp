@@ -10,11 +10,17 @@ import {
 } from "@superapp/ui";
 import Texts from "@assets/json/Texts.json";
 import { CustomeFileUploader } from "@superapp/ui/common";
-import {
-  //  Controller,
-    useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useState } from "react";
 import { DeleteOutline } from "@superapp/icons";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import {
+  CustomDatePicker,
+  CustomTimePicker,
+} from "@superapp/ui/date-time-picker";
+import { GreenCardTypeOptions } from "@type/common";
+import { RegisterGreenCardFormSchema } from "@validations/registerGreenCardFormSchema";
 
 interface FormValues {
   unitId: { value: string; label: string };
@@ -29,8 +35,6 @@ interface FormValues {
   id: string;
 }
 const RegisterGreenCardForm = () => {
-  console.log("register is called");
-  
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   const [localFiles, setLocalFiles] = useState<File[]>([]);
@@ -53,7 +57,7 @@ const RegisterGreenCardForm = () => {
     // setValue,
     // formState: { isDirty, dirtyFields },
   } = useForm<FormValues | any>({
-    // resolver: yupResolver(RegisterGreenCardFormSchema),
+    resolver: yupResolver(RegisterGreenCardFormSchema),
     defaultValues,
   });
 
@@ -82,79 +86,49 @@ const RegisterGreenCardForm = () => {
           <CustomComboBox
             label={Texts.greenCardForm.unitCode}
             control={control}
-            name="unitCode"
+            name="unitId"
             // options={novanUnitsData?.map((u) => ({
             //   value: u.code,
             //   label: u.fullName,
             // }))}
           />
         </div>
-        {/* <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
+        <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
           <Controller
             control={control}
             name="date"
             render={({ field, fieldState }) => (
-              <DatePicker
+              <CustomDatePicker
+                className="w-full"
                 {...field}
-                slotProps={{
-                  actionBar: { actions: ["accept", "cancel", "clear"] },
-                  toolbar: {
-                    sx: { backgroundColor: theme.palette.primary.main },
-                  },
-                }}
-                required
-                sx={{ width: "100%" }}
-                openTo="day"
-                // value={date as unknown as Date}
                 label={Shared_Text.common.date}
-                // onChange={(value) => setValue('date', value)}
                 disableFuture
+                helperText={fieldState?.error?.message}
                 error={!!fieldState.error}
-                helperText={fieldState?.error?.message} // Optional validation error message
               />
             )}
           />
-        </div> */}
+        </div>
       </div>
       <div
         className={`flex ${isDesktop ? "flex-row" : "flex-col"} w-full gap-4`}
       >
-        {/* <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
+        <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
           <Controller
             control={control}
             name="time"
             render={({ field, fieldState }) => (
-              <TimePicker
+              <CustomTimePicker
+                className="w-full"
                 {...field}
-                name="time"
-                required
-                label={Texts.greenCardForm.seenTime}
-                maxTime={new Date(Date.now())}
-                // value={time}
-                // onChange={(value) => setValue('time', value)}
-                sx={{
-                  width: "100%",
-                }}
-                slotProps={{
-                  actionBar: { actions: ["accept", "cancel", "clear"] },
-                  toolbar: {
-                    sx: {
-                      backgroundColor: theme.palette.primary.main,
-                      "& .MuiTimePickerToolbar-ampmLabel": {
-                        color: "#0f0f0f",
-                      },
-                      "& .MuiPickersToolbar-root:focus span": {
-                        color: "#fff",
-                      },
-                    },
-                  },
-                }}
+                label={Shared_Text.common.time}
+                disableFuture
                 error={!!fieldState.error}
-                helperText={fieldState?.error?.message} // Optional validation error message
+                helperText={fieldState?.error?.message}
               />
             )}
           />
-        </div> */}
+        </div>
         <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
           <CustomTextInput
             label={Texts.greenCardForm.placeAdditionalDescription}
@@ -175,7 +149,7 @@ const RegisterGreenCardForm = () => {
             label={Texts.greenCardForm.greenCardType}
             control={control}
             name="greenCardType"
-            // options={GreenCardTypeOptions}
+            options={GreenCardTypeOptions}
           />
         </div>
         <div className={` ${isDesktop ? "w-1/2" : "w-full"}`} />

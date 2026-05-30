@@ -56,12 +56,23 @@ export default defineConfig(({ mode }) => {
           "@superapp/shared-store": {
             version: "0.0.0",
             singleton: true,
+            eager: true,
+          } as any,
+          "@superapp/shared-api": {
+            version: "0.0.0",
+            singleton: true,
+            eager: true,
           } as any,
           "@superapp/tailwind-config": { singleton: true } as any,
           "react-hook-form": {
             singleton: true,
             requiredVersion: "^7.48.2",
           } as any,
+          yup: { singleton: false, requiredVersion: pkg.peerDependencies.yup },
+          "@hookform/resolvers": {
+            singleton: false,
+            requiredVersion: pkg.peerDependencies["@hookform/resolvers"],
+          },
         },
       }),
     ],
@@ -103,6 +114,10 @@ export default defineConfig(({ mode }) => {
         {
           find: /^@validations/,
           replacement: path.resolve(__dirname, "src/validations"),
+        },
+        {
+          find: /^@type/,
+          replacement: path.resolve(__dirname, "src/type"),
         },
       ],
     },

@@ -1,5 +1,5 @@
 import Banner from "@components/pages/home/Banner";
-import Footer from "@components/pages/home/Footer";
+// import Footer from "@components/pages/home/Footer";
 import Header from "@components/pages/home/Header";
 import MainContent from "@components/pages/home/MainContent";
 import { useSidebarStore } from "@superapp/shared-store/stores/sidebarStore.js";

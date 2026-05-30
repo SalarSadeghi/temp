@@ -10,14 +10,17 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@superapp/icons": "workspace:*",
     "@superapp/shared-store": "workspace:*",
     "@superapp/ui": "workspace:*",
+    "@superapp/shared-api": "workspace:*",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-hook-form": "^7.48.2",
     "react-router-dom": "^6.22.0",
-    "zustand": "^4.4.7"
+    "zustand": "^4.4.7",
+    "yup": "^1.3.2"
   },
   "devDependencies": {
     "@module-federation/vite": "^1.16.0",

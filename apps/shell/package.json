@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@superapp/icons": "workspace:*",
     "@superapp/shared-store": "workspace:*",
+    "@superapp/shared-api": "workspace:*",
     "@superapp/ui": "workspace:*",
     "@tanstack/react-query": "^5.100.14",
     "axios": "^1.6.2",

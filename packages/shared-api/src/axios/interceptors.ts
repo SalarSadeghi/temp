@@ -1,5 +1,5 @@
 import { useAuthStore } from "@superapp/shared-store";
-import { axiosInstance } from "./axios.js";
+import { axiosInstance } from "./axios";
 
 axiosInstance.interceptors.request.use(
   async (config) => {
@@ -7,7 +7,7 @@ axiosInstance.interceptors.request.use(
     config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
-  (error) => Promise.reject(error),
+  (error) => Promise.reject(error)
 );
 
 axiosInstance.interceptors.response.use(
@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error); // Reject the error so it can be handled further up
-  },
+  }
 );
 
-export default axiosInstance;
+export {axiosInstance}

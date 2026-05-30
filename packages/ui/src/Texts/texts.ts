@@ -1,6 +1,7 @@
 export const Shared_Text = {
   common: {
     date: "تاریخ",
+    time: "زمان",
     character: "کاراکتر",
     saveAndSend: "ذخیره و ارسال",
     save: "ذخیره",
@@ -14,5 +15,10 @@ export const Shared_Text = {
       attachFileHintType: "نوع فایل مجاز",
       attchFileHintSize: "حجم فایل مجاز",
     },
+  },
+  validation: {
+    required: "این فیلد اجباری است",
+    MIN: (value: number) => `حداقل مقدار این فیلد ${value} است.`,
+    MAX: (value: number) => `حداکثر مقدار این فیلد ${value} است.`,
   },
 };
