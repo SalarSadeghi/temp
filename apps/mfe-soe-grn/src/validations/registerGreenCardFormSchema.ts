@@ -32,4 +32,9 @@ export const RegisterGreenCardFormSchema = yup.object().shape({
     .string()
     .trim()
     .max(2000, Shared_Text.validation.MAX(2000)),
+  // file: yup
+  //   .array()
+  //   .of(yup.mixed())
+  //   .min(1, Shared_Text.validation.MIN(1))
+  //   .required(Shared_Text.validation.required),
 });

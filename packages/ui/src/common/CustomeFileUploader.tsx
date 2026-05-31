@@ -36,6 +36,7 @@ interface FileUploaderProps {
   title?: string;
   subtitle?: string;
   className?: string;
+  required?: boolean;
 }
 
 export const CustomeFileUploader: React.FC<FileUploaderProps> = ({
@@ -55,6 +56,7 @@ export const CustomeFileUploader: React.FC<FileUploaderProps> = ({
   title = Shared_Text.common.uploadFile.attachFileHintTitle,
   subtitle = "",
   className = "",
+  required = false,
 }) => {
   const onDrop = useCallback(
     (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
@@ -101,8 +103,6 @@ export const CustomeFileUploader: React.FC<FileUploaderProps> = ({
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
-
-  console.log(getBorderColor());
 
   return (
     <div className={`w-full ${className}`}>

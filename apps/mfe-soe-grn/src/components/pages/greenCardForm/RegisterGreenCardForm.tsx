@@ -8,9 +8,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@superapp/ui";
+import { useSnackbar, CustomSnackbar } from "@superapp/ui/snackbar";
 import Texts from "@assets/json/Texts.json";
 import { CustomeFileUploader } from "@superapp/ui/common";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { useState } from "react";
 import { DeleteOutline } from "@superapp/icons";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,36 +20,41 @@ import {
   CustomDatePicker,
   CustomTimePicker,
 } from "@superapp/ui/date-time-picker";
-import { GreenCardTypeOptions } from "@type/common";
+import { GreenCardTypeOption, GreenCardTypeOptions } from "@type/common";
 import { RegisterGreenCardFormSchema } from "@validations/registerGreenCardFormSchema";
+import { Unit } from "@superapp/shared-types/unit";
 
 interface FormValues {
-  unitId: { value: string; label: string };
+  unitId: Unit;
   placeAdditionalDescription: string;
-  greenCardType: { value: string; label: string };
+  greenCardType: GreenCardTypeOption[];
   placeViewDescription: string;
   suggestionDescription: string;
   file: File[];
   time: Date;
   date: Date;
-  viewDate: Date;
-  id: string;
 }
+
+const DefaultValues = {
+  unitId: undefined,
+  file: [],
+  greenCardType: undefined,
+  time: undefined,
+  date: undefined,
+  placeAdditionalDescription: "",
+  placeViewDescription: "",
+  suggestionDescription: "",
+};
 const RegisterGreenCardForm = () => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   const [localFiles, setLocalFiles] = useState<File[]>([]);
 
-  const defaultValues = {
-    unitId: null,
-    file: null,
-    greenCardType: null,
-    time: null,
-    date: null,
-    placeAdditionalDescription: "",
-    placeViewDescription: "",
-    suggestionDescription: "",
-  };
+  const { showSnackbar } = useSnackbar();
+  // const placeAdditionalDescription = useWatch({
+  //   name: "placeAdditionalDescription",
+  // });
+
   const {
     handleSubmit,
     control,
@@ -57,17 +63,22 @@ const RegisterGreenCardForm = () => {
     // setValue,
     // formState: { isDirty, dirtyFields },
   } = useForm<FormValues | any>({
-    resolver: yupResolver(RegisterGreenCardFormSchema),
-    defaultValues,
+    // resolver: yupResolver(RegisterGreenCardFormSchema),
+    defaultValues: DefaultValues,
   });
 
   const handleAcceptedFiles = (acceptedFiles: File[]) => {
     console.log(acceptedFiles);
     setLocalFiles(acceptedFiles);
+    showSnackbar({ message: "sss" });
   };
 
   const handleRejectedFiles = (rejections: any[]) => {
     console.log(rejections);
+  };
+
+  const handleDeleteLocalFiles = (index: number) => {
+    setLocalFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
   const onsubmit = async (data: FormValues) => {
@@ -101,7 +112,7 @@ const RegisterGreenCardForm = () => {
               <CustomDatePicker
                 className="w-full"
                 {...field}
-                label={Shared_Text.common.date}
+                label={Texts.greenCardForm.seenDate}
                 disableFuture
                 helperText={fieldState?.error?.message}
                 error={!!fieldState.error}
@@ -121,7 +132,7 @@ const RegisterGreenCardForm = () => {
               <CustomTimePicker
                 className="w-full"
                 {...field}
-                label={Shared_Text.common.time}
+                label={Texts.greenCardForm.seenTime}
                 disableFuture
                 error={!!fieldState.error}
                 helperText={fieldState?.error?.message}
@@ -137,7 +148,7 @@ const RegisterGreenCardForm = () => {
           />
           <span className="text-xs text-gray-500 px-4">
             {Texts.greenCardForm.placeAdditionalDescriptionHelpMSG}{" "}
-            {/* {`(${placeAdditionalDescription?.trim()?.length} ${Texts.common.character})`} */}
+            {/* {`(${placeAdditionalDescription?.trim()?.length} ${Shared_Text.common.character})`} */}
           </span>
         </div>
       </div>
@@ -193,6 +204,7 @@ const RegisterGreenCardForm = () => {
           onFilesAccepted={handleAcceptedFiles}
           onFilesRejected={handleRejectedFiles}
           maxFiles={1}
+          required={true}
         />
         <div>
           <ul className="gap-2 flex flex-col">
@@ -216,7 +228,7 @@ const RegisterGreenCardForm = () => {
                       <>
                         <IconButton
                           color="error"
-                          // onClick={() => handleDeleteLocalFiles(index)}
+                          onClick={() => handleDeleteLocalFiles(index)}
                         >
                           <DeleteOutline />
                         </IconButton>

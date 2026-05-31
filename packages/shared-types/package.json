@@ -1,0 +1,16 @@
+{
+  "name": "@superapp/shared-types",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./unit": "./src/Unit/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
+}
