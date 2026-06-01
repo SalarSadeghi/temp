@@ -29,7 +29,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@validations/*": ["./src/validations/*"],
       "@type/*": ["./src/type/*"],
-      "@api/*": ["./src/api/*"]
+      "@api/*": ["./src/api/*"],
+      "@constants/*": ["./src/constants/*"]
     }
   },
   "include": ["src"],

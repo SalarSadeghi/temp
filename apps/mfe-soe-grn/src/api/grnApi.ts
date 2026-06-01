@@ -21,7 +21,9 @@ export const getGreenCardDrafts = async ({
 }) => {
   const response = await axiosInstance.get<
     paginationResponse<GreenCardDraftResponseDTO>
-  >(`${GRN_BASE_URL}/drafts`, {
+  >(
+    `${GRN_BASE_URL}/drafts`
+    , {
     transformResponse: (data) => data,
     params: {
       searchParam,
@@ -30,6 +32,6 @@ export const getGreenCardDrafts = async ({
     },
   });
   return jsonToBigInt(
-    response.data
+    response.data,
   ) as paginationResponse<GreenCardDraftResponseDTO>;
 };

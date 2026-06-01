@@ -123,6 +123,10 @@ export default defineConfig(({ mode }) => {
           find: /^@api/,
           replacement: path.resolve(__dirname, "src/api"),
         },
+        {
+          find: /^@constants/,
+          replacement: path.resolve(__dirname, "src/constants"),
+        },
       ],
     },
   };

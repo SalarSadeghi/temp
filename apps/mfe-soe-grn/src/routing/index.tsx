@@ -3,8 +3,12 @@ import { Loadable, NotFound } from "@superapp/ui";
 import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-export const RegisterGreenCardForm = Loadable(
-  lazy(() => import("@components/pages/greenCardForm/RegisterGreenCardForm"))
+const RegisterGreenCardForm = Loadable(
+  lazy(() => import("@components/pages/greenCardForm/RegisterGreenCardForm")),
+);
+
+const DraftGreenCard = Loadable(
+  lazy(() => import("@components/pages/greenCardForm/DraftGreenCard")),
 );
 
 const AppRouter = () => {
@@ -13,7 +17,7 @@ const AppRouter = () => {
       <Route path="greenCard" element={<DrawerLayout />}>
         <Route index element={<Navigate to="register" replace />} />
         <Route path="register" element={<RegisterGreenCardForm />} />
-        <Route path="draft" element={"draft green card"} />
+        <Route path="draft" element={<DraftGreenCard />} />
         <Route path="sent" element={"sent green card"} />
       </Route>
       <Route path="*" element={<NotFound />} />

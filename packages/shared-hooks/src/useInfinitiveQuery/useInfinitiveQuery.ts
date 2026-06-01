@@ -1,39 +1,9 @@
-// import {
-//   useInfiniteQuery,
-//   UseInfiniteQueryOptions,
-// } from "@tanstack/react-query";
-
-// type InfiniteQueryParams<T, Cursor> = {
-//   queryKey: unknown[];
-//   queryFn: (
-//     cursor: Cursor | null
-//   ) => Promise<{ data: T[]; nextCursor: Cursor | null }>;
-//   initialPageParam: Cursor | null;
-//   getNextPageParam?: (lastPage: {
-//     nextCursor: Cursor | null;
-//   }) => Cursor | null | undefined;
-//   options?: Omit<
-//     UseInfiniteQueryOptions,
-//     "queryKey" | "queryFn" | "initialPageParam" | "getNextPageParam"
-//   >;
-// };
-
-// export function useInfiniteScroll<T, Cursor = number>({
-//   queryKey,
-//   queryFn,
-//   initialPageParam,
-//   getNextPageParam = (lastPage) => lastPage.nextCursor,
-//   options,
-// }: InfiniteQueryParams<T, Cursor>) {
-//   return useInfiniteQuery({
-//     queryKey,
-//     queryFn: ({ pageParam }) => queryFn(pageParam as Cursor | null),
-//     initialPageParam,
-//     getNextPageParam,
-//     ...options,
-//   });
-// }
-import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  QueryKey,
+  useInfiniteQuery,
+  UseInfiniteQueryOptions,
+} from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
 
 // Shape that your queryFn must return
 type PageData<T, Cursor> = {
@@ -41,26 +11,62 @@ type PageData<T, Cursor> = {
   nextCursor: Cursor | null;
 };
 
-export function useInfiniteScroll<T, Cursor = number>({
+export function useInfiniteScroll<TData, TCursor = number>({
   queryKey,
   queryFn,
   initialPageParam,
   getNextPageParam = (lastPage) => lastPage.nextCursor,
-  options,
+  ...options
 }: {
-  queryKey: unknown[];
-  queryFn: (cursor: Cursor | null) => Promise<PageData<T, Cursor>>;
-  initialPageParam: Cursor | null;
+  queryKey: QueryKey;
+  queryFn: (cursor: TCursor | null) => Promise<PageData<TData, TCursor>>;
+  initialPageParam: TCursor | null;
   getNextPageParam?: (
-    lastPage: PageData<T, Cursor>
-  ) => Cursor | null | undefined;
-  options?: any;
-}) {
+    lastPage: PageData<TData, TCursor>,
+  ) => TCursor | null | undefined;
+} & Omit<
+  UseInfiniteQueryOptions<PageData<TData, TCursor>>,
+  "queryKey" | "queryFn" | "initialPageParam" | "getNextPageParam"
+>) {
   return useInfiniteQuery({
     queryKey,
-    queryFn: ({ pageParam }) => queryFn(pageParam as Cursor | null),
+    queryFn: ({ pageParam }) => queryFn(pageParam as TCursor | null),
     initialPageParam,
     getNextPageParam,
     ...options,
   });
 }
+
+export const useIntersectionObserver = (
+  onIntersect: () => void,
+  enabled: boolean,
+) => {
+  const targetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!enabled) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Fix: Check if entries[0] exists before accessing isIntersecting
+        if (entries[0]?.isIntersecting) {
+          onIntersect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "100px" },
+    );
+
+    const currentTarget = targetRef.current;
+    if (currentTarget) {
+      observer.observe(currentTarget);
+    }
+
+    return () => {
+      if (currentTarget) {
+        observer.unobserve(currentTarget);
+      }
+    };
+  }, [onIntersect, enabled]);
+
+  return targetRef;
+};

@@ -50,6 +50,9 @@ importers:
       '@superapp/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@tanstack/react-query':
+        specifier: ^5.100.14
+        version: 5.100.14(react@19.2.1)
       react:
         specifier: ^19.2.1
         version: 19.2.1
