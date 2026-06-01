@@ -68,9 +68,7 @@ const RegisterGreenCardForm = () => {
   });
 
   const handleAcceptedFiles = (acceptedFiles: File[]) => {
-    console.log(acceptedFiles);
     setLocalFiles(acceptedFiles);
-    showSnackbar({ message: "sss" });
   };
 
   const handleRejectedFiles = (rejections: any[]) => {

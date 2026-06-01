@@ -28,7 +28,8 @@
       "@pages/*": ["./src/pages/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@validations/*": ["./src/validations/*"],
-      "@type/*": ["./src/type/*"]
+      "@type/*": ["./src/type/*"],
+      "@api/*": ["./src/api/*"]
     }
   },
   "include": ["src"],

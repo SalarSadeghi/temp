@@ -119,6 +119,10 @@ export default defineConfig(({ mode }) => {
           find: /^@type/,
           replacement: path.resolve(__dirname, "src/type"),
         },
+        {
+          find: /^@api/,
+          replacement: path.resolve(__dirname, "src/api"),
+        },
       ],
     },
   };

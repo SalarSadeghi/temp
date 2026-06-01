@@ -41,6 +41,8 @@
     "vite": "^6.4.2"
   },
   "dependencies": {
-    "@superapp/shared-types": "workspace:*"
+    "@superapp/shared-types": "workspace:*",
+    "@superapp/shared-hooks": "workspace:*",
+    "@superapp/shared-utils": "workspace:*"
   }
 }

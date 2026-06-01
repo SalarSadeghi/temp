@@ -5,5 +5,4 @@ export interface Unit {
   code: string;
   level: number;
   parentCode: string | null;
-  lastUpdate: Date;
 }

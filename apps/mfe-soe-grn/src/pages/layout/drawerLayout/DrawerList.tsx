@@ -1,4 +1,5 @@
 import { useDrawerStore } from "@store/drawerStore";
+import { useGreenCardStore } from "@store/greenCardStore";
 import {
   AppRegistrationOutlined,
   ArticleOutlined,
@@ -17,7 +18,8 @@ import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface DrawerItem {
-  title?: string;
+  sidebarTitle?: string;
+  pageTitle?: string;
   icon?: ReactNode;
   href?: string;
   hidden?: boolean;
@@ -25,19 +27,22 @@ interface DrawerItem {
 
 const ITEMS: DrawerItem[] = [
   {
-    title: "ثبت فرم کارت سبز",
+    sidebarTitle: "ثبت فرم کارت سبز",
+    pageTitle: "ثبت فرم کارت سبز",
     icon: <AppRegistrationOutlined />,
     href: "register",
     hidden: false,
   },
   {
-    title: "پیش نویس‌های کارت سبز",
+    sidebarTitle: "پیش نویس‌های کارت سبز",
+    pageTitle: "پیش‌نویس کارت سبز",
     icon: <ArticleOutlined />,
     hidden: false,
     href: "draft",
   },
   {
-    title: "کارت سبز‌های ارسال شده",
+    sidebarTitle: "کارت سبز‌های ارسال شده",
+    pageTitle: "ارسالی‌های کارت سبز",
     icon: <SendOutlined />,
     hidden: false,
     href: "sent",
@@ -46,11 +51,13 @@ const ITEMS: DrawerItem[] = [
 
 const DrawerList = () => {
   const { changeOpenDrawer } = useDrawerStore();
+  const { setPageTitle } = useGreenCardStore();
   const navigate = useNavigate();
   const handleNavigate = (item: DrawerItem) => {
     if (item?.href) {
       navigate(item?.href);
       changeOpenDrawer(false);
+      setPageTitle(item?.pageTitle || "");
     }
   };
   return (
@@ -75,7 +82,7 @@ const DrawerList = () => {
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText
-                  primary={<span className="text-xs">{item.title}</span>}
+                  primary={<span className="text-xs">{item.sidebarTitle}</span>}
                 />
               </ListItemButton>
             </ListItem>

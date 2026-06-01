@@ -2,79 +2,86 @@ import type {
   SnackbarProps as MuiSnackbarProps,
   AlertColor,
 } from "@mui/material";
-import { Snackbar as MuiSnackbar, Alert, AlertProps } from "@mui/material";
+import {
+  Snackbar as MuiSnackbar,
+  Alert,
+  AlertProps,
+  IconButton,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import {
   useNotificationStore,
   CustomSnackbarState,
 } from "@superapp/shared-store/stores/notificationStore.js";
+import { Close } from "../../../icons/src";
 export type SnackbarSeverity = AlertColor; // 'error' | 'warning' | 'info' | 'success'
 
-// export interface CustomSnackbarProps {
-//   open: boolean;
-//   message: string;
-//   severity?: SnackbarSeverity;
-//   autoHideDuration?: number;
-//   onClose?: () => void;
-//   position?: {
-//     vertical: "top" | "bottom";
-//     horizontal: "left" | "center" | "right";
-//   };
-// }
-
 export const CustomSnackbar: React.FC = () => {
-  const { message, open, position, severity, autoHideDuration } =
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
+  const { message, open, position, severity, autoHideDuration, setOpen } =
     useNotificationStore();
-  //   const handleClose = (
-  //     event?: React.SyntheticEvent | Event,
-  //     reason?: string
-  //   ) => {
-  //     if (reason === "clickaway") return;
-  //     onClose?.();
-  //   };
+  const handleClose = (
+    _event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") return;
+    setOpen(false);
+  };
+
+  const action = (
+    <IconButton
+      size="small"
+      aria-label="close"
+      color="inherit"
+      onClick={handleClose}
+    >
+      <Close fontSize="small" />
+    </IconButton>
+  );
 
   return (
-    <MuiSnackbar
-      open={open}
-      autoHideDuration={autoHideDuration}
-      //   onClose={handleClose}
-      anchorOrigin={position}
-    >
-      <Alert
-        // onClose={handleClose}
-        severity={severity}
-        variant="filled" // optional: use 'filled', 'outlined', or 'standard'
-        sx={{ width: "100%" }}
+    <div>
+      <MuiSnackbar
+        open={open}
+        autoHideDuration={autoHideDuration}
+        onClose={handleClose}
+        anchorOrigin={position}
+        action={action}
+        sx={isDesktop ? { width: 350 } : { width: "" }}
       >
-        {message}
-      </Alert>
-    </MuiSnackbar>
+        <Alert
+          onClose={handleClose}
+          severity={severity}
+          variant="filled" // optional: use 'filled', 'outlined', or 'standard'
+          sx={{ width: "100%" }}
+        >
+          {message}
+        </Alert>
+      </MuiSnackbar>
+    </div>
   );
 };
 
 export const useSnackbar = () => {
-  const { setMessage, setOpen, setAutoHideDuration, setPosition, setSeverity } =
+  const { setMessage, setOpen, setPosition, setSeverity } =
     useNotificationStore();
 
   const showSnackbar = ({
     message,
     position,
     severity,
-  }: Pick<CustomSnackbarState, "message"> &
-    Partial<Pick<CustomSnackbarState, "position" | "severity">>) => {
+  }: Partial<
+    Pick<CustomSnackbarState, "message" | "position" | "severity">
+  >) => {
     setOpen(true);
-    setMessage(message);
-    setSeverity(severity);
-    setPosition(position);
+    message && setMessage(message);
+    severity && setSeverity(severity);
+    position && setPosition(position);
   };
 
   return {
-    // snackbarProps: {
-    //   open: state.open,
-    //   message: state.message,
-    //   severity: state.severity,
-    //   onClose: hideSnackbar,
-    // },
     showSnackbar,
-    // hideSnackbar,
   };
 };

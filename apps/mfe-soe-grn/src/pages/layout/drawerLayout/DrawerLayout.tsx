@@ -3,13 +3,14 @@ import { Drawer, IconButton } from "@superapp/ui";
 import { Outlet } from "react-router-dom";
 import DrawerList from "./DrawerList";
 import { useDrawerStore } from "@store/drawerStore";
+import { useGreenCardStore } from "@store/greenCardStore";
 
 const DrawerLayout = () => {
   const { isOpenDrawer, changeOpenDrawer } = useDrawerStore();
+  const { pageTitle } = useGreenCardStore();
   const toggleDrawer = (newOpen: boolean) => () => {
     changeOpenDrawer(newOpen);
   };
-  console.log("drawer layout is called");
 
   return (
     <div className="flex flex-col relative">
@@ -17,7 +18,7 @@ const DrawerLayout = () => {
         <IconButton onClick={toggleDrawer(true)}>
           <Menu />
         </IconButton>
-        <span>عنوان</span>
+        <span>{pageTitle}</span>
       </div>
       <Drawer open={isOpenDrawer} onClose={toggleDrawer(false)}>
         <DrawerList />

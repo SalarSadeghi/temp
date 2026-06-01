@@ -6,7 +6,7 @@ export type SnackbarSeverity = "error" | "warning" | "info" | "success";
 export interface CustomSnackbarState {
   open: boolean;
   message: string;
-  severity?: SnackbarSeverity;
+  severity: SnackbarSeverity;
   autoHideDuration?: number;
   setOpen: (state: boolean) => void;
   setMessage: (state: string) => void;
@@ -16,15 +16,15 @@ export interface CustomSnackbarState {
     horizontal: "left" | "center" | "right";
   };
   setPosition: (position: CustomSnackbarState["position"]) => void;
-  setSeverity: (severity?: SnackbarSeverity) => void;
+  setSeverity: (severity: SnackbarSeverity) => void;
 }
 
 const initialState = {
   open: false,
   message: "",
   severity: "info" as SnackbarSeverity,
-  autoHideDuration: 6000,
-  position: { vertical: "bottom", horizontal: "left" } as const,
+  autoHideDuration: 5000,
+  position: { vertical: "bottom", horizontal: "right" } as const,
 };
 
 export const useNotificationStore = create<CustomSnackbarState>()(
@@ -45,9 +45,9 @@ export const useNotificationStore = create<CustomSnackbarState>()(
 
     setSeverity: (severity: SnackbarSeverity) => {
       set((state) => {
-        if (severity) {
+       
           state.severity = severity;
-        }
+      
       });
     },
 

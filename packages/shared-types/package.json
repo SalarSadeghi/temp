@@ -4,7 +4,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./unit": "./src/Unit/index.ts"
+    "./unit": "./src/Unit/index.ts",
+    "./Response": "./src/Response/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0"
