@@ -1,4 +1,5 @@
 import AppRouter from "@routing/index";
+import { CustomConfirmDialog } from "@superapp/ui";
 
 function App() {
   // Run in both shell and MFE
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
       <AppRouter />
+      <CustomConfirmDialog />
     </>
   );
 }

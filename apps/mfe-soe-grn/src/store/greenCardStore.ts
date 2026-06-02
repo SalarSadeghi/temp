@@ -1,3 +1,7 @@
+import {
+  GreenCardDraftResponseDTO,
+  GreenCardSentResponseDTO,
+} from "@type/response";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -17,6 +21,8 @@ interface StoreState {
   // setSent: (sent: GreenCardSentResponse | null) => void;
   setPageTitle: (title: string) => void;
   changeMode: (mode: Mode) => void;
+  setDraft: (draft: GreenCardDraftResponseDTO | null) => void;
+  setSent: (sent: GreenCardSentResponseDTO | null) => void;
 }
 
 const initialState = {
@@ -37,5 +43,14 @@ export const useGreenCardStore = create<StoreState>()(
         draft.pageTitle = title;
       });
     },
+    setDraft: (data: GreenCardDraftResponseDTO | null) =>
+      set((draft) => {
+        draft.draft = data;
+      }),
+
+    setSent: (data: GreenCardSentResponseDTO | null) =>
+      set((draft) => {
+        draft.sent = data;
+      }),
   }))
 );

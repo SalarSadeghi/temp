@@ -2,7 +2,11 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import type { ModalStore, ModalEntry, ModalState } from "./types.js";
+import type {
+  ModalStore,
+  ModalEntry,
+  ModalState,
+} from "./types.js";
 import { DEFAULT_MAX_STACK_SIZE, Z_INDEX_INCREMENT } from "./types.js";
 
 // Initial state
@@ -11,8 +15,6 @@ const initialState: ModalState = {
   maxZIndex: 1000, // Base z-index for first modal
   maxStackSize: DEFAULT_MAX_STACK_SIZE,
 };
-
-
 
 const calculateZIndex = (currentMaxZIndex: number): number => {
   return currentMaxZIndex + Z_INDEX_INCREMENT;
@@ -58,7 +60,7 @@ export const useModalStore = create<ModalStore>()(
         const newZIndex = calculateZIndex(maxZIndex);
         const newEntry: ModalEntry<TProps> = {
           id: options.id,
-          type: options?.type,
+          type: options?.type || "Generic",
           props: options?.props,
           zIndex: newZIndex,
           timestamp: Date.now(),
@@ -139,7 +141,7 @@ export const useModalStore = create<ModalStore>()(
           // Push new one with same z-index pattern
           state.stack.push({
             id: options.id,
-            type: options?.type,
+            type: options?.type || "Generic",
             props: options?.props,
             zIndex: maxZIndex,
             timestamp: Date.now(),

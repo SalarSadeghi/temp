@@ -1,5 +1,5 @@
 // components/modals/BaseModal.tsx
-import React, { ReactNode,  useCallback,  memo } from "react";
+import React, { ReactNode, useCallback, memo } from "react";
 import {
   Modal as MuiModal,
   Box,
@@ -17,12 +17,12 @@ import {
   useTopModal,
 } from "../../../shared-store/src/index.js";
 import { Close } from "../../../icons/src/index.js";
-
+type ModalType = "Basic" | "Confirm";
 // Types
 export type BaseModalProps = {
   // Core
   modalId: string;
-  modalType?: string;
+  modalType?: ModalType;
   // open: boolean;
 
   // Content
@@ -69,7 +69,7 @@ const modalStyles = {
 
 const BaseModal: React.FC<BaseModalProps> = ({
   modalId,
-  //modalType,
+  modalType = "Basic",
   // open,
   title,
   children,
@@ -89,7 +89,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   //onEntered,
   keepMounted = false,
 }) => {
-  const { popModal,  isModalOpen } = useModalActions();
+  const { popModal, isModalOpen } = useModalActions();
   const topModal = useTopModal();
 
   // Track if this modal is the topmost in stack

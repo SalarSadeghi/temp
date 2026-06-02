@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import { CustomConfirmDialog } from "@superapp/ui";
 
 if (import.meta.env.DEV) {
   import("http://localhost:3000/src/index.css").catch(() => {
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      <CustomConfirmDialog />
     </BrowserRouter>
   </React.StrictMode>
 );

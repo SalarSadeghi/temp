@@ -23,6 +23,13 @@ import {
 import { GreenCardTypeOption, GreenCardTypeOptions } from "@type/common";
 import { RegisterGreenCardFormSchema } from "@validations/registerGreenCardFormSchema";
 import { Unit } from "@superapp/shared-types/unit";
+import { useGreenCardStore } from "@store/greenCardStore";
+import { combineDateTimeFields } from "@superapp/shared-utils";
+import { GreenCardDraftResponseDTO } from "@type/response";
+import { useModalActions } from "@superapp/shared-store";
+import { useDialogStore } from "@superapp/shared-store/stores/dialogStore.js";
+import { useMutation } from "@tanstack/react-query";
+import { createGRN } from "@api/grnApi";
 
 interface FormValues {
   unitId: Unit;
@@ -34,6 +41,46 @@ interface FormValues {
   time: Date;
   date: Date;
 }
+
+type Mode = "edit" | "add" | null;
+const formDataMapper = (
+  data: FormValues | GreenCardDraftResponseDTO | any,
+  mode: Mode = "add"
+) => {
+  if (mode === "add") {
+    return {
+      unitId: data.unitId.value,
+      placeViewDescription: data.placeViewDescription,
+      greenCardType: data.greenCardType.value,
+      viewDate: data.viewDate,
+      placeAdditionalDescription: data.placeAdditionalDescription,
+      ...(data.suggestionDescription && {
+        suggestionDescription: data.suggestionDescription,
+      }),
+      ...(data.file && data.file.length > 0 && { file: data.file[0] }),
+    };
+  }
+  if (mode === "edit") {
+    return {
+      ...(data.id && { id: data.id }),
+      ...(data.unitId && { unitId: data.unitId.value }),
+      ...(data.placeViewDescription && {
+        placeViewDescription: data.placeViewDescription,
+      }),
+      ...(data.greenCardType && { greenCardType: data.greenCardType?.value }),
+      ...(data.placeAdditionalDescription && {
+        placeAdditionalDescription: data.placeAdditionalDescription,
+      }),
+      ...(data.viewDate && { viewDate: data.viewDate }),
+      ...(data.suggestionDescription && {
+        suggestionDescription: data.suggestionDescription,
+      }),
+      ...(data.file && data.file.length > 0 && { file: data.file[0] }),
+      ...(data.deletedFileId &&
+        data.deletedFileId.length > 0 && { deletedFileId: data.deletedFileId }),
+    };
+  }
+};
 
 const DefaultValues = {
   unitId: undefined,
@@ -49,8 +96,16 @@ const RegisterGreenCardForm = () => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   const [localFiles, setLocalFiles] = useState<File[]>([]);
-
+  const [deletedFileId, setDeletedFileId] = useState<string[]>([]);
+  const { mode, draft, changeMode, setDraft } = useGreenCardStore();
   const { showSnackbar } = useSnackbar();
+  const {
+    changeOpen: changeDialogOpen,
+    changeTitle: changeDialogTitle,
+    changeBody: changeDialogText,
+    changeOnOk: changeDialogOnOk,
+    changeHasCancelBtn: changeDialogHasCancelBtn,
+  } = useDialogStore();
   // const placeAdditionalDescription = useWatch({
   //   name: "placeAdditionalDescription",
   // });
@@ -59,8 +114,8 @@ const RegisterGreenCardForm = () => {
     handleSubmit,
     control,
     // watch,
-    // reset,
-    // setValue,
+    reset,
+    setValue,
     // formState: { isDirty, dirtyFields },
   } = useForm<FormValues | any>({
     // resolver: yupResolver(RegisterGreenCardFormSchema),
@@ -79,8 +134,66 @@ const RegisterGreenCardForm = () => {
     setLocalFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: createGRN,
+    onSuccess: async () => {
+      reset();
+      changeMode("add");
+      setDraft(null);
+      setLocalFiles([]);
+      showSnackbar({
+        message: Shared_Text.common.successOperationMsg,
+        severity: "success",
+      });
+      changeDialogTitle(Shared_Text.common.successOperationMsg);
+      changeDialogText(
+        <div className="flex flex-col gap-8">
+          {/* <SuccessAnimation /> */}
+          <span className={`${isDesktop ? "text-base" : "text-sm"}`}>
+            {Texts.greenCardForm.successPostGreenCardMSG}
+          </span>
+        </div>
+      );
+      changeDialogOpen(true);
+      changeDialogHasCancelBtn(false);
+    },
+  });
+
   const onsubmit = async (data: FormValues) => {
-    console.log(data);
+    const formData: FormData = new FormData();
+    if (mode === "add") {
+      const viewDate = combineDateTimeFields({
+        time: data.time,
+        date: data.date,
+      });
+      const dataToSend = formDataMapper({ ...data, viewDate }, "add");
+      Object.entries(dataToSend).forEach(([key, value]) => {
+        formData.append(key, value as any);
+      });
+      localFiles.forEach((f) => formData.append("file", f));
+      changeDialogOpen(true);
+      changeDialogOnOk(() => mutate(formData));
+      changeDialogTitle(Texts.greenCardForm.registerTitle);
+      changeDialogText(Texts.greenCardForm.confirmModalRegeisterText);
+    } else if (mode === "edit") {
+      const viewDate = combineDateTimeFields({
+        time: data.time,
+        date: data.date,
+      });
+      const dataToSend = formDataMapper(
+        {
+          ...data,
+          viewDate,
+          id: draft?.id,
+          deletedFileId,
+        },
+        mode
+      );
+      Object.entries(dataToSend).forEach(([key, value]) => {
+        formData.append(key, value as any);
+      });
+      localFiles.forEach((f) => formData.append("file", f));
+    }
   };
 
   return (

@@ -8,4 +8,5 @@ export const RQKeys = {
     "sentGreenCardByPrcCode",
     prcCode,
   ],
+  getSentGreenCard: (searchParam?: string) => ["sentSuggestion", searchParam],
 };
