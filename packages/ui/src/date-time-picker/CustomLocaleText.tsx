@@ -33,13 +33,13 @@ const defaultMuiLocaleText: Partial<PickersLocaleText> = {
   calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
 
   // Field labels
-  fieldMonthPlaceholder: (params) => "ماه",
-  fieldYearPlaceholder: (params) => "سال",
-  fieldDayPlaceholder: (params) => "روز",
-  fieldHoursPlaceholder: (params) => "ساعت",
-  fieldMinutesPlaceholder: (params) => "دقیقه",
-  fieldSecondsPlaceholder: (params) => "ثانیه",
-  fieldMeridiemPlaceholder: (params) => "قبل/بعد از ظهر",
+  fieldMonthPlaceholder: (_params) => "ماه",
+  fieldYearPlaceholder: (_params) => "سال",
+  fieldDayPlaceholder: (_params) => "روز",
+  fieldHoursPlaceholder: (_params) => "ساعت",
+  fieldMinutesPlaceholder: (_params) => "دقیقه",
+  fieldSecondsPlaceholder: (_params) => "ثانیه",
+  fieldMeridiemPlaceholder: (_params) => "قبل/بعد از ظهر",
 
   openDatePickerDialogue: (formattedDate) =>
     formattedDate

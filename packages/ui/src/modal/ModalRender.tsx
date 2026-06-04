@@ -1,7 +1,6 @@
 // components/modals/ModalRenderer.tsx
 import React, {
-  Suspense,
-  // lazy, ComponentType
+  Suspense, // lazy, ComponentType //useEffect, // Suspense,
 } from "react";
 import { CircularProgress, Box } from "@mui/material";
 import { BaseModal, BaseModalProps } from "./BaseModal.js";
@@ -46,9 +45,11 @@ interface ModalRendererProps extends BaseModalProps {}
 
 // Main Modal Renderer - place this once in your App component
 export const ModalRenderer: React.FC<ModalRendererProps> = (
-  props: ModalRendererProps
+  props: ModalRendererProps,
 ) => {
-  const hasModals = useModalStore((state) => state.stack.length > 0);
+  const stack = useModalStore((state) => state.stack);
+  const hasModals = stack.length > 0;
+
   if (!hasModals) return null;
 
   //const { modalType } = props;

@@ -2,7 +2,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
 import { faIR } from "date-fns-jalali/locale";
 import { createCustomLocaleText } from "./CustomLocaleText";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 // import { faIR } from "date-fns/locale";
 interface CustomLocalizationProviderProps {
   children: React.ReactNode;

@@ -1,6 +1,8 @@
-import Home from "@pages/home/Home";
 import { Route, Routes } from "react-router-dom";
+import { lazy } from "react";
+import { Loadable } from "@superapp/ui/common";
 
+const Home = Loadable(lazy(() => import("@pages/home/Home")));
 const AppRouter = () => {
   return (
     <Routes>

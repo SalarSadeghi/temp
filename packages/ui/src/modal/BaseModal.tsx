@@ -1,5 +1,5 @@
 // components/modals/BaseModal.tsx
-import React, { ReactNode, useCallback, memo } from "react";
+import React, { ReactNode, useCallback } from "react";
 import {
   Modal as MuiModal,
   Box,
@@ -69,7 +69,7 @@ const modalStyles = {
   outline: "none", // Remove focus outline (MUI handles focus)
 };
 
-const BaseModal: React.FC<BaseModalProps> = ({
+export const BaseModal: React.FC<BaseModalProps> = ({
   modalId,
   //modalType = "Basic",
   // open,
@@ -271,8 +271,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
   );
 };
 
-const MemoizedBaseModal = memo(BaseModal);
-export { MemoizedBaseModal as BaseModal };
+
 
 // Optional: Preset configurations for common modal types
 // export const modalPresets = {

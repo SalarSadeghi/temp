@@ -49,6 +49,8 @@ export const useModalStore = create<ModalStore>()(
         type?: string;
         props?: TProps;
       }): string => {
+        console.log("push called");
+        
         const { stack, maxZIndex, maxStackSize } = get();
         // Prevent stack overflow
         if (stack.length >= maxStackSize) {

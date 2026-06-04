@@ -25,6 +25,9 @@ export default defineConfig(({ mode }) => {
       host: true,
       cors: true,
     },
+    preview: {
+      port: 3000,
+    },
     plugins: [
       react(),
       VitePWA({
@@ -95,9 +98,11 @@ export default defineConfig(({ mode }) => {
           react: {
             singleton: true,
             requiredVersion: pkg.dependencies.react,
+            eager: true,
           } as any,
           "react-dom": {
             singleton: true,
+            eager: true,
             requiredVersion: pkg.dependencies["react-dom"],
           } as any,
           zustand: {
@@ -111,11 +116,11 @@ export default defineConfig(({ mode }) => {
           "@hookform/resolvers": {
             singleton: false,
             requiredVersion: pkg.dependencies["@hookform/resolvers"],
-          },
+          } as any,
           yup: {
             singleton: false,
             requiredVersion: pkg.dependencies.yup,
-          },
+          } as any,
           "@superapp/shared-store": {
             version: "0.0.0",
             singleton: true,
@@ -129,6 +134,11 @@ export default defineConfig(({ mode }) => {
           "react-router-dom": {
             singleton: true,
             requiredVersion: pkg.dependencies["react-router-dom"],
+            eager: true,
+          } as any,
+          "@superapp/ui": {
+            singleton: true,
+            version: "0.0.0"
           } as any,
           "@superapp/tailwind-config": {
             singleton: true,
