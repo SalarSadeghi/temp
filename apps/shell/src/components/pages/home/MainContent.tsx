@@ -77,8 +77,8 @@ const MainContentItems = [
 const MainContent = () => {
   return (
     <div className="w-full flex flex-wrap">
-      {MainContentItems?.map((item) => (
-        <div className="w-1/4 flex justify-center items-center">
+      {MainContentItems?.map((item, i) => (
+        <div key={i} className="w-1/4 flex justify-center items-center">
           <Link to={item.href}>
             <ServiceBox title={item.title} icon={item.icon} />
           </Link>

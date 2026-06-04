@@ -1,0 +1,9 @@
+{
+  "name": "@superapp/shared-assets",
+  "version": "0.0.0",
+  "exports": {
+    "./fonts.css": "./assets/fonts/fonts.css",
+    "./fonts/*": "./assets/fonts/*"
+  },
+   "files": ["assets"]
+}

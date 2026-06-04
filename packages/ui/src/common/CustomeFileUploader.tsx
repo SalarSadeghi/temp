@@ -84,16 +84,16 @@ export const CustomeFileUploader: React.FC<FileUploaderProps> = ({
     // isDragAccept,
     // isDragReject,
     // fileRejections,
-    acceptedFiles,
+    // acceptedFiles,
   } = useDropzone(dropzoneOptions);
 
   // Determine border color based on state
-  const getBorderColor = () => {
-    // if (isDragReject) return "border-red-500";
-    // if (isDragAccept) return "border-green-500";
-    if (acceptedFiles?.length > 0) return "border-blue-500";
-    return "border-red-300";
-  };
+  // const getBorderColor = () => {
+  //   // if (isDragReject) return "border-red-500";
+  //   // if (isDragAccept) return "border-green-500";
+  //   if (acceptedFiles?.length > 0) return "border-blue-500";
+  //   return "border-red-300";
+  // };
 
   // Format file size for display
   const formatFileSize = (bytes: number): string => {
@@ -113,7 +113,7 @@ export const CustomeFileUploader: React.FC<FileUploaderProps> = ({
         
         `}
       >
-        <input {...getInputProps()} />
+        <input {...getInputProps()} required={required} />
 
         {/* Upload Icon */}
         {/* <svg

@@ -4,7 +4,7 @@ import PWAlogo from "/pwa-192.png";
 export const InstallPWABanner: React.FC = () => {
   const { shouldShow, isIos, promptInstall, dismissBanner, isInstalled } =
     usePWAInstall();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     // Only show after a small delay to prevent layout shift
@@ -13,9 +13,9 @@ export const InstallPWABanner: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [shouldShow, isInstalled]);
-
   if (!visible || isInstalled) return null;
-
+  
+  
   const handleInstall = async () => {
     if (isIos) {
       // iOS: Can't trigger programmatically, show instructions modal instead

@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { CustomConfirmDialog } from "@superapp/ui";
 
+// Import the local Tailwind build ONLY in development
 if (import.meta.env.DEV) {
-  import("http://localhost:3000/src/index.css").catch(() => {
-    console.warn("Shell CSS not available, running in standalone mode");
-  });
+  import("./index.css");
+   import('@superapp/shared-assets/fonts.css');
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -17,5 +16,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <App />
       <CustomConfirmDialog />
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

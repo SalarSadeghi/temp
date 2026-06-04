@@ -11,12 +11,14 @@ import {
   Backdrop,
   Fade,
 } from "@mui/material";
+import { useModalActions, useTopModal } from "@superapp/shared-store/stores/modal/modalStore.js";
+import { Close } from "../../../icons/src";
 // import CloseIcon from "@mui/icons-material/Close";
-import {
-  useModalActions,
-  useTopModal,
-} from "../../../shared-store/src/index.js";
-import { Close } from "../../../icons/src/index.js";
+// import {
+//   useModalActions,
+//   useTopModal,
+// } from "../../../shared-store/src/index.js";
+// import { Close } from "../../../icons/src/index.js";
 type ModalType = "Basic" | "Confirm";
 // Types
 export type BaseModalProps = {
@@ -69,7 +71,7 @@ const modalStyles = {
 
 const BaseModal: React.FC<BaseModalProps> = ({
   modalId,
-  modalType = "Basic",
+  //modalType = "Basic",
   // open,
   title,
   children,

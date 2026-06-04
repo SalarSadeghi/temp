@@ -1,11 +1,9 @@
 import type {
-  SnackbarProps as MuiSnackbarProps,
   AlertColor,
 } from "@mui/material";
 import {
   Snackbar as MuiSnackbar,
   Alert,
-  AlertProps,
   IconButton,
   useMediaQuery,
   useTheme,

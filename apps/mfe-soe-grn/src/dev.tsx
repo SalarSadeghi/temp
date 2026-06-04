@@ -1,15 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CustomConfirmDialog } from "@superapp/ui";
 
+// Import the local Tailwind build ONLY in development
 if (import.meta.env.DEV) {
-  import("http://localhost:3000/src/index.css").catch(() => {
-    console.warn("Shell CSS not available, running in standalone mode");
-  });
+  import("@superapp/shared-assets/fonts.css");
+  import("./index.css");
 }
 
 const queryClient = new QueryClient({

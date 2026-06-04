@@ -8,6 +8,7 @@
     "dev:temp": "turbo dev --filter=temp",
     "dev:mfe-soe-grn": "turbo dev --filter=mfe-soe-grn",
     "build:shell": "turbo run build --filter=shell",
+    "preview:shell": "turbo run preview --filter=shell",
     "build:temp": "turbo run build --filter=temp",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

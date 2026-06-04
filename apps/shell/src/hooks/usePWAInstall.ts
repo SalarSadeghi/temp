@@ -21,7 +21,7 @@ export function usePWAInstall() {
     setIsInstalled(isStandalone);
     return isStandalone;
   };
-
+  
   // Check iOS and set flag
   const checkIos = () => {
     const ios =
@@ -41,7 +41,7 @@ export function usePWAInstall() {
     return false;
   };
 
-  // Dismiss banner for N days (default: 7)
+  // Dismiss banner for N days (default: 1)
   const dismissBanner = (days: number = 1) => {
     const until = new Date().getTime() + days * 24 * 60 * 60 * 1000;
     localStorage.setItem("pwa-dismissed-until", until.toString());

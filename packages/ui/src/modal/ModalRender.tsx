@@ -7,10 +7,9 @@ import { CircularProgress, Box } from "@mui/material";
 import { BaseModal, BaseModalProps } from "./BaseModal.js";
 //import { useModalActions } from "../../../shared-store/src/index.js";
 import {
-  useModalActions,
+  //useModalActions,
   useModalStore,
 } from "../../../shared-store/src/stores/modal/modalStore.js";
-import ConfirmModal from "./ConfirmModal.js";
 
 // Registry of modal components (lazy loaded)
 // const modalRegistry: Record<
@@ -52,7 +51,7 @@ export const ModalRenderer: React.FC<ModalRendererProps> = (
   const hasModals = useModalStore((state) => state.stack.length > 0);
   if (!hasModals) return null;
 
-  const { modalType } = props;
+  //const { modalType } = props;
 
   return (
     <>

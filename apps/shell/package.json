@@ -34,6 +34,7 @@
     "@module-federation/vite": "^1.16.0",
     "@originjs/vite-plugin-federation": "^1.4.1",
     "@superapp/tailwind-config": "workspace:*",
+    "@superapp/shared-assets": "workspace:*",
     "@types/json-bigint": "^1.0.4",
     "@types/moment-jalaali": "^0.7.9",
     "@types/node": "^25.9.1",

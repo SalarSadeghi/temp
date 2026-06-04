@@ -32,7 +32,7 @@ interface StoreState {
 }
 
 export const useDialogStore = create<StoreState>()(
-  immer((set, get) => ({
+  immer((set, _get) => ({
     isLoading: false,
     isOpen: false,
     title: "",
