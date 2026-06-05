@@ -30,7 +30,9 @@ const DraftCard = ({ draft }: DraftCardProps) => {
   const [draftToDeleteId, setDeraftToDeleteId] = useState<string>("");
   const { showSnackbar } = useSnackbar();
   const qc = useQueryClient();
-  const { mutate, isPending } = useMutation({
+  const { 
+    //mutate, 
+    isPending } = useMutation({
     mutationFn: () => deleteGreenCardDraft(draft?.id as string),
     onSuccess: () => {
       setDeraftToDeleteId("");

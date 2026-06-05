@@ -61,9 +61,41 @@ export default defineConfig(({ mode }) => {
             version: "0.0.0",
             singleton: true,
           } as any,
+          "@tanstack/react-query": {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies["@tanstack/react-query"],
+          } as any,
           "@superapp/ui": {
             singleton: true,
             version: "0.0.0",
+          } as any,
+          "@emotion/react": {
+            singleton: true,
+            requiredVersion: "^11.11.0",
+          } as any,
+          "@emotion/styled": {
+            singleton: true,
+            requiredVersion: "^11.11.0",
+          } as any,
+          "@emotion/cache": {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies["@emotion/cache"],
+          } as any,
+          stylis: {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies.stylis,
+          } as any,
+          "stylis-plugin-rtl": {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies["stylis-plugin-rtl"],
+          } as any,
+          "date-fns": {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies["date-fns"],
+          } as any,
+          "date-fns-jalali": {
+            singleton: true,
+            requiredVersion: pkg.peerDependencies["date-fns-jalali"],
           } as any,
           "@superapp/tailwind-config": { singleton: true } as any,
         },

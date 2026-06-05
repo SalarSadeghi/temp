@@ -1,5 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
-
+import { Button } from "@superapp/ui/components";
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
@@ -89,14 +89,18 @@ const DefaultErrorFallback: React.FC<DefaultErrorFallbackProps> = ({
   return (
     <div
       role="alert"
-      className="error-boundary flex flex-col justify-center items-center h-screen"
+      className="error-boundary flex flex-col gap-4 justify-center items-center h-screen"
     >
-      <h2>Something went wrong</h2>
-      <details style={{ whiteSpace: "pre-wrap" }}>
-        <summary>Error details</summary>
-        {error && error.toString()}
-      </details>
-      <button onClick={resetErrorBoundary}>Try again</button>
+      <h2>خطایی رخ داده است!</h2>
+      {import.meta.env.DEV && (
+        <details style={{ whiteSpace: "pre-wrap" }}>
+          <summary>Error details</summary>
+          {error && error.toString()}
+        </details>
+      )}
+      <Button color="error" variant="outlined" onClick={resetErrorBoundary}>
+        تلاش مجدد
+      </Button>
     </div>
   );
 };

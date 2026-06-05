@@ -10,9 +10,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useDialogStore } from "@superapp/shared-store/stores/dialogStore.js";
 import { Shared_Text } from "../Texts/texts";
-
+import { useDialogStore } from "@superapp/shared-store";
 export function CustomConfirmDialog() {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
@@ -82,17 +81,19 @@ export function CustomConfirmDialog() {
       <DialogContent>
         {typeof body === "string" ? (
           <DialogContentText id="alert-dialog-description">
-            <Typography paragraph align="justify">
-              {body}
-            </Typography>
+            <Typography align="justify">{body}</Typography>
           </DialogContentText>
         ) : (
           <div> {body}</div>
         )}
       </DialogContent>
-      <DialogActions sx={{ justifyContent: "flex-start" }}>
+      <DialogActions sx={{ justifyContent: "flex-end" }}>
         {hasOkBtn && (
           <Button
+            sx={{
+              backgroundColor: theme.palette.success.light,
+              color: theme.palette.primary.main,
+            }}
             disabled={isLoading}
             startIcon={isLoading ? <CircularProgress size={15} /> : undefined}
             onClick={handleOk}
@@ -103,7 +104,15 @@ export function CustomConfirmDialog() {
         )}
 
         {hasCancelBtn && (
-          <Button onClick={handleCancel}>{Shared_Text.common.cancel}</Button>
+          <Button
+            sx={{
+              backgroundColor: theme.palette.error.light,
+              color: theme.palette.primary.main,
+            }}
+            onClick={handleCancel}
+          >
+            {Shared_Text.common.cancel}
+          </Button>
         )}
       </DialogActions>
     </Dialog>

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppThemeProvider } from "@superapp/ui";
+import { CustomConfirmDialog } from "@superapp/ui/common";
 import App from "./App";
 import "@superapp/shared-assets/fonts.css";
 
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <AppThemeProvider>
         <App />
+        <CustomConfirmDialog />
       </AppThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>,

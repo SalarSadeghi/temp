@@ -10,10 +10,14 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
 
 # Copy all share packages package.json files
 COPY packages/shared-store/package.json packages/shared-store/
+COPY packages/shared-assets/package.json packages/shared-assets/
+COPY packages/shared-api/package.json packages/shared-api/
+COPY packages/shared-types/package.json packages/shared-types/
+COPY packages/shared-utils/package.json packages/shared-utils/
+COPY packages/shared-hooks/package.json packages/shared-hooks/
 COPY packages/ui/package.json packages/ui/
 COPY packages/icons/package.json packages/icons/
 COPY packages/typescript-config/package.json packages/typescript-config/
-COPY packages/icons/package.json packages/icons/
 COPY packages/tailwind-config/package.json packages/tailwind-config/
 COPY packages/eslint-config/package.json packages/eslint-config/
 

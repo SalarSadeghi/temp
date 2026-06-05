@@ -18,6 +18,7 @@ const defaultMuiLocaleText: Partial<PickersLocaleText> = {
   clearButtonLabel: "پاک کردن",
   okButtonLabel: "تأیید",
   todayButtonLabel: "امروز",
+  nextStepButtonLabel: "بعدی",
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>

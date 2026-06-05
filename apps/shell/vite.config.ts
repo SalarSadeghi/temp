@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
   // const isDev = env.NODE_ENV === "development";
   return {
     server: {
-      port: 3000,
+      port: 3001,
       host: true,
       cors: true,
     },
@@ -95,6 +95,7 @@ export default defineConfig(({ mode }) => {
           "soe-grn": `${env.VITE_SOE_GRN_URL}/assets/remoteEntry.js`,
         },
         shared: {
+          // React Singletons
           react: {
             singleton: true,
             requiredVersion: pkg.dependencies.react,
@@ -105,10 +106,31 @@ export default defineConfig(({ mode }) => {
             eager: true,
             requiredVersion: pkg.dependencies["react-dom"],
           } as any,
+          "react-router-dom": {
+            singleton: true,
+            requiredVersion: pkg.dependencies["react-router-dom"],
+            eager: true,
+          } as any,
+          // State & API
+          "@superapp/shared-store": {
+            version: "0.0.0",
+            singleton: true,
+            eager: true,
+          } as any,
+          "@superapp/shared-api": {
+            version: "0.0.0",
+            singleton: true,
+            eager: true,
+          } as any,
+          "@tanstack/react-query": {
+            singleton: true,
+            requiredVersion: pkg.dependencies["@tanstack/react-query"],
+          } as any,
           zustand: {
             singleton: true,
             requiredVersion: pkg.dependencies.zustand,
           } as any,
+          // Forms
           "react-hook-form": {
             singleton: true,
             requiredVersion: pkg.dependencies["react-hook-form"],
@@ -121,24 +143,46 @@ export default defineConfig(({ mode }) => {
             singleton: false,
             requiredVersion: pkg.dependencies.yup,
           } as any,
-          "@superapp/shared-store": {
-            version: "0.0.0",
-            singleton: true,
-            eager: true,
-          } as any,
-          "@superapp/shared-api": {
-            version: "0.0.0",
-            singleton: true,
-            eager: true,
-          } as any,
-          "react-router-dom": {
-            singleton: true,
-            requiredVersion: pkg.dependencies["react-router-dom"],
-            eager: true,
-          } as any,
+          // UI
           "@superapp/ui": {
             singleton: true,
-            version: "0.0.0"
+            version: "0.0.0",
+            eager: true,
+          } as any,
+          "@emotion/react": {
+            singleton: true,
+            requiredVersion: "^11.11.0",
+            eager: true,
+          } as any,
+          "@emotion/styled": {
+            singleton: true,
+            requiredVersion: "^11.11.0",
+            eager: true,
+          } as any,
+          "@emotion/cache": {
+            singleton: true,
+            requiredVersion: pkg.dependencies["@emotion/cache"],
+            eager: true,
+          } as any,
+          stylis: {
+            singleton: true,
+            requiredVersion: "^4.3.0",
+            eager: true,
+          } as any,
+          "date-fns": {
+            singleton: true,
+            requiredVersion: "^3.3.1",
+            eager: true,
+          } as any,
+          "date-fns-jalali": {
+            singleton: true,
+            requiredVersion: "^4.1.0",
+            eager: true,
+          } as any,
+          "stylis-plugin-rtl": {
+            singleton: true,
+            requiredVersion: "^2.1.1",
+            eager: true,
           } as any,
           "@superapp/tailwind-config": {
             singleton: true,

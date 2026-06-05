@@ -1,8 +1,9 @@
 import { useTempStore } from "@store/tempStore";
 import {
   useAuthStore,
+  useDialogStore,
   useModalActions,
-  useModalStore,
+  // useModalStore,
   // useIsModalOpen,
 } from "@superapp/shared-store";
 import { Button } from "@superapp/ui";
@@ -16,9 +17,8 @@ import {
   CustomTimePicker,
 } from "@superapp/ui/date-time-picker";
 const Home = () => {
-  console.log("temp home called");
-
   const { user, setUser } = useAuthStore((state) => state);
+  const { changeOpen, changeBody, changeTitle } = useDialogStore();
   const { temp } = useTempStore();
   useEffect(() => {
     setUser({ name: "foo", family: "bar" });
@@ -31,18 +31,12 @@ const Home = () => {
     });
   };
 
-  useEffect(() => {
-    // Subscribe directly to the whole state (or a selector)
-    const unsub = useModalStore.subscribe(
-      (state) => state.stack.length,
-      (newLength, prevLength) => {
-        console.log(
-          `🔄 Stack length changed from ${prevLength} to ${newLength}`,
-        );
-      },
-    );
-    return unsub;
-  }, []);
+  const handleOpenDialog = () => {
+    changeOpen(true);
+    changeTitle("Title");
+    changeBody("This is the main content of dialog");
+  };
+
   return (
     <div className="flex flex-col h-screen justify-center items-center gap-4">
       <p>USER NAME IS: {user?.name ?? "-"}</p>
@@ -55,6 +49,9 @@ const Home = () => {
       <div>This is local store: {temp}</div>
       <div>
         <Button onClick={handleOpenModal}>Open Modal</Button>
+      </div>
+      <div>
+        <Button onClick={() => handleOpenDialog()}>Open Dialog</Button>
       </div>
       <div className="">
         <CustomDatePicker />

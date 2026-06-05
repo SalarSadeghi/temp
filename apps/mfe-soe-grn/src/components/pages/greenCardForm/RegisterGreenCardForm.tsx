@@ -8,25 +8,32 @@ import {
   useMediaQuery,
   useTheme,
 } from "@superapp/ui";
-import { useSnackbar, CustomSnackbar } from "@superapp/ui/snackbar";
+import {
+  useSnackbar,
+  // CustomSnackbar
+} from "@superapp/ui/snackbar";
 import Texts from "@assets/json/Texts.json";
 import { CustomeFileUploader } from "@superapp/ui/common";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import {
+  Controller,
+  useForm,
+  // useWatch
+} from "react-hook-form";
 import { useState } from "react";
 import { DeleteOutline } from "@superapp/icons";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
   CustomDatePicker,
   CustomTimePicker,
 } from "@superapp/ui/date-time-picker";
 import { GreenCardTypeOption, GreenCardTypeOptions } from "@type/common";
-import { RegisterGreenCardFormSchema } from "@validations/registerGreenCardFormSchema";
+// import { RegisterGreenCardFormSchema } from "@validations/registerGreenCardFormSchema";
 import { Unit } from "@superapp/shared-types/unit";
 import { useGreenCardStore } from "@store/greenCardStore";
 import { combineDateTimeFields } from "@superapp/shared-utils";
 import { GreenCardDraftResponseDTO } from "@type/response";
-import { useModalActions } from "@superapp/shared-store";
+// import { useModalActions } from "@superapp/shared-store";
 import { useDialogStore } from "@superapp/shared-store/stores/dialogStore.js";
 import { useMutation } from "@tanstack/react-query";
 import { createGRN } from "@api/grnApi";
@@ -45,7 +52,7 @@ interface FormValues {
 type Mode = "edit" | "add" | null;
 const formDataMapper = (
   data: FormValues | GreenCardDraftResponseDTO | any,
-  mode: Mode = "add"
+  mode: Mode = "add",
 ) => {
   if (mode === "add") {
     return {
@@ -96,7 +103,7 @@ const RegisterGreenCardForm = () => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   const [localFiles, setLocalFiles] = useState<File[]>([]);
-  const [deletedFileId, setDeletedFileId] = useState<string[]>([]);
+  const [deletedFileId, _setDeletedFileId] = useState<string[]>([]);
   const { mode, draft, changeMode, setDraft } = useGreenCardStore();
   const { showSnackbar } = useSnackbar();
   const {
@@ -115,7 +122,7 @@ const RegisterGreenCardForm = () => {
     control,
     // watch,
     reset,
-    setValue,
+    // setValue,
     // formState: { isDirty, dirtyFields },
   } = useForm<FormValues | any>({
     // resolver: yupResolver(RegisterGreenCardFormSchema),
@@ -134,7 +141,10 @@ const RegisterGreenCardForm = () => {
     setLocalFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const { mutate, isPending } = useMutation({
+  const {
+    mutate,
+    //isPending
+  } = useMutation({
     mutationFn: createGRN,
     onSuccess: async () => {
       reset();
@@ -152,7 +162,7 @@ const RegisterGreenCardForm = () => {
           <span className={`${isDesktop ? "text-base" : "text-sm"}`}>
             {Texts.greenCardForm.successPostGreenCardMSG}
           </span>
-        </div>
+        </div>,
       );
       changeDialogOpen(true);
       changeDialogHasCancelBtn(false);
@@ -187,7 +197,7 @@ const RegisterGreenCardForm = () => {
           id: draft?.id,
           deletedFileId,
         },
-        mode
+        mode,
       );
       Object.entries(dataToSend).forEach(([key, value]) => {
         formData.append(key, value as any);

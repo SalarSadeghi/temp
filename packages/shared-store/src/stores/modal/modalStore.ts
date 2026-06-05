@@ -2,11 +2,7 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import type {
-  ModalStore,
-  ModalEntry,
-  ModalState,
-} from "./types.js";
+import type { ModalStore, ModalEntry, ModalState } from "./types.js";
 import { DEFAULT_MAX_STACK_SIZE, Z_INDEX_INCREMENT } from "./types.js";
 
 // Initial state
@@ -22,7 +18,7 @@ const calculateZIndex = (currentMaxZIndex: number): number => {
 
 const getModalAtIndex = (
   stack: ModalEntry[],
-  index: number
+  index: number,
 ): ModalEntry | undefined => {
   return stack[index];
 };
@@ -49,13 +45,11 @@ export const useModalStore = create<ModalStore>()(
         type?: string;
         props?: TProps;
       }): string => {
-        console.log("push called");
-        
         const { stack, maxZIndex, maxStackSize } = get();
         // Prevent stack overflow
         if (stack.length >= maxStackSize) {
           console.warn(
-            `Modal stack limit reached (${maxStackSize}). Cannot open more modals.`
+            `Modal stack limit reached (${maxStackSize}). Cannot open more modals.`,
           );
           return "";
         }
@@ -170,7 +164,7 @@ export const useModalStore = create<ModalStore>()(
 
         if (modalIndex === -1) {
           console.warn(
-            `[Modal] Cannot update props - modal ${options.modalId} not found`
+            `[Modal] Cannot update props - modal ${options.modalId} not found`,
           );
           return;
         }
@@ -216,13 +210,13 @@ export const useModalStore = create<ModalStore>()(
             const removedCount = state.stack.length - size;
             state.stack = state.stack.slice(0, size);
             console.warn(
-              `[Modal] Stack trimmed to ${size}, removed ${removedCount} modal(s)`
+              `[Modal] Stack trimmed to ${size}, removed ${removedCount} modal(s)`,
             );
           }
         });
       },
-    }))
-  )
+    })),
+  ),
 );
 
 // Performance-optimized selectors (prevent unnecessary re-renders)

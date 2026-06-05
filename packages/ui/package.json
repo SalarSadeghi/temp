@@ -36,22 +36,22 @@
     "vite": "^6.4.2"
   },
   "dependencies": {
-    "@emotion/cache": "^11.11.0",
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "7.3.0",
     "@mui/x-data-grid": "^9.3.0",
-    "@mui/x-date-pickers": "^9.3.0",
     "@mui/x-tree-view": "^7.3.1",
-    "date-fns": "^3.3.1",
-    "date-fns-jalali": "4.1.0-0",
     "react-dom": "^19.2.1",
     "react-dropzone": "^15.0.0",
     "react-hook-form": "^7.48.2",
-    "stylis": "^4.3.0",
-    "stylis-plugin-rtl": "^2.1.1"
+    "@mui/x-date-pickers": "^9.3.0",
+    "@mui/material": "7.3.0"
   },
   "peerDependencies": {
-    "@superapp/shared-store": "workspace:*"
+    "@superapp/shared-store": "workspace:*",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@emotion/cache": "^11.11.0",
+    "stylis": "^4.3.0",
+    "stylis-plugin-rtl": "^2.1.1",
+    "date-fns": "^3.3.1",
+    "date-fns-jalali": "4.1.0-0"
   }
 }

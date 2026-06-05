@@ -1,7 +1,10 @@
-import DrawerLayout from "@pages/layout/drawerLayout/DrawerLayout";
 import { Loadable, NotFound } from "@superapp/ui";
 import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+
+const DrawerLayout = Loadable(
+  lazy(() => import("@pages/layout/drawerLayout/DrawerLayout")),
+);
 
 const RegisterGreenCardForm = Loadable(
   lazy(() => import("@components/pages/greenCardForm/RegisterGreenCardForm")),
