@@ -9,16 +9,8 @@ type Mode = "edit" | "add" | null;
 interface StoreState {
   mode: Mode;
   pageTitle: string;
-  //@ts-ignore
-  draft: GreenCardDraftResponse | null;
-  //@ts-ignore
-
-  // setDraft: (draft: GreenCardDraftResponse | null) => void;
-  //@ts-ignore
-  sent: GreenCardSentResponse | null;
-  //@ts-ignore
-
-  // setSent: (sent: GreenCardSentResponse | null) => void;
+  draft: GreenCardDraftResponseDTO | null;
+  sent: GreenCardSentResponseDTO | null;
   setPageTitle: (title: string) => void;
   changeMode: (mode: Mode) => void;
   setDraft: (draft: GreenCardDraftResponseDTO | null) => void;
@@ -36,7 +28,9 @@ export const useGreenCardStore = create<StoreState>()(
   immer((set, _get) => ({
     ...initialState,
     changeMode: (mode) => {
-      set((draft) => (draft.mode = mode));
+      set((draft) => {
+        draft.mode = mode;
+      });
     },
     setPageTitle: (title: string) => {
       set((draft) => {

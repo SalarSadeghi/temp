@@ -19,7 +19,7 @@ const ServiceBox = ({
   return (
     <div className="flex flex-col items-center gap-1 justify-center  cursor-pointer p-1">
       <div
-        className={`bg-gradient-to-br rounded-md  from-[#9945FF] to-[#14F195] p-1 ${outerBoxClassName}`}
+        className={`bg-gradient-to-br rounded-md  from-[#432b6f] to-[#00807e] p-1 ${outerBoxClassName}`}
       >
         <div
           className={`h-10 w-10 bg-white flex items-center justify-center ${innerBoxClassName}`}

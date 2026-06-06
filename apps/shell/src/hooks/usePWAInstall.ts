@@ -21,7 +21,7 @@ export function usePWAInstall() {
     setIsInstalled(isStandalone);
     return isStandalone;
   };
-  
+
   // Check iOS and set flag
   const checkIos = () => {
     const ios =
@@ -70,6 +70,10 @@ export function usePWAInstall() {
 
   // Engagement threshold: only show after 2+ pages or 30+ seconds
   const shouldShowBanner = () => {
+    console.log(isInstalled);
+    console.log(isDismissed);
+    console.log(canInstall);
+
     if (isInstalled || isDismissed || !canInstall) return false;
     if (isIos) return true; // iOS always shows instructions
 

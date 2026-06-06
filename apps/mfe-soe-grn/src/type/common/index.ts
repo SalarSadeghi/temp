@@ -25,3 +25,9 @@ export const GreenCardTypeOptions: GreenCardTypeOption[] = [
     label: Texts.greenCardForm.greenCardTypeOptions.SEMACC,
   },
 ];
+
+
+export interface NavigationState {
+  fromPage: string;
+  // Add other state properties as needed
+}

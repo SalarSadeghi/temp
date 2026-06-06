@@ -19,6 +19,7 @@ import { GreenCardDraftResponseDTO } from "@type/response";
 import Texts from "@assets/json/Texts.json";
 import { CloseOutlined, SearchOutlined } from "@superapp/icons";
 import DraftCard from "./DraftCard";
+import { NavigationState } from "@type/common";
 
 const DraftGreenCardForm = () => {
   const PAGE_SIZE = 10;
@@ -30,10 +31,7 @@ const DraftGreenCardForm = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedSearchValue = useDebounce(searchValue, 500);
   const { showSnackbar } = useSnackbar();
-  interface NavigationState {
-    fromPage: string;
-    // Add other state properties as needed
-  }
+
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
@@ -50,7 +48,7 @@ const DraftGreenCardForm = () => {
       getNextPageParam: (lastPage) => {
         return lastPage.hasMore ? Number(lastPage.page) + 1 : undefined;
       },
-      initialPageParam: 0, 
+      initialPageParam: 0,
     });
 
   const observer = useRef<IntersectionObserver>(null);
@@ -151,58 +149,51 @@ const DraftGreenCardForm = () => {
           />
         </div>
       </div>
-      {
-        data && data.pages?.length > 0 && data.pages[0].total === 0 ? (
-          <div>
-            <span>داده‌ای یافت نشد</span>
-          </div>
-        ) : (
-          data && (
-            <div className="flex flex-col gap-4 mt-4">
-              <div
-                className={`flex w-full ${isDesktop ? "flex-row flex-wrap gap-4 justify-center" : "flex-col gap-4"}`}
-              >
-                {data?.pages.map((page, pageIndex) => (
-                  <Fragment key={pageIndex}>
-                    {page.data.map((draft, draftIndex) => {
-                      // Attach ref to the last draft card
-                      if (
-                        pageIndex === data.pages.length - 1 &&
-                        draftIndex === page.data.length - 1
-                      ) {
-                        return (
-                          <div
-                            onClick={() => handleDraft(draft)}
-                            className={`flex justify-center ${isDesktop ? "min-w-[25%]" : "w-full"}`}
-                            ref={lastDraftRef}
-                            key={draft.id}
-                          >
-                            <DraftCard draft={draft} />
-                          </div>
-                        );
-                      }
+      {data && data.pages?.length > 0 && data.pages[0].total === 0 ? (
+        <div>
+          <span>داده‌ای یافت نشد</span>
+        </div>
+      ) : (
+        data && (
+          <div className="flex flex-col gap-4 mt-4">
+            <div
+              className={`flex w-full ${isDesktop ? "flex-row flex-wrap gap-4 justify-center" : "flex-col gap-4"}`}
+            >
+              {data?.pages.map((page, pageIndex) => (
+                <Fragment key={pageIndex}>
+                  {page.data.map((draft, draftIndex) => {
+                    // Attach ref to the last draft card
+                    if (
+                      pageIndex === data.pages.length - 1 &&
+                      draftIndex === page.data.length - 1
+                    ) {
                       return (
                         <div
-                          className={`flex justify-center ${isDesktop ? "min-w-[25%]" : "w-full"}`}
                           onClick={() => handleDraft(draft)}
+                          className={`flex justify-center ${isDesktop ? "min-w-[25%]" : "w-full"}`}
+                          ref={lastDraftRef}
+                          key={draft.id}
                         >
-                          <DraftCard key={draft.id} draft={draft} />
+                          <DraftCard draft={draft} />
                         </div>
                       );
-                    })}
-                  </Fragment>
-                ))}
-              </div>
-              {isFetchingNextPage && <span>منتظر بمانید...</span>}
+                    }
+                    return (
+                      <div
+                        className={`flex justify-center ${isDesktop ? "min-w-[25%]" : "w-full"}`}
+                        onClick={() => handleDraft(draft)}
+                      >
+                        <DraftCard key={draft.id} draft={draft} />
+                      </div>
+                    );
+                  })}
+                </Fragment>
+              ))}
             </div>
-          )
+            {isFetchingNextPage && <span>منتظر بمانید...</span>}
+          </div>
         )
-        // : (
-        //     <div>
-        //         <CardMessage />
-        //     </div>
-        // )
-      }
+      )}
     </>
   );
 };

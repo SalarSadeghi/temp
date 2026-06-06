@@ -1,10 +1,12 @@
-version: "3.8"
+# version: "3.8"
 
 services:
   shell:
     build:
       context: .
-      dockerfile: apps/shell/dockerfile
+      # dockerfile: apps/shell/dockerfile
+      args:
+        APP_NAME: shell
     container_name: shell
     ports:
       - "3001:80"
@@ -15,8 +17,23 @@ services:
   temp:
     build:
       context: .
-      dockerfile: apps/temp/dockerfile
+      # dockerfile: apps/temp/dockerfile
+      args:
+        APP_NAME: temp
     container_name: temp
+    depends_on:
+      - shell
+    ports:
+      - "3002:80"
+    networks:
+      - superapp-network
+  mfe-soe-grn:
+    build:
+      context: .
+      # dockerfile: apps/temp/dockerfile
+      args:
+        APP_NAME: mfe-soe-grn
+    container_name: mfe-soe-grn
     depends_on:
       - shell
     ports:

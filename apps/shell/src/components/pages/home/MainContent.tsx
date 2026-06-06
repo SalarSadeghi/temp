@@ -5,7 +5,6 @@ import {
   LocalFireDepartmentOutlined,
 } from "@superapp/icons";
 import { Link } from "react-router-dom";
-import { Button } from "@superapp/ui/components";
 
 const MainContentItems = [
   {

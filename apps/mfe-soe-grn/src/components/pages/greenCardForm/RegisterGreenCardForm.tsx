@@ -19,7 +19,7 @@ import {
   useForm,
   // useWatch
 } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DeleteOutline } from "@superapp/icons";
 // import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -27,7 +27,11 @@ import {
   CustomDatePicker,
   CustomTimePicker,
 } from "@superapp/ui/date-time-picker";
-import { GreenCardTypeOption, GreenCardTypeOptions } from "@type/common";
+import {
+  GreenCardTypeOption,
+  GreenCardTypeOptions,
+  NavigationState,
+} from "@type/common";
 // import { RegisterGreenCardFormSchema } from "@validations/registerGreenCardFormSchema";
 import { Unit } from "@superapp/shared-types/unit";
 import { useGreenCardStore } from "@store/greenCardStore";
@@ -37,6 +41,7 @@ import { GreenCardDraftResponseDTO } from "@type/response";
 import { useDialogStore } from "@superapp/shared-store/stores/dialogStore.js";
 import { useMutation } from "@tanstack/react-query";
 import { createGRN } from "@api/grnApi";
+import { useLocation } from "react-router-dom";
 
 interface FormValues {
   unitId: Unit;
@@ -52,13 +57,16 @@ interface FormValues {
 type Mode = "edit" | "add" | null;
 const formDataMapper = (
   data: FormValues | GreenCardDraftResponseDTO | any,
-  mode: Mode = "add",
+  mode: Mode = "add"
 ) => {
+
   if (mode === "add") {
     return {
-      unitId: data.unitId.value,
+      unitId: data?.unitId?.id,
       placeViewDescription: data.placeViewDescription,
-      greenCardType: data.greenCardType.value,
+      ...(data.greenCardType?.value && {
+        greenCardType: data.greenCardType.value,
+      }),
       viewDate: data.viewDate,
       placeAdditionalDescription: data.placeAdditionalDescription,
       ...(data.suggestionDescription && {
@@ -104,7 +112,11 @@ const RegisterGreenCardForm = () => {
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   const [localFiles, setLocalFiles] = useState<File[]>([]);
   const [deletedFileId, _setDeletedFileId] = useState<string[]>([]);
-  const { mode, draft, changeMode, setDraft } = useGreenCardStore();
+  const location = useLocation();
+  const state = location.state as NavigationState;
+
+  const { mode, draft, changeMode, setDraft, setPageTitle } =
+    useGreenCardStore();
   const { showSnackbar } = useSnackbar();
   const {
     changeOpen: changeDialogOpen,
@@ -122,7 +134,7 @@ const RegisterGreenCardForm = () => {
     control,
     // watch,
     reset,
-    // setValue,
+    setValue,
     // formState: { isDirty, dirtyFields },
   } = useForm<FormValues | any>({
     // resolver: yupResolver(RegisterGreenCardFormSchema),
@@ -162,19 +174,55 @@ const RegisterGreenCardForm = () => {
           <span className={`${isDesktop ? "text-base" : "text-sm"}`}>
             {Texts.greenCardForm.successPostGreenCardMSG}
           </span>
-        </div>,
+        </div>
       );
       changeDialogOpen(true);
       changeDialogHasCancelBtn(false);
     },
   });
 
+  useEffect(() => {
+    if (mode === "edit" && state?.fromPage === "draft") {
+      const editedDraft: FormValues | any = {
+        ...(draft?.unit?.id && {
+          unitId: { value: draft?.unit.unitId, label: draft?.unit?.name },
+        }),
+        ...(draft?.greenCardType && {
+          greenCardType: {
+            value: draft?.greenCardType,
+            label: draft.greenCardTypeTitle,
+          },
+        }),
+        ...(draft?.viewDate && {
+          time: new Date(draft?.viewDate),
+          date: new Date(draft?.viewDate),
+        }),
+        placeAdditionalDescription: draft?.placeAdditionalDescription,
+        placeViewDescription: draft?.placeViewDescription,
+        suggestionDescription: draft?.suggestionDescription,
+        ...(draft?.viewDate && { viewDate: new Date(draft.viewDate) }),
+      };
+
+      reset(editedDraft);
+    } else {
+      changeMode("add");
+      setDraft(null);
+      setValue("unitId", null);
+      setValue("placeAdditionalDescription", "");
+      setValue("greenCardType", null);
+      setValue("placeViewDescription", "");
+      setValue("suggestionDescription", "");
+      setValue("time", null);
+      setValue("date", null);
+    }
+  }, [mode, state, state?.fromPage, draft, draft?.id]);
+
   const onsubmit = async (data: FormValues) => {
     const formData: FormData = new FormData();
     if (mode === "add") {
       const viewDate = combineDateTimeFields({
-        time: data.time,
-        date: data.date,
+        time: data?.time,
+        date: data?.date,
       });
       const dataToSend = formDataMapper({ ...data, viewDate }, "add");
       Object.entries(dataToSend).forEach(([key, value]) => {
@@ -197,7 +245,7 @@ const RegisterGreenCardForm = () => {
           id: draft?.id,
           deletedFileId,
         },
-        mode,
+        mode
       );
       Object.entries(dataToSend).forEach(([key, value]) => {
         formData.append(key, value as any);
@@ -205,6 +253,10 @@ const RegisterGreenCardForm = () => {
       localFiles.forEach((f) => formData.append("file", f));
     }
   };
+
+  useEffect(() => {
+    setPageTitle("ثبت فرم کارت سبز");
+  }, []);
 
   return (
     <form

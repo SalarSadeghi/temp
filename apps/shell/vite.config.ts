@@ -21,12 +21,13 @@ export default defineConfig(({ mode }) => {
   // const isDev = env.NODE_ENV === "development";
   return {
     server: {
-      port: 3001,
+      port: 3000,
       host: true,
       cors: true,
+      https:{ }
     },
     preview: {
-      port: 3000,
+      port: 4172,
     },
     plugins: [
       react(),
@@ -34,9 +35,9 @@ export default defineConfig(({ mode }) => {
         registerType: "autoUpdate", // Updates the service worker automatically. Other options: prompt, manual
         includeAssets: ["vite.svg"], // Includes static assets from  public folder in the precache. For offline usage
         manifest: {
-          name: "Super App",
-          short_name: "Super App",
-          description: "All in one platform",
+          name: "Nexora",
+          short_name: "Nexora",
+          description: "All in one Super App platform",
           theme_color: "#ffffff", // Browser toolbar/address bar color
           background_color: "#ffffff", // Splash screen background color during loading
           display: "standalone", // How the app appears when running
@@ -85,7 +86,7 @@ export default defineConfig(({ mode }) => {
           // ],
         },
         devOptions: {
-          enabled: false, // Disable service worker in development for easier debugging
+          enabled: true, // Disable service worker in development for easier debugging
         },
       }),
       federation({

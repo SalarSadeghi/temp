@@ -1,7 +1,7 @@
 # BUILDER STAGE
 FROM node:20-alpine AS builder
 
-
+ARG APP_NAME
 
 WORKDIR /app
 
@@ -24,27 +24,29 @@ COPY packages/tailwind-config/package.json packages/tailwind-config/
 COPY packages/eslint-config/package.json packages/eslint-config/
 
 # Copy shell package.json file
-COPY apps/shell/package.json apps/shell/
+COPY apps/${APP_NAME}/package.json apps/${APP_NAME}/
 
 # Install dependencies with verbose output
 RUN pnpm install
 
 # Copy source code
-COPY apps/shell apps/shell
+COPY apps/${APP_NAME} apps/${APP_NAME}
 COPY packages packages
 
 # Build
-RUN pnpm turbo run build --filter=shell
+RUN pnpm turbo run build --filter=${APP_NAME}
 
 
 # Production Stage
 FROM nginx:alpine AS production
 
+ARG APP_NAME
+
 # RUN apk add --no-cache curl
 
 # Copy built assets
-COPY --from=builder /app/apps/shell/dist /usr/share/nginx/html
-COPY apps/shell/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/apps/${APP_NAME}/dist /usr/share/nginx/html
+COPY apps/${APP_NAME}/nginx.conf /etc/nginx/conf.d/default.conf
 
 
 # Copy shared package assets (if any)

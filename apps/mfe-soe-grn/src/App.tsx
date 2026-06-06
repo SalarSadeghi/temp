@@ -1,9 +1,7 @@
 import AppRouter from "@routing/index";
 import Layout from "@pages/layout/Layout";
-import { AppThemeProvider } from "@superapp/ui";
+import { AppThemeProvider, CustomConfirmDialog } from "@superapp/ui";
 import { CustomSnackbar } from "@superapp/ui/snackbar";
-
-
 
 function App() {
   // Run in both shell and MFE
@@ -12,9 +10,8 @@ function App() {
       <AppThemeProvider>
         <Layout>
           <AppRouter />
-          <CustomSnackbar
-          // {...snackbarProps} may handle this to override per service
-          />
+          {import.meta.env.DEV && <CustomSnackbar />}
+          {import.meta.env.DEV && <CustomConfirmDialog />}
         </Layout>
       </AppThemeProvider>
     </>

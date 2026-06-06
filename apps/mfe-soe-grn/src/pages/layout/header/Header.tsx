@@ -8,7 +8,7 @@ const Header = () => {
     navigate("/");
   };
   return (
-    <div className="w-full h-16 bg-gradient-to-bl  from-[#9945FF] to-[#14F195] p-4 flex items-center rounded-tr-md rounded-tl-md">
+    <div className="w-full h-16 bg-gradient-to-bl  from-[#432b6f] to-[#00807e] p-4 flex items-center rounded-tr-md rounded-tl-md">
       <IconButton onClick={handleGoHome}>
         <ArrowRightAlt fontSize="large" sx={{ color: "white" }} />
       </IconButton>

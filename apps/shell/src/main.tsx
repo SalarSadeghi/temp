@@ -6,6 +6,7 @@ import { AppThemeProvider } from "@superapp/ui";
 import { CustomConfirmDialog } from "@superapp/ui/common";
 import App from "./App";
 import "@superapp/shared-assets/fonts.css";
+import { CustomSnackbar } from "@superapp/ui/snackbar";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,8 +22,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <AppThemeProvider>
         <App />
+        <CustomSnackbar />
         <CustomConfirmDialog />
       </AppThemeProvider>
     </QueryClientProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
