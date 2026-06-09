@@ -16,7 +16,7 @@ const AppRouter = () => {
   return (
     <Router>
       <ErrorBoundary>
-        <InstallPWABanner />
+        {/* <InstallPWABanner /> */}
         <Routes>
           {/* Redirect to '/user' path */}
           <Route path="/" element={<Navigate to="/user" replace />} />

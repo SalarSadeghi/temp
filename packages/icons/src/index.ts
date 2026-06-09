@@ -1,1 +1,1 @@
-export * from "@mui/icons-material";
+export * from "./mui/index.js";

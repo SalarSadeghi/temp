@@ -1,6 +1,6 @@
 import { useTimer } from "@hooks/useTimer";
 import { OTPInput } from "@pages/login/OTPInput";
-import { Edit } from "@superapp/icons";
+import { Edit } from "@superapp/icons/mui/index.ts";
 import { CustomButton, IconButton } from "@superapp/ui";
 import { phonePrivacyFormatters } from "@utils/formatter/phonePrivacyFormatter";
 import { useEffect } from "react";

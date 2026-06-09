@@ -42,7 +42,8 @@
     "react-dropzone": "^15.0.0",
     "react-hook-form": "^7.48.2",
     "@mui/x-date-pickers": "^9.3.0",
-    "@mui/material": "7.3.0"
+    "@mui/material": "7.3.0",
+    "@superapp/icons": "workspace:*"
   },
   "peerDependencies": {
     "@superapp/shared-store": "workspace:*",

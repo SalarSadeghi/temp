@@ -24,7 +24,6 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       host: true,
       cors: true,
-      https:{ }
     },
     preview: {
       port: 4172,

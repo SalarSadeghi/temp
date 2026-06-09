@@ -1,6 +1,6 @@
 // src/components/LoginPage.tsx
 import React from "react";
-import { Lock } from "@superapp/icons";
+import { Lock } from "@superapp/icons/mui/index.ts";
 import Login from "@components/pages/login/Login";
 
 export const LoginPage: React.FC = () => {
