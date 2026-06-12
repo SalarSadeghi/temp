@@ -11,6 +11,7 @@ interface TextInputProps {
   error?: boolean;
   helperText?: React.ReactNode;
   // required?: boolean;
+  size?: "medium" | "small";
   multiline?: boolean;
   rows?: number;
   sx?: SxProps;
@@ -34,6 +35,7 @@ export const CustomTextInput: React.FC<TextInputProps> = ({
   rows = 1,
   sx,
   InputProps,
+  size,
   focused,
   shrink,
   disabled = false,
@@ -51,6 +53,7 @@ export const CustomTextInput: React.FC<TextInputProps> = ({
           // value={value }
           // required={required}
           disabled={disabled}
+          size={size}
           focused={focused}
           defaultValue={defaultValue}
           rows={rows}

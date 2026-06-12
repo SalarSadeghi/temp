@@ -1,28 +1,27 @@
 // src/components/LoginPage.tsx
-import React from "react";
-import { Lock } from "@superapp/icons/mui/index.ts";
 import Login from "@components/pages/login/Login";
+import logo from "/pwa-76.png";
+import LoginFooter from "./LoginFooter";
 
-export const LoginPage: React.FC = () => {
+const LoginPage: React.FC = () => {
   return (
-    <div className="flex justify-center items-center h-screen p-4 bg-gradient-to-br  to-[#9945FF] from-[#14F195]">
-      <div className="bg-white min-h-96 w-[90%] rounded-2xl shadow-lg p-4 flex flex-col justify-between items-center">
-        <div className="flex flex-col items-center gap-2">
-          <div className="rounded-full bg-gradient-to-br  to-[#9945FF] from-[#14F195] p-2">
-            <Lock sx={{ color: "white" }} />
+    <div className="flex justify-center items-center h-screen p-4 bg-default">
+      <div className="flex flex-col justify-between">
+        <div className="flex items-center flex-col gap-2">
+          <div className="flex justify-center">
+            <img src={logo} className="rounded-full" />
           </div>
-          <span className="font-semibold text-lg">خوش آمدید!</span>
+          <span className="font-semibold">به اپلیکیشن سازمان خوش آمدید</span>
         </div>
-        <div>
+        <div className="py-4">
           <Login />
         </div>
-        <div className="text-xs flex gap-2">
-          <span className="text-gray-400">عضو نیستید؟</span>
-          <span className="text-[#9945FF] cursor-pointer underline underline-offset-8">
-            ثبت‌نام
-          </span>
+        <div className="flex justify-center">
+          <LoginFooter />
         </div>
       </div>
+      <div></div>
     </div>
   );
 };
+export default LoginPage;

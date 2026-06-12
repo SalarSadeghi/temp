@@ -70,21 +70,17 @@ export function usePWAInstall() {
 
   // Engagement threshold: only show after 2+ pages or 30+ seconds
   const shouldShowBanner = () => {
-    console.log(isInstalled);
-    console.log(isDismissed);
-    console.log(canInstall);
-
     if (isInstalled || isDismissed || !canInstall) return false;
     if (isIos) return true; // iOS always shows instructions
 
     // Check engagement
     const visitCount = parseInt(
       sessionStorage.getItem("pwa-visit-count") || "0",
-      10
+      10,
     );
     const firstVisitTime = parseInt(
       sessionStorage.getItem("pwa-first-visit") || Date.now().toString(),
-      10
+      10,
     );
     const timeElapsed = Date.now() - firstVisitTime;
 
@@ -95,7 +91,7 @@ export function usePWAInstall() {
   const incrementVisit = () => {
     const count = parseInt(
       sessionStorage.getItem("pwa-visit-count") || "0",
-      10
+      10,
     );
     sessionStorage.setItem("pwa-visit-count", (count + 1).toString());
 
@@ -130,7 +126,7 @@ export function usePWAInstall() {
     return () => {
       window.removeEventListener(
         "beforeinstallprompt",
-        handleBeforeInstallPrompt
+        handleBeforeInstallPrompt,
       );
       window.removeEventListener("appinstalled", handleAppInstalled);
     };

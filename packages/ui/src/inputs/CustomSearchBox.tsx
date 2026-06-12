@@ -7,7 +7,7 @@ import {
   TextFieldProps,
   Theme,
 } from "@mui/material";
-import { CloseOutlined, SearchOutlined } from "@superapp/icons/mui/index.js";
+import { CloseOutlined, SearchOutlined } from "@superapp/icons";
 
 import React, {
   forwardRef,
@@ -97,7 +97,7 @@ export const CustomSearchComponent = forwardRef<
       onSearch,
       label = "",
       helperText = "",
-      placeholder = "",
+      placeholder = "جستجو",
       isLoading = false,
       showClearButton = true,
       showSearchButton = true,
@@ -114,7 +114,7 @@ export const CustomSearchComponent = forwardRef<
       onClear,
       minChars = 0,
     },
-    ref
+    ref,
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -181,43 +181,6 @@ export const CustomSearchComponent = forwardRef<
         variant={variant}
         sx={sx}
         autoFocus={autoFocus}
-        // InputProps={{
-        //   startAdornment: isLoading ? (
-        //     <InputAdornment position="start">
-        //       {/* Replace Loading with your loading component */}
-        //       <Loading size={20} />
-        //     </InputAdornment>
-        //   ) : undefined,
-        //   endAdornment: (showClearButton || showSearchButton) && (
-        //     <InputAdornment position="end">
-        //       {showSearchButton && (
-        //         <IconButton
-        //           onClick={handleSearchClick}
-        //           edge="end"
-        //           disabled={
-        //             disabled ||
-        //             (minChars > 0 &&
-        //               value.length < minChars &&
-        //               value.length > 0)
-        //           }
-        //           aria-label="search"
-        //         >
-        //           <SearchOutlined />
-        //         </IconButton>
-        //       )}
-        //       {showClearButton && value && (
-        //         <IconButton
-        //           onClick={handleClearClick}
-        //           edge="end"
-        //           disabled={disabled}
-        //           aria-label="clear search"
-        //         >
-        //           <CloseOutlined />
-        //         </IconButton>
-        //       )}
-        //     </InputAdornment>
-        //   ),
-        // }}
         slotProps={{
           input: {
             startAdornment: isLoading ? (
@@ -260,5 +223,5 @@ export const CustomSearchComponent = forwardRef<
         {...textFieldProps}
       />
     );
-  }
+  },
 );

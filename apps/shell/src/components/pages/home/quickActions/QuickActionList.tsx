@@ -1,57 +1,51 @@
-import { Box, Button, Typography } from "@superapp/ui";
+import { Button } from "@superapp/ui";
 import { QuickActionCard } from "./QuickActionCard";
-import {
-  AccountBalanceWalletOutlined,
-  CalendarMonthOutlined,
-  DescriptionOutlined,
-  WorkOutline,
-} from "@superapp/icons";
 
+import {
+  Briefcase,
+  FlameKindling,
+  Stethoscope,
+  Wallet,
+} from "@superapp/icons/lucide";
+import SectionTitle from "@components/common/SectionTitle";
+import ServiceBox from "@components/common/ServiceBox";
 const quickActions = [
   {
     id: 1,
-    title: "مرخصی",
-    icon: <CalendarMonthOutlined sx={{ color: "#16A34A" }} />,
-    bg: "#DCFCE7",
+    title: "کارت سبز",
+    icon: <FlameKindling color="#ff3737" />,
+    bg: "#dc28281a",
   },
   {
     id: 2,
-    title: "فیش حقوق",
-    icon: <AccountBalanceWalletOutlined sx={{ color: "#2563EB" }} />,
-    color: "#2563EB",
+    title: "کیف پول",
+    icon: <Wallet color="#2563EB" />,
     bg: "#DBEAFE",
   },
   {
     id: 3,
     title: "ماموریت",
-    icon: <WorkOutline sx={{ color: "#EA580C" }} />,
-
+    icon: <Briefcase color="#EA580C" />,
     bg: "#FFEDD5",
   },
   {
     id: 4,
-    title: "حکم کارگزینی",
-    icon: <DescriptionOutlined sx={{ color: "#9333EA" }} />,
-    color: "9333EA",
+    title: "معاینات دوره‌ای",
+    icon: <Stethoscope color="#9333EA" />,
     bg: "#F3E8FF",
   },
 ];
 const QuickActionList = () => {
   return (
-    <div className="flex flex-col gap-2 ">
-      <div className="flex justify-between items-center">
-        <span className="font-semibold text-xs">دسترسی سریع به سرویس‌ها </span>
-        <Button size="small" variant="text" color="info">
-          مشاهده همه
-        </Button>
-      </div>
-      <div className="flex gap-2">
-        {quickActions?.map((action) => (
-          <QuickActionCard
-            key={action.id}
-            title={action.title}
+    <div className="flex flex-col gap-2">
+      <SectionTitle buttonText="مشاهده همه" title="دسترسی سریع به سرویس‌ها" />
+      <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+        {quickActions?.map((action, i) => (
+          <ServiceBox
+            key={i}
             icon={action.icon}
-            bg={action.bg}
+            iconBoxBg={action.bg}
+            title={action.title}
           />
         ))}
       </div>

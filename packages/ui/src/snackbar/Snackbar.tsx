@@ -47,7 +47,7 @@ export const CustomSnackbar: React.FC = () => {
         onClose={handleClose}
         anchorOrigin={position}
         action={action}
-        sx={isDesktop ? { width: 350 } : { width: "" }}
+        sx={isDesktop ? { width: 350 } : { width: "95%" }}
       >
         <Alert
           onClose={handleClose}

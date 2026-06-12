@@ -1,19 +1,25 @@
 import CustomBottomNavigation from "@components/common/CustomBottomNavigation";
-import { CustomConfirmDialog, CustomSnackbar } from "@superapp/ui";
+import { getAccessToken } from "@utils/index";
+import { Navigate, Outlet, useNavigation } from "react-router-dom";
 
-interface MainLayoutProps {
-  children?: React.ReactNode;
-}
-const MainLayout = (props: MainLayoutProps) => {
+const MainLayout = () => {
+  const token = getAccessToken();
+  if (!token) {
+    return <Navigate to="/auth/login" replace />;
+  }
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
   return (
     <>
-      <main className="w-full h-screen">
-        <div>{props.children}</div>
-        <div className="fixed bottom-0 left-0 right-0">
+      <main className="w-full h-screen flex flex-col">
+        {isLoading && <>لطفا منتظر بمانید.</>}
+
+        <div className="flex-1 overflow-y-auto">
+          <Outlet />
+        </div>
+        <div>
           <CustomBottomNavigation />
         </div>
-        <CustomSnackbar />
-        <CustomConfirmDialog />
       </main>
     </>
   );

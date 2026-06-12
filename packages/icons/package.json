@@ -4,8 +4,8 @@
   "private": true,
   "exports": {
     ".": "./src/index.ts",
-    "./mui/*": "./src/mui/index.ts",
-    "./lucide/*": "./src/lucide/index.ts"
+    "./mui": "./src/mui/index.ts",
+    "./lucide": "./src/lucide/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0"

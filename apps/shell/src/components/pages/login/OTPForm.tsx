@@ -1,7 +1,15 @@
 import { useTimer } from "@hooks/useTimer";
 import { OTPInput } from "@pages/login/OTPInput";
-import { Edit } from "@superapp/icons/mui/index.ts";
-import { CustomButton, IconButton } from "@superapp/ui";
+import { MessageCircleMore, Phone } from "@superapp/icons/lucide";
+import { Edit } from "@superapp/icons/mui";
+import {
+  Button,
+  CustomButton,
+  Divider,
+  IconButton,
+  Typography,
+  useTheme,
+} from "@superapp/ui";
 import { phonePrivacyFormatters } from "@utils/formatter/phonePrivacyFormatter";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -11,6 +19,7 @@ interface FormValues {
 }
 const OTP_LENGTH = 6;
 const OTPForm = () => {
+  const theme = useTheme();
   const {
     handleSubmit,
     control,
@@ -24,49 +33,73 @@ const OTPForm = () => {
     },
   });
   const { otp } = watch();
-  const privatePhone = phonePrivacyFormatters.low("09123456789");
+  // const privatePhone = phonePrivacyFormatters.low("09123456789");
 
   const onSubmit = async (data: FormValues) => {
     console.log(data);
   };
 
-  const { isActive, startTimer, formatTime } = useTimer(5);
+  const { isActive, startTimer, formatTime } = useTimer(120);
 
   useEffect(() => {
     startTimer();
   }, []);
-  console.log(isActive);
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col p-4 border shadow-xl bg-white rounded-lg  gap-8"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className="flex flex-col gap-2">
-        <div className="flex flex-col">
-          <div className="flex items-center text-gray-400 text-[10px]">
-            <div className="flex">
-              <span>{`لطفا کد پیامک شده به (`}</span>
-              <span dir="ltr" className="font-semibold">
-                {privatePhone}
-              </span>
-              <span>{`) را وارد نمایید`}</span>
+        <div className="flex flex-col gap-2 text-xs">
+          <span className="text-disabled text-end">شماره موبایل</span>
+          <div className="flex flex-row-reverse justify-between">
+            <div className="flex flex-row-reverse gap-2 items-center">
+              <Phone size={14} />
+              <span className="font-semibold">09217440127</span>
             </div>
-            <IconButton>
-              <Edit color="primary" className="" sx={{ fontSize: "15px" }} />
-            </IconButton>
+            <div className="">
+              <Button variant="text" size="small">
+                <span className="text-xs"> ویرایش</span>
+              </Button>
+            </div>
           </div>
         </div>
-        <Controller
-          name="otp"
-          control={control}
-          render={({ field }) => (
-            <OTPInput
-              length={OTP_LENGTH}
-              onChange={field.onChange}
-              value={field.value}
-            />
-          )}
-        />
-        <div className="text-xs flex items-center gap-4">
-          <span className="text-gray-400">زمان باقیمانده:</span>
+        <Divider />
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-2 items-center justify-center">
+            <MessageCircleMore size={42} color={theme.palette.info.main} />
+            <span className="text-sm font-semibold">کد تایید ارسال شد</span>
+            <p className="text-xs text-disabled">
+              کد 6 رقمی ارسال شده به شماره
+              <span
+                style={{
+                  display: "inline",
+                  padding: 4,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: theme.palette.primary.main,
+                }}
+              >
+                09217440127
+              </span>
+              را وارد کنید
+            </p>
+          </div>
+          <Controller
+            name="otp"
+            control={control}
+            render={({ field }) => (
+              <OTPInput
+                length={OTP_LENGTH}
+                onChange={field.onChange}
+                value={field.value}
+              />
+            )}
+          />
+        </div>
+
+        <div className="text-xs flex items-center justify-center flex-row-reverse gap-4">
           <span className={`${isActive ? "text-green-500" : "text-red-500"}`}>
             {" "}
             {formatTime()}
@@ -83,8 +116,8 @@ const OTPForm = () => {
       <CustomButton
         disabled={!otp || otp.length !== OTP_LENGTH || !isActive}
         type="submit"
-        label="تایید"
-        color="success"
+        label="تایید و ورود"
+        color="primary"
         variant="contained"
       />
     </form>

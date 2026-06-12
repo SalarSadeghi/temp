@@ -1,11 +1,11 @@
-import { BottomNavigation, BottomNavigationAction, Box } from "@superapp/ui";
+import { BottomNavigation, BottomNavigationAction } from "@superapp/ui";
 import React, { ReactNode } from "react";
 import {
   House,
   LayoutGrid,
   MessageSquareMore,
   User,
-} from "@superapp/icons/lucide/index.ts";
+} from "@superapp/icons/lucide";
 
 interface IBottomNavigationItems {
   label?: string;
@@ -30,8 +30,8 @@ const CustomBottomNavigation = () => {
         setValue(newValue);
       }}
     >
-      {BottomNavigationItems?.map((item) => (
-        <BottomNavigationAction label={item.label} icon={item.icon} />
+      {BottomNavigationItems?.map((item, i) => (
+        <BottomNavigationAction key={i} label={item.label} icon={item.icon} />
       ))}
     </BottomNavigation>
   );

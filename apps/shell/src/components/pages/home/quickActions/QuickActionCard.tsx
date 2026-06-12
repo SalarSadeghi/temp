@@ -1,3 +1,4 @@
+import IconBox from "@components/common/IconBox";
 import { Box, Card } from "@superapp/ui";
 import { ReactNode } from "react";
 
@@ -21,21 +22,10 @@ export function QuickActionCard({ bg, icon, title }: QuickActionCardProps) {
         alignItems: "center",
         justifyContent: "center",
         gap: 1,
+        flexShrink: 0,
       }}
     >
-      <Box
-        sx={{
-          width: 48,
-          height: 48,
-          borderRadius: 1,
-          background: bg,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {icon}
-      </Box>
+      {/* <IconBox background={bg} icon={icon} /> */}
       <span className="text-xs font-[600]">{title}</span>
     </Card>
   );

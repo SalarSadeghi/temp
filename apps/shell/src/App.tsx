@@ -1,13 +1,12 @@
-import MainLayout from "@pages/layout/MainLayout";
 import AppRouter from "@routing/index";
 // import { CustomConfirmDialog } from "@superapp/ui";
+import { InstallPWABanner } from "@components/common/InstallPWABanner";
 
 function App() {
   return (
     <>
-      <MainLayout>
-        <AppRouter />
-      </MainLayout>
+      <AppRouter />
+      <InstallPWABanner />
     </>
   );
 }

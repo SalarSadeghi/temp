@@ -1,38 +1,42 @@
-import { QuestionMark } from "@superapp/icons";
-import { ReactNode } from "react";
+import IconBox, { IconBoxProps } from "./IconBox";
+import { Card, SxProps, Theme, Typography } from "@superapp/ui";
 
-interface ServiceBoxProps {
-  icon?: ReactNode;
+interface ServiceBoxProps extends IconBoxProps {
+  serviceBoxSX?: SxProps<Theme>;
   title?: string;
-  innerBoxClassName?: string;
-  titleClassName?: string;
-  outerBoxClassName?: string;
+  titleSX?: SxProps<Theme>;
 }
 
-const ServiceBox = ({
-  innerBoxClassName = "",
-  titleClassName = "",
-  icon = <QuestionMark color="primary" />,
-  title = "",
-  outerBoxClassName = "",
+const ServiceBox: React.FC<ServiceBoxProps> = ({
+  icon,
+  serviceBoxSX,
+  iconBoxBg,
+  iconBoxSX,
+  title,
+  titleSX,
 }: ServiceBoxProps) => {
   return (
-    <div className="flex flex-col items-center gap-1 justify-center  cursor-pointer p-1">
-      <div
-        className={`bg-gradient-to-br rounded-md  from-[#432b6f] to-[#00807e] p-1 ${outerBoxClassName}`}
-      >
-        <div
-          className={`h-10 w-10 bg-white flex items-center justify-center ${innerBoxClassName}`}
-        >
-          {icon}
-        </div>
-      </div>
-      <div
-        className={`font-semibold text-[10px] break-words ${titleClassName}`}
-      >
+    <Card
+      sx={{
+        width: 96,
+        height: 96,
+        borderRadius: 2,
+        border: "1px solid #E2E8F0",
+        boxShadow: "none",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 1,
+        flexShrink: 0,
+        ...serviceBoxSX,
+      }}
+    >
+      <IconBox icon={icon} iconBoxBg={iconBoxBg} iconBoxSX={iconBoxSX} />
+      <Typography sx={{ fontSize: 10, fontWeight: 600, ...titleSX }}>
         {title}
-      </div>
-    </div>
+      </Typography>
+    </Card>
   );
 };
 
