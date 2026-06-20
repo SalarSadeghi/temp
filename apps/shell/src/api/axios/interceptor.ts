@@ -6,11 +6,11 @@ import axios, {
 } from "axios";
 
 import {
-  ACCESS_TOKEN_KEY,
-  REFRESH_TOKEN_KEY,
+  // ACCESS_TOKEN_KEY,
+  // REFRESH_TOKEN_KEY,
   AUTH_REFRESH_URL,
-  AUTH_LOGOUT_URL,
-  API_BASE_URL,
+  // AUTH_LOGOUT_URL,
+  API_URL,
 } from "./config";
 import {
   clearTokens,
@@ -47,7 +47,7 @@ export function setupInterceptors(instance: AxiosInstance) {
       }
       return config;
     },
-    (error) => Promise.reject(error),
+    (error) => Promise.reject(error)
   );
 
   // ─── Response Interceptor ────────────────────────────────
@@ -60,10 +60,9 @@ export function setupInterceptors(instance: AxiosInstance) {
 
       // Only handle 401 and not already retried
       if (error.response?.status === 401 && !originalRequest._retry) {
-        // Avoid refresh loop on the refresh endpoint itself
         if (originalRequest.url === AUTH_REFRESH_URL) {
           clearTokens();
-          window.location.href = "/login"; // or use a router
+          window.location.href = "/login";
           return Promise.reject(error);
         }
 
@@ -85,13 +84,12 @@ export function setupInterceptors(instance: AxiosInstance) {
         try {
           const refreshToken = getRefreshToken();
           if (!refreshToken) {
-            throw new Error("No refresh token available");
+            throw new Error("Ooooooooops! No refresh token available");
           }
 
-          const { data } = await axios.post(
-            `${API_BASE_URL}${AUTH_REFRESH_URL}`,
-            { refreshToken },
-          );
+          const { data } = await axios.post(`${API_URL}${AUTH_REFRESH_URL}`, {
+            refreshToken,
+          });
 
           const newAccessToken = data.accessToken;
           const newRefreshToken = data.refreshToken;
@@ -113,6 +111,6 @@ export function setupInterceptors(instance: AxiosInstance) {
       }
 
       return Promise.reject(error);
-    },
+    }
   );
 }

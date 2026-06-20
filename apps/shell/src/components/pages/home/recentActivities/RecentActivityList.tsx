@@ -1,6 +1,6 @@
 import SectionTitle from "@components/common/SectionTitle";
-import RecentActivityCard from "./RecentActivityCard";
 import { Briefcase, Check, FileText } from "@superapp/icons/lucide";
+import CustomListItem from "@components/common/CustomListItem";
 
 export const activities = [
   {
@@ -30,7 +30,8 @@ const RecentActivityList = () => {
       <SectionTitle title="آخرین فعالیت‌ها" buttonText="مشاهده همه" />
       <div className="flex flex-col gap-1">
         {activities?.map((active, i) => (
-          <RecentActivityCard
+          <CustomListItem
+            variant="compactInfo"
             title={active.title}
             subtitle={active.subtitle}
             icon={active.icon}

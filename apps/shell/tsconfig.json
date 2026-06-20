@@ -29,6 +29,9 @@
       "@hooks/*": ["./src/hooks/*"],
       "@validations/*": ["./src/validations/*"],
       "@theme/*": ["./src/theme/*"],
+      "@type/*": ["./src/type/*"],
+      "@api/*": ["./src/api/*"],
+      "@constants/*": ["./src/constants/*"]
     },
     "allowSyntheticDefaultImports": true
   },

@@ -1,5 +1,4 @@
-import IconBox from "@components/common/IconBox";
-import { Box, Card } from "@superapp/ui";
+import { Card } from "@superapp/ui";
 import { ReactNode } from "react";
 
 interface QuickActionCardProps {
@@ -8,7 +7,7 @@ interface QuickActionCardProps {
   bg?: string;
 }
 
-export function QuickActionCard({ bg, icon, title }: QuickActionCardProps) {
+export function QuickActionCard({ title }: QuickActionCardProps) {
   return (
     <Card
       sx={{

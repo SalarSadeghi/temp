@@ -1,0 +1,61 @@
+{
+  "common": {
+    "date": "تاریخ",
+    "time": "زمان",
+    "character": "کاراکتر",
+    "saveAndSend": "ذخیره و ارسال",
+    "save": "ذخیره",
+    "send": "ارسال",
+    "search": "جستجو",
+    "searchInAllFields": "جستجو در تمامی مقادیر",
+    "searchCharactersHelp": "حداقل سه حرف برای جستجو وارد کنید",
+    "successOperationMsg": "عملیات با موفقیت انجام شد",
+    "errorOperationMsg": "خطا در انجام عملیات",
+    "committee": "کمیته",
+    "agree": "قبول",
+    "cancel": "لغو",
+    "edit": "ویرایش",
+    "logout": "خروج ازحساب کاربری",
+    "uploadFile": {
+      "uploadFile": "بارگذاری فایل",
+      "selectFile": "انتخاب فایل",
+      "addAttachment": "افزودن پیوست",
+      "attachFileHintTitle": "فایل پیوست را انتخاب کرده یا بکشید و سپس در کادر رها کنید.",
+      "attachFileHintType": "نوع فایل مجاز",
+      "attchFileHintSize": "حجم فایل مجاز"
+    }
+  },
+  "features": {
+    "soe": {
+      "grn": {
+        "greenCard": "کارت سبز",
+        "registerTitle": "ثبت فرم کارت سبز",
+        "editTitle": "ویرایش کارت سبز",
+        "draftTitle": "پیش نویس کارت سبز",
+        "sentTitle": "ارسالی‌های کارت سبز",
+        "unitCode": "مکان مشاهده",
+        "greenCardType": "نوع کارت سبز",
+        "placeAdditionalDescription": "توضیحات تکمیلی مکان مشاهده",
+        "placeAdditionalDescriptionHelpMSG": "حداکثر 256 کاراکتر",
+        "seenTime": "زمان مشاهده",
+        "seenDate": "تاریخ مشاهده",
+        "placeViewDescription": "شرح مشاهده",
+        "placeViewDescriptionHelpMSG": "حداکثر 500 کاراکتر",
+        "suggestionDescription": "اقدام اصلاحی (کنترلی) و یا پیشگیرانه پیشنهادی",
+        "suggestionDescriptionHelpMSG": "حداکثر 2000 کاراکتر",
+        "successPostGreenCardMSG": "کاربر گرامی کارت سبز شما با موفقیت در صف ارسال قرار گرفت. کد کارت سبز شما به محض ثبت شدن برای شما ارسال میگردد.",
+        "confirmModalRegeisterText": "آیا از ارسال فرم کارت سبز اطمینان دارید؟",
+        "totalDraft": "تعداد کل پیش‌نویس‌ها",
+        "lockDraftMSG": "درخواست شما در صف بررسی می‌باشد و امکان ویرایش آن وجود ندارد.",
+        "underReview": "درحال بررسی",
+        "totalSent": "تعداد کل ارسالی‌ها",
+        "greenCardTypeOptions": {
+          "ACC": "خطر",
+          "SEMACC": "شبه حادثه",
+          "MINORACC": "حادثه جزِئی"
+        },
+        "saveAsDraft": "ذخیره به عنوان پیش‌نویس"
+      }
+    }
+  }
+}

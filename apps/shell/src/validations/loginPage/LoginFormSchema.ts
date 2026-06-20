@@ -5,7 +5,7 @@ import * as yup from "yup";
 // const persianPhoneRegex = /^(0|۰)?(9|۹)[0-9۰-۹]{9}$/;
 
 export const LoginFormSchema = yup.object().shape({
-  phoneNumber: yup
+  phone: yup
     .string()
     .required("شماره همراه الزامی است")
     .matches(/^(09|9|۰۹|۹)[0-9۰-۹]{9}$/, "شماره همراه معتبر نیست"),

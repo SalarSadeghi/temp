@@ -15,7 +15,7 @@ export const lightTheme: Theme = createTheme(
       info: { light: "#ebf5ff", main: "#0288d1", dark: "#01579b" },
       warning: { main: "#F59E0B", light: "#FFEDD5", dark: "#b45309" },
       text: { primary: "#0f172a", secondary: "#64748b", disabled: "#94a3b8" },
-      tertiary: { main: "#9333EA", light: "#F3E8FF" },
+      // tertiary: { main: "#9333EA", light: "#F3E8FF" },
     },
 
     typography: {
@@ -26,7 +26,7 @@ export const lightTheme: Theme = createTheme(
     shape: { borderRadius: 8 },
   },
   datePickerFA,
-  dataGridFA,
+  dataGridFA
 );
 
 export const darkTheme: Theme = createTheme(
@@ -81,7 +81,7 @@ export const darkTheme: Theme = createTheme(
     shape: { borderRadius: 8 },
   },
   datePickerFA,
-  dataGridFA,
+  dataGridFA
 );
 
 export const getTheme = (mode: "light" | "dark"): Theme =>

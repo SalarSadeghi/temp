@@ -1,6 +1,3 @@
-import { Button } from "@superapp/ui";
-import { QuickActionCard } from "./QuickActionCard";
-
 import {
   Briefcase,
   FlameKindling,
@@ -8,13 +5,23 @@ import {
   Wallet,
 } from "@superapp/icons/lucide";
 import SectionTitle from "@components/common/SectionTitle";
-import ServiceBox from "@components/common/ServiceBox";
+// import ServiceBox from "@components/common/ServiceBox";
+import { useNavigate } from "react-router-dom";
+import CustomListItem from "@components/common/CustomListItem";
+interface IQuickAction {
+  id: string | number;
+  title: string;
+  icon: React.ReactNode;
+  bg: string;
+  href?: string;
+}
 const quickActions = [
   {
     id: 1,
     title: "کارت سبز",
     icon: <FlameKindling color="#ff3737" />,
     bg: "#dc28281a",
+    href: "/soe/grn",
   },
   {
     id: 2,
@@ -36,12 +43,18 @@ const quickActions = [
   },
 ];
 const QuickActionList = () => {
+  const navigate = useNavigate();
+  const handleServiceBoxClick = (item: IQuickAction) => {
+    if (item?.href) navigate(item.href);
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <SectionTitle buttonText="مشاهده همه" title="دسترسی سریع به سرویس‌ها" />
       <div className="flex gap-2 overflow-x-auto scrollbar-hide">
         {quickActions?.map((action, i) => (
-          <ServiceBox
+          <CustomListItem
+            onClick={() => handleServiceBoxClick(action)}
             key={i}
             icon={action.icon}
             iconBoxBg={action.bg}

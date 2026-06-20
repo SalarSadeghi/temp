@@ -1,10 +1,11 @@
 import IconBox, { IconBoxProps } from "./IconBox";
-import { Card, SxProps, Theme, Typography } from "@superapp/ui";
+import { Card, CardActionArea, SxProps, Theme, Typography } from "@superapp/ui";
 
 interface ServiceBoxProps extends IconBoxProps {
   serviceBoxSX?: SxProps<Theme>;
   title?: string;
   titleSX?: SxProps<Theme>;
+  onClick?: () => void;
 }
 
 const ServiceBox: React.FC<ServiceBoxProps> = ({
@@ -14,7 +15,12 @@ const ServiceBox: React.FC<ServiceBoxProps> = ({
   iconBoxSX,
   title,
   titleSX,
+  onClick,
 }: ServiceBoxProps) => {
+  const handleActionAreaClick = () => {
+    if (onClick) onClick();
+  };
+  
   return (
     <Card
       sx={{
@@ -32,10 +38,22 @@ const ServiceBox: React.FC<ServiceBoxProps> = ({
         ...serviceBoxSX,
       }}
     >
-      <IconBox icon={icon} iconBoxBg={iconBoxBg} iconBoxSX={iconBoxSX} />
-      <Typography sx={{ fontSize: 10, fontWeight: 600, ...titleSX }}>
-        {title}
-      </Typography>
+      <CardActionArea
+        onClick={handleActionAreaClick}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 1,
+          flexShrink: 0,
+        }}
+      >
+        <IconBox icon={icon} iconBoxBg={iconBoxBg} iconBoxSX={iconBoxSX} />
+        <Typography sx={{ fontSize: 10, fontWeight: 600, ...titleSX }}>
+          {title}
+        </Typography>
+      </CardActionArea>
     </Card>
   );
 };

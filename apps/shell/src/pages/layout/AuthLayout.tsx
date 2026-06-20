@@ -5,7 +5,7 @@ const AuthLayout = () => {
   const token = getAccessToken();
   if (token) {
     // I should validate this token. maybe later!
-    return <Navigate to="/" replace />;
+    return <Navigate to="/home" replace />;
   }
   
   return (

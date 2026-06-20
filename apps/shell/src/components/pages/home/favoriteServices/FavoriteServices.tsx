@@ -1,8 +1,7 @@
-import IconBox from "@components/common/IconBox";
+import CustomListItem from "@components/common/CustomListItem";
 import SectionTitle from "@components/common/SectionTitle";
-import ServiceBox from "@components/common/ServiceBox";
 import { Briefcase, Plus, Stethoscope, Wallet } from "@superapp/icons/lucide";
-import { Card, useTheme } from "@superapp/ui";
+import { useTheme } from "@superapp/ui";
 
 const favoriteServices = [
   {
@@ -31,22 +30,27 @@ const FavoriteServices = () => {
       <SectionTitle buttonText="ویرایش" title="سرویس‌هاس محبوب" />
       <div className="flex gap-2">
         {favoriteServices?.map((service, i) => (
-          <ServiceBox
+          <CustomListItem
             key={i}
             icon={service.icon}
             iconBoxBg={service.bg}
-            serviceBoxSX={{ width: 75, height: 75 }}
+            containerSX={{ width: 75, height: 75 }}
+            // serviceBoxSX={{ width: 75, height: 75 }}
             iconBoxSX={{ width: 32, height: 32 }}
             title={service?.title}
             titleSX={{ fontSize: 10, fontWeight: 600 }}
           />
         ))}
-        <ServiceBox
+        <CustomListItem
           icon={<Plus className="text-disabled" />}
-          serviceBoxSX={{ width: 75, height: 75 }}
+          containerSX={{ width: 75, height: 75 }}
           iconBoxSX={{ width: 32, height: 32 }}
           title="افزودن"
-          titleSX={{ color: theme.palette.text.disabled, fontSize: 10, fontWeight: 600 }}
+          titleSX={{
+            color: theme.palette.text.disabled,
+            fontSize: 10,
+            fontWeight: 600,
+          }}
         />
       </div>
     </div>

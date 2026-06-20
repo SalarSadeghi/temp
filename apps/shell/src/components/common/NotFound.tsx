@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const NotFound = () => {
   const navigate = useNavigate();
   const handleExitNotFoundPage = () => {
-    navigate("/");
+    navigate("/home");
   };
   return (
     <div className="flex flex-1 h-full w-full gap-4 flex-col justify-center items-center">

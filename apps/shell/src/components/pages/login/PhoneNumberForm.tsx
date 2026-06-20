@@ -1,30 +1,54 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PhoneAndroid } from "@superapp/icons";
 import { Phone } from "@superapp/icons/lucide";
-import { CustomButton, CustomTextInput, InputAdornment } from "@superapp/ui";
+import { CustomTextInput, InputAdornment, useSnackbar } from "@superapp/ui";
 import { LoginFormSchema } from "@validations/loginPage/LoginFormSchema";
 import { useForm } from "react-hook-form";
 import LoginByPassBox from "./LoginByPassBox";
 import LoginByOTPBox from "./LoginByOTPBox";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@api/auth";
+import { AuthKeys } from "@constants/RQKeys/auth";
+import { useAuthStore } from "@store/auth/authStore";
+import { extractErrors } from "@utils/index";
 
 interface FormValues {
-  phoneNumber: string;
+  phone: string;
 }
 
 const PhoneNumberForm = () => {
+  const { showSnackbar } = useSnackbar();
+  const { setPhone, setIsPhoneVerified } = useAuthStore();
   const {
     handleSubmit,
     control,
     // reset,
     // setValue,
-    // watch,
+    watch,
     formState: { errors },
   } = useForm<FormValues | any>({
     resolver: yupResolver(LoginFormSchema),
   });
+  const { phone } = watch();
+  const { mutate: getCode } = useMutation({
+    mutationKey: AuthKeys.login(),
+    mutationFn: login,
+    onSuccess: (data) => {
+      showSnackbar({ message: data.data?.message, severity: "success" });
+      setPhone(phone);
+      setIsPhoneVerified(true);
+    },
+    onError: (error) => {
+      const messages = error.response?.data.error?.messages;
+      if (messages) {
+        const extracted = extractErrors(messages);
+        extracted.length > 0 &&
+          showSnackbar({ message: extracted[0], severity: "error" });
+      }
+    },
+  });
 
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
+    getCode(data.phone);
   };
 
   return (
@@ -38,12 +62,11 @@ const PhoneNumberForm = () => {
           <CustomTextInput
             size="small"
             helperText={
-              errors?.phoneNumber?.message &&
-              (errors?.phoneNumber?.message as string)
+              errors?.phone?.message && (errors?.phone?.message as string)
             }
             type="tel"
             control={control}
-            name="phoneNumber"
+            name="phone"
             label=""
             InputProps={{
               endAdornment: (

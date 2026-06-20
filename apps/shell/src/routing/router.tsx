@@ -4,6 +4,8 @@ import { createBrowserRouter } from "react-router-dom";
 import RouteErrorPage from "./RouteErrorPage";
 import { appRoutes } from "./routes/app.routes";
 import { authRoutes } from "./routes/auth.routes";
+import FeatureLayout from "@pages/layout/FeatureLayout";
+import { featureRoutes } from "./routes/features/feature.routes";
 
 export const router = createBrowserRouter([
   {
@@ -16,5 +18,10 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <RouteErrorPage />,
     children: appRoutes,
+  },
+  {
+    element: <FeatureLayout />,
+    errorElement: <RouteErrorPage />,
+    children: featureRoutes,
   },
 ]);

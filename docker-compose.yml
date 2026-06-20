@@ -10,34 +10,7 @@ services:
     container_name: shell
     ports:
       - "3001:80"
-    environment:
-      - VITE_TEMP_URL=http://localhost:3002
-    networks:
-      - superapp-network
-  temp:
-    build:
-      context: .
-      # dockerfile: apps/temp/dockerfile
-      args:
-        APP_NAME: temp
-    container_name: temp
-    depends_on:
-      - shell
-    ports:
-      - "3002:80"
-    networks:
-      - superapp-network
-  mfe-soe-grn:
-    build:
-      context: .
-      # dockerfile: apps/temp/dockerfile
-      args:
-        APP_NAME: mfe-soe-grn
-    container_name: mfe-soe-grn
-    depends_on:
-      - shell
-    ports:
-      - "3002:80"
+
     networks:
       - superapp-network
 

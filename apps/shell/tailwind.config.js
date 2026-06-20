@@ -5,10 +5,10 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "../temp/src/**/*.{js, ts, jsx, tsx}",
-    "../../packages/ui/src/**/*.{js, ts, jsx, tsx}",
+    // "../temp/src/**/*.{js, ts, jsx, tsx}",
+    // "../../packages/ui/src/**/*.{js, ts, jsx, tsx}",
     // Or use a pattern for all MFEs
-    "../mfe-*/src/**/*.{js,ts,jsx,tsx}",
+    // "../mfe-*/src/**/*.{js,ts,jsx,tsx}",
   ],
   corePlugins: {
     preflight: true, // Shell provides the CSS reset
@@ -34,10 +34,11 @@ export default {
           dark: "#1e3a8a",
         },
         secondary: { DEFAULT: "#475569", light: "#94a3b8", dark: "#1e293b" },
-        success: { light: "#aaffc7", main: "#16a34a", dark: "#15803d" },
-        error: { light: "#f48fb1", main: "#ff3737", dark: "#b91c1c" },
-        info: { light: "#ebf5ff", main: "#0288d1", dark: "#01579b" },
-        warning: { main: "#f59e0b", light: "#fde68a", dark: "#b45309" },
+        success: { light: "#aaffc7", DEFAULT: "#16a34a", dark: "#15803d" },
+        error: { light: "#f48fb1", DEFAULT: "#ff3737", dark: "#b91c1c" },
+        info: { light: "#ebf5ff", DEFAULT: "#0288d1", dark: "#01579b" },
+        warning: { DEFAULT: "#f59e0b", light: "#fde68a", dark: "#b45309"},
+        tertiary: { DEFAULT: "#9333EA", light: "#F3E8FF"},
       },
     },
   },

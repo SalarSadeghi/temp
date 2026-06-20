@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TanStackDevtools } from "@tanstack/react-devtools";
+import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
+
 import {
   AppThemeProvider,
   // AppThemeProvider,
@@ -28,6 +31,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <CustomSnackbar />
         <CustomConfirmDialog />
       </AppThemeProvider>
+      {import.meta.env.DEV && (
+        <TanStackDevtools
+          plugins={[
+            {
+              name: "TanStack Query",
+              render: <ReactQueryDevtoolsPanel />,
+            },
+          ]}
+        />
+      )}
     </QueryClientProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

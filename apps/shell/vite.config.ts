@@ -4,7 +4,9 @@ import federation from "@originjs/vite-plugin-federation";
 // import { federation } from "@module-federation/vite";
 import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
-import pkg from "./package.json";
+// import pkg from "./package.json";
+import svgr from "vite-plugin-svgr";
+
 // const getRemoteUrl = () => {
 //   // Check if running on mobile/local network
 //   const isDev = process.env.NODE_ENV === "development";
@@ -30,65 +32,70 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
-      // VitePWA({
-      //   registerType: "autoUpdate", // Updates the service worker automatically. Other options: prompt, manual
-      //   includeAssets: ["vite.svg"], // Includes static assets from  public folder in the precache. For offline usage
-      //   manifest: {
-      //     name: "Nexora",
-      //     short_name: "Nexora",
-      //     description: "All in one Super App platform",
-      //     theme_color: "#ffffff", // Browser toolbar/address bar color
-      //     background_color: "#ffffff", // Splash screen background color during loading
-      //     display: "standalone", // How the app appears when running
-      //     scope: "/",
-      //     start_url: "/user", // Where the app opens when launched
-      //     orientation: "portrait",
-      //     //  what icon to show on the home screen when the app is installed (atleast two icons: 192 and 512)
-      //     icons: [
-      //       {
-      //         src: "pwa-192.png",
-      //         sizes: "192x192", //
-      //         type: "image/png",
-      //         purpose: "any", //
-      //       },
-      //       {
-      //         src: "pwa-225.png",
-      //         sizes: "225x225",
-      //         type: "image/png",
-      //         purpose: "any", // For Android adaptive icons with padding
-      //       },
-      //       {
-      //         src: "pwa-512.png",
-      //         sizes: "512x512",
-      //         type: "image/png",
-      //         purpose: "any", // For Android adaptive icons with padding
-      //       },
-      //     ],
-      //   },
-      //   //This is where you define caching strategies
-      //   workbox: {
-      //     // Tells Workbox which file types to precache during build
-      //     globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
-      //     // runtimeCaching: [
-      //     //   {
-      //     //     urlPattern:
-      //     //       /^https:\/\/api\.example\.com\/.*\.(?:png|jpg|jpeg|svg)/,
-      //     //     handler: "StaleWhileRevalidate", // Use cache, update in background
-      //     //     options: {
-      //     //       cacheName: "api-image-cache",
-      //     //       expiration: {
-      //     //         maxEntries: 50,
-      //     //         maxAgeSeconds: 60 * 60 * 24, // 24 hours
-      //     //       },
-      //     //     },
-      //     //   },
-      //     // ],
-      //   },
-      //   devOptions: {
-      //     enabled: false, // Disable service worker in development for easier debugging
-      //   },
-      // }),
-      
+      svgr({
+        svgrOptions: {
+          exportType: "default",
+        },
+      }),
+      VitePWA({
+        registerType: "autoUpdate", // Updates the service worker automatically. Other options: prompt, manual
+        includeAssets: ["vite.svg"], // Includes static assets from  public folder in the precache. For offline usage
+        manifest: {
+          name: "Nexora",
+          short_name: "Nexora",
+          description: "All in one Super App platform",
+          theme_color: "#ffffff", // Browser toolbar/address bar color
+          background_color: "#ffffff", // Splash screen background color during loading
+          display: "standalone", // How the app appears when running
+          scope: "/",
+          start_url: "/home", // Where the app opens when launched
+          orientation: "portrait",
+          //  what icon to show on the home screen when the app is installed (atleast two icons: 192 and 512)
+          icons: [
+            {
+              src: "pwa-192.png",
+              sizes: "192x192", //
+              type: "image/png",
+              purpose: "any", //
+            },
+            {
+              src: "pwa-225.png",
+              sizes: "225x225",
+              type: "image/png",
+              purpose: "any", // For Android adaptive icons with padding
+            },
+            {
+              src: "pwa-512.png",
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "any", // For Android adaptive icons with padding
+            },
+          ],
+        },
+        //This is where you define caching strategies
+        workbox: {
+          // Tells Workbox which file types to precache during build
+          globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+          // runtimeCaching: [
+          //   {
+          //     urlPattern:
+          //       /^https:\/\/api\.example\.com\/.*\.(?:png|jpg|jpeg|svg)/,
+          //     handler: "StaleWhileRevalidate", // Use cache, update in background
+          //     options: {
+          //       cacheName: "api-image-cache",
+          //       expiration: {
+          //         maxEntries: 50,
+          //         maxAgeSeconds: 60 * 60 * 24, // 24 hours
+          //       },
+          //     },
+          //   },
+          // ],
+        },
+        devOptions: {
+          enabled: false, // Disable service worker in development for easier debugging
+        },
+      }),
+
       // federation({
       //   name: "shell",
       //   remotes: {
@@ -192,6 +199,7 @@ export default defineConfig(({ mode }) => {
       //   },
       // }),
     ],
+
     optimizeDeps: {
       include: [
         "react",
@@ -204,7 +212,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       target: "esnext",
-      cssCodeSplit: false,
+      cssCodeSplit: true,
     },
     resolve: {
       extensions: [".js", ".ts", ".jsx", ".tsx", ".json"],
@@ -241,9 +249,21 @@ export default defineConfig(({ mode }) => {
           find: /^@validations/,
           replacement: path.resolve(__dirname, "src/validations"),
         },
-         {
+        {
           find: /^@theme/,
           replacement: path.resolve(__dirname, "src/theme"),
+        },
+        {
+          find: /^@type/,
+          replacement: path.resolve(__dirname, "src/type"),
+        },
+        {
+          find: /^@api/,
+          replacement: path.resolve(__dirname, "src/api"),
+        },
+        {
+          find: /^@constants/,
+          replacement: path.resolve(__dirname, "src/constants"),
         },
       ],
     },

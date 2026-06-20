@@ -1,7 +1,8 @@
-export const API_BASE_URL = import.meta.env.DEV
-  ? import.meta.env.VITE_DEVELOPMENT_API_URL ||
-    "http://10.96.192.118:3000/gateway"
-  : `${window.location.protocol}//${window.location.host}/api`;
+export const BASE_URL = import.meta.env.DEV
+  ? import.meta.env.VITE_API_URL
+  : `${window.location.protocol}//${window.location.host}`;
+
+export const API_URL = `${BASE_URL}/api/core/v1`;
 
 export const ACCESS_TOKEN_KEY = "access_token";
 export const REFRESH_TOKEN_KEY = "refresh_token";

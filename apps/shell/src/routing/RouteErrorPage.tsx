@@ -13,7 +13,7 @@ export default function RouteErrorPage() {
   }
 
   return (
-    <div>
+    <div className="flex">
       <h1>Something went wrong</h1>
     </div>
   );

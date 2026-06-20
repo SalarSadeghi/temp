@@ -11,8 +11,8 @@ const HomePage = () => {
       <div className="flex flex-col p-4 gap-6">
         <Header />
         {/* <HomeSearch /> */}
-        {/* <FavoriteServices /> */}
-        {/* <RecentActivityList /> */}
+        <FavoriteServices />
+        <RecentActivityList />
         <QuickActionList />
       </div>
     </>

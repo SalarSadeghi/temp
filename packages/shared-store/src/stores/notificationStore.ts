@@ -5,11 +5,11 @@ export type SnackbarSeverity = "error" | "warning" | "info" | "success";
 
 export interface CustomSnackbarState {
   open: boolean;
-  message: string;
+  message: React.ReactNode;
   severity: SnackbarSeverity;
   autoHideDuration?: number;
   setOpen: (state: boolean) => void;
-  setMessage: (state: string) => void;
+  setMessage: (state: React.ReactNode) => void;
   setAutoHideDuration: (duration: number) => void;
   position?: {
     vertical: "top" | "bottom";
@@ -37,7 +37,7 @@ export const useNotificationStore = create<CustomSnackbarState>()(
       });
     },
 
-    setMessage: (message: string) => {
+    setMessage: (message: React.ReactNode) => {
       set((state) => {
         state.message = message;
       });

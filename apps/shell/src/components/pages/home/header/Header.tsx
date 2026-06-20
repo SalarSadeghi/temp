@@ -12,7 +12,7 @@ const Header = () => {
           }}
         />
         <div className="flex flex-col gap-0">
-          <Typography fontWeight={700}>سلام علی جان 👋</Typography>
+          <Typography fontWeight={700}>سلام سالار جان 👋</Typography>
           <span className="text-xs text-gray-500 font-medium">
             واحد منابع انسانی
           </span>
