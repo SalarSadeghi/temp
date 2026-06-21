@@ -1,4 +1,4 @@
-import {
+import axios, {
   type AxiosInstance,
   type InternalAxiosRequestConfig,
   type AxiosError,
@@ -20,7 +20,14 @@ import {
 // } from "@utils/index";
 // import { useAuthStore } from "@store/auth/authStore";
 
-import { refresh } from "@api/auth";
+import { API_URL, BASE_URL } from "./config";
+const publicApi = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 let isRefreshing = false;
 
 let failedQueue: Array<{
@@ -49,7 +56,7 @@ export function setupInterceptors(instance: AxiosInstance) {
       // }
       return config;
     },
-    (error) => Promise.reject(error)
+    (error) => Promise.reject(error),
   );
 
   // ─── Response Interceptor ────────────────────────────────
@@ -185,33 +192,28 @@ export function setupInterceptors(instance: AxiosInstance) {
   instance.interceptors.response.use(
     (response) => response,
     async (error: AxiosError) => {
-      if (!error.config) {
-        return Promise.reject(error);
-      }
-
       const originalRequest = error.config as InternalAxiosRequestConfig & {
         _retry?: boolean;
       };
 
-      if (
-        error.response?.status !== 401 ||
-        originalRequest._retry ||
-        originalRequest.url?.includes("/auth/refresh")
-      ) {
+      if (error.response?.status !== 401 || originalRequest._retry) {
         return Promise.reject(error);
       }
 
       if (isRefreshing) {
-        return new Promise<void>((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        }).then(() => instance(originalRequest));
+        return new Promise((resolve, reject) => {
+          failedQueue.push({
+            resolve: () => resolve(instance(originalRequest)),
+            reject,
+          });
+        });
       }
 
       originalRequest._retry = true;
       isRefreshing = true;
 
       try {
-        await refresh();
+        await publicApi.post(`${API_URL}/auth/refresh`);
         processQueue();
         return instance(originalRequest);
       } catch (refreshError) {
@@ -221,6 +223,6 @@ export function setupInterceptors(instance: AxiosInstance) {
       } finally {
         isRefreshing = false;
       }
-    }
+    },
   );
 }

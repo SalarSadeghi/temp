@@ -1,14 +1,14 @@
 import FeatureHeader from "@components/common/FeatureHeader";
+import { useAuthStore } from "@store/auth/authStore";
 // import { getAccessToken } from "@utils/index";
-import { Outlet, useNavigation } from "react-router-dom";
+import { Navigate, Outlet, useNavigation } from "react-router-dom";
 
 const FeatureLayout = () => {
-  // const token = getAccessToken();
-  // const accessToken = useAuthStore((state) => state.accessToken);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" replace />;
+  }
 
-  // if (!token) {
-  //   return <Navigate to="/auth/login" replace />;
-  // }
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
   return (

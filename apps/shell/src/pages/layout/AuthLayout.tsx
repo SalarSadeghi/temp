@@ -1,13 +1,12 @@
 // import { getAccessToken } from "@utils/index";
-import {  Outlet } from "react-router-dom";
+import { useAuthStore } from "@store/auth/authStore";
+import { Navigate, Outlet } from "react-router-dom";
 
 const AuthLayout = () => {
-  // const token = getAccessToken();
-  // const accessToken = useAuthStore((state) => state.accessToken);
-  // if (accessToken) {
-  //   // I should validate this token. maybe later!
-  //   return <Navigate to="/home" replace />;
-  // }
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  if (isAuthenticated) {
+    return <Navigate to="/home" replace />;
+  }
 
   return (
     <>

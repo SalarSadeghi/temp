@@ -1,14 +1,16 @@
 import AppRouter from "@routing/index";
 // import { CustomConfirmDialog } from "@superapp/ui";
 import { InstallPWABanner } from "@components/common/InstallPWABanner";
-// import { useAuthInit } from "@hooks/useAuthInit";
+import AuthProvider from "@routing/auth/AuthProvider";
 
 function App() {
   // useAuthInit();
 
   return (
     <>
-      <AppRouter />
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
       <InstallPWABanner />
     </>
   );

@@ -39,9 +39,13 @@ const OTPForm = () => {
   });
   // const { code } = watch();
   // const privatePhone = phonePrivacyFormatters.low("09123456789");
-  const { isPhoneVerified, phone, setPhone, setIsPhoneVerified } = useAuthStore(
-    (state) => state
-  );
+  const {
+    isPhoneVerified,
+    phone,
+    setPhone,
+    setIsPhoneVerified,
+    setIsAuthenticated,
+  } = useAuthStore((state) => state);
 
   const { mutate: verifyCode, isPending } = useMutation({
     mutationKey: AuthKeys.verify(),
@@ -49,6 +53,7 @@ const OTPForm = () => {
     onSuccess: (data) => {
       const { isSuccess } = data;
       if (isSuccess) {
+        setIsAuthenticated(true);
         showSnackbar({
           message: (
             <div className="flex gap-1 items-center">
