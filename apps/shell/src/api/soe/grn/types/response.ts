@@ -1,13 +1,13 @@
 import { Unit } from "@type/common";
-import { GreenCardType } from "./request";
+import { GRNType } from "./request";
 
 interface UnitInfo extends Pick<Unit, "id" | "unitId" | "code" | "name"> {}
-export interface GreenCardDraftResponseDTO {
+export interface GRNDraftResponseDTO {
   id: number | string;
   name: string;
   unit: UnitInfo | null;
-  greenCardType: GreenCardType;
-  greenCardTypeTitle: string;
+  grnType: GRNType;
+  grnTypeTitle: string;
   placeAdditionalDescription: string | null;
   placeViewDescription: string | null;
   suggestionDescription: string | null;
@@ -17,7 +17,7 @@ export interface GreenCardDraftResponseDTO {
   lock?: boolean;
 }
 
-export interface GreenCardSentResponseDTO {
+export interface GRNSentResponseDTO {
   id: number | string;
   greenCardType: string;
   createdAt: number;

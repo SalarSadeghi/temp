@@ -1,12 +1,6 @@
 export const GRNKeys = {
-  getNovanUnits: () => ["novanUnits"],
-  getGreenCardDrafts: (searchParam?: string) => [
-    "greenCardDrafts",
-    searchParam,
-  ],
-  getSentGreenCardByPrcCode: (prcCode?: string) => [
-    "sentGreenCardByPrcCode",
-    prcCode,
-  ],
-  getSentGreenCard: (searchParam?: string) => ["sentSuggestion", searchParam],
+  getUnits: () => ["units"],
+  getGRNDrafts: (searchParam?: string) => ["grnDrafts", searchParam],
+  getSentGRNByPrcCode: (prcCode?: string) => ["sentGRNByPrcCode", prcCode],
+  getSentGRN: (searchParam?: string) => ["sentSuggestion", searchParam],
 };

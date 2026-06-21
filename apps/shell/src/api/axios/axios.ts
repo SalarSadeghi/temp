@@ -5,6 +5,7 @@ import { IServiceCommunicateResponse } from "@type/common";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },

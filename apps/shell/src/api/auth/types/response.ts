@@ -6,3 +6,7 @@ export interface VerifyResponseDTO {
 export interface LoginResponseDTO {
   message: string;
 }
+
+export interface RefreshResponseDTO {
+  accessToken: string;
+}

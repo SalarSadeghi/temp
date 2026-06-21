@@ -23,7 +23,7 @@ const SentGreenCardModal = () => {
         setSearchParam();
       }}
       modalId={SentGreenCardModalID}
-      title={Texts.features.soe.grn.greenCard}
+      title={Texts.features.soe.grn.grn}
     >
       <div className="p-4 border-solid border-2 rounded-md border-[#f57c00] relative flex flex-col gap-4">
         {/* <div className="absolute w-16 h-16 mx-auto left-0 right-0 top-[-32px] border-[#f57c00] border-2 border-solid z-10 rounded-full bg-white">
@@ -92,9 +92,7 @@ const SentGreenCardModal = () => {
         <div
           className={`flex ${isDesktop ? "flex-row items-center gap-4" : "flex-col gap-2"}`}
         >
-          <span className="text-sm">
-            {Texts.features.soe.grn.greenCardType}:
-          </span>
+          <span className="text-sm">{Texts.features.soe.grn.grnType}:</span>
 
           <span className="text-gray-400 font-thin text-xs">
             {/* {Texts.pages.greenCardForm.greenCardTypeOptions[

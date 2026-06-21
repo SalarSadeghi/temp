@@ -28,3 +28,10 @@ export interface paginationResponse<T> {
 }
 
 export type Order = "asc" | "desc";
+
+export interface PaginationRequestDTO {
+  page?: number;
+  size?: number;
+  orderBy?: Order;
+  search?: string;
+}

@@ -1,28 +1,28 @@
 import Texts from "@assets/json/Texts.json";
 
-export enum GreenCardType {
+export enum GRNType {
   ACC = "ACC",
   SEMACC = "SEMACC",
   MINORACC = "MINORACC",
 }
 
-export interface GreenCardTypeOption {
-  value: GreenCardType;
+export interface GRNTypeOption {
+  value: GRNType;
   label: string;
 }
 
-export const GreenCardTypeOptions: GreenCardTypeOption[] = [
+export const GRNTypeOptions: GRNTypeOption[] = [
   {
-    value: GreenCardType.ACC,
-    label: Texts.features.soe.grn.greenCardTypeOptions.ACC,
+    value: GRNType.ACC,
+    label: Texts.features.soe.grn.grnTypeOptions.ACC,
   },
   {
-    value: GreenCardType.MINORACC,
-    label: Texts.features.soe.grn.greenCardTypeOptions.MINORACC,
+    value: GRNType.MINORACC,
+    label: Texts.features.soe.grn.grnTypeOptions.MINORACC,
   },
   {
-    value: GreenCardType.SEMACC,
-    label: Texts.features.soe.grn.greenCardTypeOptions.SEMACC,
+    value: GRNType.SEMACC,
+    label: Texts.features.soe.grn.grnTypeOptions.SEMACC,
   },
 ];
 

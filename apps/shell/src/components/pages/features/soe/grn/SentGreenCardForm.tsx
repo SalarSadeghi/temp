@@ -22,7 +22,7 @@ import { useModalActions } from "@superapp/shared-store";
 import { SentGreenCardModalID } from "./SentGreenCardModal";
 import { GRNKeys } from "@constants/RQKeys/soe/grn";
 import { getSentGreenCard, getSentGreencardByPrcCode } from "@api/soe/grn";
-import { GreenCardSentResponseDTO } from "@api/soe/grn/types/response";
+import { GRNSentResponseDTO } from "@api/soe/grn/types/response";
 import { useGreenCardStore } from "@store/soe/grn/greenCardStore";
 
 const PRC_CODE = "prcCode";
@@ -45,7 +45,7 @@ const SentGreenCardForm = () => {
     data: sentGreenCardByPrcCodeData,
     error: sentGreenCardByPrcCodeDataError,
   } = useQuery({
-    queryKey: GRNKeys.getSentGreenCardByPrcCode(prcCodeParam || undefined),
+    queryKey: GRNKeys.getSentGRNByPrcCode(prcCodeParam || undefined),
     queryFn: () =>
       getSentGreencardByPrcCode({ prcCode: prcCodeParam || undefined }),
     enabled: !!prcCodeParam,
@@ -53,7 +53,7 @@ const SentGreenCardForm = () => {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
-      queryKey: GRNKeys.getSentGreenCard(
+      queryKey: GRNKeys.getSentGRN(
         debouncedSearchValue.length > 2 ? debouncedSearchValue : undefined
       ),
       queryFn: async ({ pageParam = 0 }) => {
@@ -109,7 +109,7 @@ const SentGreenCardForm = () => {
     }
   };
 
-  const handleSent = (sent: GreenCardSentResponseDTO) => {
+  const handleSent = (sent: GRNSentResponseDTO) => {
     setSent(sent);
     pushModal({ id: SentGreenCardModalID });
   };

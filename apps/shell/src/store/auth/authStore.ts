@@ -4,12 +4,16 @@ import { immer } from "zustand/middleware/immer";
 interface StoreState {
   phone?: string;
   isPhoneVerified: boolean;
+  accessToken?: string;
   setPhone: (phone?: string) => void;
   setIsPhoneVerified: (status: boolean) => void;
+  setAccessToken: (token?: string) => void;
+  clearAccessToken: () => void;
 }
 
 const initialState = {
   phone: undefined,
+  accessToken: undefined,
   isPhoneVerified: false,
 };
 
@@ -24,6 +28,16 @@ export const useAuthStore = create<StoreState>()(
     setIsPhoneVerified: (status: boolean) => {
       set((state) => {
         state.isPhoneVerified = status;
+      });
+    },
+    setAccessToken: (token?: string) => {
+      set((state) => {
+        state.accessToken = token;
+      });
+    },
+    clearAccessToken: () => {
+      set((state) => {
+        state.accessToken = undefined;
       });
     },
   }))

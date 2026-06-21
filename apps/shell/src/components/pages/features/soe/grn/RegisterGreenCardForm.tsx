@@ -36,18 +36,18 @@ import { useMutation } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import { Unit } from "@type/common";
 import {
-  GreenCardTypeOption,
-  GreenCardTypeOptions,
+  GRNTypeOption,
+  GRNTypeOptions,
   NavigationState,
 } from "@api/soe/grn/types/request";
-import { GreenCardDraftResponseDTO } from "@api/soe/grn/types/response";
+import { GRNDraftResponseDTO } from "@api/soe/grn/types/response";
 import { useGreenCardStore } from "@store/soe/grn/greenCardStore";
 import { createGRN } from "@api/soe/grn";
 
 interface FormValues {
   unitId: Unit;
   placeAdditionalDescription: string;
-  greenCardType: GreenCardTypeOption[];
+  greenCardType: GRNTypeOption[];
   placeViewDescription: string;
   suggestionDescription: string;
   file: File[];
@@ -57,7 +57,7 @@ interface FormValues {
 
 type Mode = "edit" | "add" | null;
 const formDataMapper = (
-  data: FormValues | GreenCardDraftResponseDTO | any,
+  data: FormValues | GRNDraftResponseDTO | any,
   mode: Mode = "add"
 ) => {
   if (mode === "add") {
@@ -172,7 +172,7 @@ const RegisterGreenCardForm = () => {
         <div className="flex flex-col gap-8">
           {/* <SuccessAnimation /> */}
           <span className={`${isDesktop ? "text-base" : "text-sm"}`}>
-            {Texts.features.soe.grn.successPostGreenCardMSG}
+            {Texts.features.soe.grn.successPostGRNMSG}
           </span>
         </div>
       );
@@ -187,10 +187,10 @@ const RegisterGreenCardForm = () => {
         ...(draft?.unit?.id && {
           unitId: { value: draft?.unit.unitId, label: draft?.unit?.name },
         }),
-        ...(draft?.greenCardType && {
-          greenCardType: {
-            value: draft?.greenCardType,
-            label: draft.greenCardTypeTitle,
+        ...(draft?.grnType && {
+          grnType: {
+            value: draft?.grnType,
+            label: draft.grnTypeTitle,
           },
         }),
         ...(draft?.viewDate && {
@@ -330,10 +330,10 @@ const RegisterGreenCardForm = () => {
       >
         <div className={` ${isDesktop ? "w-1/2" : "w-full"}`}>
           <CustomComboBox
-            label={Texts.features.soe.grn.greenCardType}
+            label={Texts.features.soe.grn.grnType}
             control={control}
             name="greenCardType"
-            options={GreenCardTypeOptions}
+            options={GRNTypeOptions}
           />
         </div>
         <div className={` ${isDesktop ? "w-1/2" : "w-full"}`} />

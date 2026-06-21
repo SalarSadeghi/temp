@@ -15,8 +15,8 @@ import Texts from "@assets/json/Texts.json";
 import { CloseOutlined, SearchOutlined } from "@superapp/icons";
 import DraftCard from "./DraftCard";
 import { useGreenCardStore } from "@store/soe/grn/greenCardStore";
-import { getGreenCardDrafts } from "@api/soe/grn";
-import { GreenCardDraftResponseDTO } from "@api/soe/grn/types/response";
+import { getGRNDrafts } from "@api/soe/grn";
+import { GRNDraftResponseDTO } from "@api/soe/grn/types/response";
 import { NavigationState } from "@api/soe/grn/types/request";
 import { GRNKeys } from "@constants/RQKeys/soe/grn";
 import { useDebounce } from "@superapp/shared-hooks";
@@ -34,14 +34,14 @@ const DraftGreenCardForm = () => {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
-      queryKey: GRNKeys.getGreenCardDrafts(
+      queryKey: GRNKeys.getGRNDrafts(
         debouncedSearchValue?.length > 2 ? debouncedSearchValue : undefined
       ),
       queryFn: async ({ pageParam = 0 }) => {
-        return await getGreenCardDrafts({
-          searchParam: debouncedSearchValue || undefined,
-          pageNumber: String(pageParam),
-          pageSize: String(PAGE_SIZE),
+        return await getGRNDrafts({
+          search: debouncedSearchValue || undefined,
+          page: pageParam,
+          size: PAGE_SIZE,
         });
       },
       getNextPageParam: (lastPage) => {
@@ -65,7 +65,7 @@ const DraftGreenCardForm = () => {
     [isFetchingNextPage, hasNextPage, fetchNextPage]
   );
 
-  const handleDraft = (draft: GreenCardDraftResponseDTO) => {
+  const handleDraft = (draft: GRNDraftResponseDTO) => {
     if (draft?.lock) {
       showSnackbar({
         message: Texts.features.soe.grn.lockDraftMSG,

@@ -1,11 +1,12 @@
-import { GreenCardSentResponseDTO } from "@api/soe/grn/types/response";
+import { GRNSentResponseDTO } from "@api/soe/grn/types/response";
 import { AccessTimeOutlined, CalendarMonthOutlined } from "@superapp/icons";
 import { getTimeFromTimestamp } from "@superapp/shared-utils";
 import { useMediaQuery, useTheme } from "@superapp/ui";
 
 interface SentCardProps {
-  sent: GreenCardSentResponseDTO;
+  sent: GRNSentResponseDTO;
 }
+
 const SentCard = ({ sent }: SentCardProps) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));

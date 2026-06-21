@@ -12,7 +12,7 @@ import {
   useTheme,
 } from "@superapp/ui";
 import { useMutation } from "@tanstack/react-query";
-import { extractErrors, setTokens } from "@utils/index";
+import { extractErrors } from "@utils/index";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -47,9 +47,8 @@ const OTPForm = () => {
     mutationKey: AuthKeys.verify(),
     mutationFn: verify,
     onSuccess: (data) => {
-      const { data: tokenData } = data;
-      if (tokenData?.accessToken && tokenData?.refreshToken) {
-        setTokens(tokenData?.accessToken, tokenData?.refreshToken);
+      const { isSuccess } = data;
+      if (isSuccess) {
         showSnackbar({
           message: (
             <div className="flex gap-1 items-center">

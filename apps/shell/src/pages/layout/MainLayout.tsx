@@ -1,13 +1,17 @@
 import CustomBottomNavigation from "@components/common/CustomBottomNavigation";
+// import { useAuthStore } from "@store/auth/authStore";
 import { useMediaQuery, useTheme } from "@superapp/ui";
-import { getAccessToken } from "@utils/index";
-import { Navigate, Outlet, useNavigation } from "react-router-dom";
+// import { getAccessToken } from "@utils/index";
+// import { getAccessToken } from "@utils/index";
+import { Outlet, useNavigation } from "react-router-dom";
 
 const MainLayout = () => {
-  const token = getAccessToken();
-  if (!token) {
-    return <Navigate to="/auth/login" replace />;
-  }
+  // const token = getAccessToken();
+  // const accessToken = useAuthStore((state) => state.accessToken);
+  // if (!token) {
+  //   return <Navigate to="/auth/login" replace />;
+  // }
+
   const theme = useTheme();
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";

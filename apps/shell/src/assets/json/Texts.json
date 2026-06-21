@@ -28,13 +28,13 @@
   "features": {
     "soe": {
       "grn": {
-        "greenCard": "کارت سبز",
+        "grn": "کارت سبز",
         "registerTitle": "ثبت فرم کارت سبز",
         "editTitle": "ویرایش کارت سبز",
         "draftTitle": "پیش نویس کارت سبز",
         "sentTitle": "ارسالی‌های کارت سبز",
         "unitCode": "مکان مشاهده",
-        "greenCardType": "نوع کارت سبز",
+        "grnType": "نوع کارت سبز",
         "placeAdditionalDescription": "توضیحات تکمیلی مکان مشاهده",
         "placeAdditionalDescriptionHelpMSG": "حداکثر 256 کاراکتر",
         "seenTime": "زمان مشاهده",
@@ -43,13 +43,13 @@
         "placeViewDescriptionHelpMSG": "حداکثر 500 کاراکتر",
         "suggestionDescription": "اقدام اصلاحی (کنترلی) و یا پیشگیرانه پیشنهادی",
         "suggestionDescriptionHelpMSG": "حداکثر 2000 کاراکتر",
-        "successPostGreenCardMSG": "کاربر گرامی کارت سبز شما با موفقیت در صف ارسال قرار گرفت. کد کارت سبز شما به محض ثبت شدن برای شما ارسال میگردد.",
+        "successPostGRNMSG": "کاربر گرامی کارت سبز شما با موفقیت در صف ارسال قرار گرفت. کد کارت سبز شما به محض ثبت شدن برای شما ارسال میگردد.",
         "confirmModalRegeisterText": "آیا از ارسال فرم کارت سبز اطمینان دارید؟",
         "totalDraft": "تعداد کل پیش‌نویس‌ها",
         "lockDraftMSG": "درخواست شما در صف بررسی می‌باشد و امکان ویرایش آن وجود ندارد.",
         "underReview": "درحال بررسی",
         "totalSent": "تعداد کل ارسالی‌ها",
-        "greenCardTypeOptions": {
+        "grnTypeOptions": {
           "ACC": "خطر",
           "SEMACC": "شبه حادثه",
           "MINORACC": "حادثه جزِئی"

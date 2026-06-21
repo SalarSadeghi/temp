@@ -17,12 +17,12 @@ import {
   formatJalaliNumeric,
   getTimeFromTimestamp,
 } from "@superapp/shared-utils";
-import { GreenCardDraftResponseDTO } from "@api/soe/grn/types/response";
-import { deleteGreenCardDraft } from "@api/soe/grn";
+import { GRNDraftResponseDTO } from "@api/soe/grn/types/response";
+import { deleteGRNDraft } from "@api/soe/grn";
 import { GRNKeys } from "@constants/RQKeys/soe/grn";
 
 interface DraftCardProps {
-  draft: GreenCardDraftResponseDTO;
+  draft: GRNDraftResponseDTO;
 }
 const DraftCard = ({ draft }: DraftCardProps) => {
   const theme = useTheme();
@@ -34,11 +34,11 @@ const DraftCard = ({ draft }: DraftCardProps) => {
     //mutate,
     isPending,
   } = useMutation({
-    mutationFn: () => deleteGreenCardDraft(draft?.id as string),
+    mutationFn: () => deleteGRNDraft(draft?.id as string),
     onSuccess: () => {
       setDeraftToDeleteId("");
       qc.invalidateQueries({
-        queryKey: GRNKeys.getGreenCardDrafts()[0] as any,
+        queryKey: GRNKeys.getGRNDrafts()[0] as any,
       });
       showSnackbar({
         message: Shared_Text.common.successOperationMsg,
@@ -84,7 +84,7 @@ const DraftCard = ({ draft }: DraftCardProps) => {
         <div className={`flex flex-col ${isDesktop ? "px-2" : "px-2"}`}>
           <div className="flex max-w-[100px]">
             <span className="font-bold text-sm text-gray-400 truncate">
-              {draft.greenCardTypeTitle ?? "-"}
+              {draft.grnTypeTitle ?? "-"}
             </span>
           </div>
           <div className="flex max-w-[100px]">

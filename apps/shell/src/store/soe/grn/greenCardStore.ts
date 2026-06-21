@@ -1,5 +1,5 @@
 
-import { GreenCardDraftResponseDTO, GreenCardSentResponseDTO } from "@api/soe/grn/types/response";
+import { GRNDraftResponseDTO, GRNSentResponseDTO } from "@api/soe/grn/types/response";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -7,12 +7,12 @@ type Mode = "edit" | "add" | null;
 interface StoreState {
   mode: Mode;
   pageTitle: string;
-  draft: GreenCardDraftResponseDTO | null;
-  sent: GreenCardSentResponseDTO | null;
+  draft: GRNDraftResponseDTO | null;
+  sent: GRNSentResponseDTO | null;
   setPageTitle: (title: string) => void;
   changeMode: (mode: Mode) => void;
-  setDraft: (draft: GreenCardDraftResponseDTO | null) => void;
-  setSent: (sent: GreenCardSentResponseDTO | null) => void;
+  setDraft: (draft: GRNDraftResponseDTO | null) => void;
+  setSent: (sent: GRNSentResponseDTO | null) => void;
 }
 
 const initialState = {
@@ -35,12 +35,12 @@ export const useGreenCardStore = create<StoreState>()(
         draft.pageTitle = title;
       });
     },
-    setDraft: (data: GreenCardDraftResponseDTO | null) =>
+    setDraft: (data: GRNDraftResponseDTO | null) =>
       set((draft) => {
         draft.draft = data;
       }),
 
-    setSent: (data: GreenCardSentResponseDTO | null) =>
+    setSent: (data: GRNSentResponseDTO | null) =>
       set((draft) => {
         draft.sent = data;
       }),
