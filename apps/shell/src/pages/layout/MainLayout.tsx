@@ -8,14 +8,14 @@ import { Navigate, Outlet, useNavigation } from "react-router-dom";
 
 const MainLayout = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  if (!isAuthenticated) {
-    return <Navigate to="/auth/login" replace />;
-  }
-
   const theme = useTheme();
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/auth/login" replace />;
+  // }
+
   return (
     <>
       <main

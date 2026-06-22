@@ -5,25 +5,30 @@ import {
   UpdatePasswordRequestDTO,
   VerifyRequestDTO,
 } from "./types/request";
-import {
-  LoginResponseDTO,
-  VerifyResponseDTO,
-} from "./types/response";
+import { LoginResponseDTO, VerifyResponseDTO } from "./types/response";
 
 const AUTH_API = `${API_URL}/auth`;
 
 export const login = async (phone: string) => {
-  const res = await api.post<LoginResponseDTO>(`${AUTH_API}/login`, {
-    phone,
-  });
+  const res = await api.post<LoginResponseDTO>(
+    `${AUTH_API}/login`,
+    {
+      phone,
+    },
+    { withCredentials: true }
+  );
   return res;
 };
 
 export const verify = async ({ code, phone }: VerifyRequestDTO) => {
-  const res = await api.post<VerifyResponseDTO>(`${AUTH_API}/verify`, {
-    code,
-    phone,
-  });
+  const res = await api.post<VerifyResponseDTO>(
+    `${AUTH_API}/verify`,
+    {
+      code,
+      phone,
+    },
+    { withCredentials: true }
+  );
   return res;
 };
 
@@ -33,7 +38,9 @@ export const refresh = async () => {
 };
 
 export const me = async () => {
-  const res = await api.get(`${AUTH_API}/me`);
+  const res = await api.get(`${AUTH_API}/me`, {
+    withCredentials: true,
+  });
   return res;
 };
 

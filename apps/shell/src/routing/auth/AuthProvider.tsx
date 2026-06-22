@@ -9,6 +9,8 @@ type Props = {
 const AuthProvider = ({ children }: Props) => {
   const { setIsAuthenticated, isBootStarpping, setIsBootStrapping } =
     useAuthStore((state) => state);
+  const location = window.location.pathname;
+
   const bootstrap = async () => {
     try {
       await me();
@@ -19,7 +21,10 @@ const AuthProvider = ({ children }: Props) => {
       setIsBootStrapping(false);
     }
   };
+
   useEffect(() => {
+    if (location === "/auth/login") return;
+    if (isBootStarpping) return;
     setIsBootStrapping(true);
     bootstrap();
   }, []);

@@ -42,5 +42,5 @@ export const useAuthStore = create<StoreState>()(
         state.isBootStarpping = status;
       });
     },
-  })),
+  }))
 );

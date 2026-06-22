@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3000,
       host: true,
-      cors: true,
+      // cors: true,
     },
     preview: {
       port: 4172,
@@ -37,64 +37,64 @@ export default defineConfig(({ mode }) => {
           exportType: "default",
         },
       }),
-      VitePWA({
-        registerType: "autoUpdate", // Updates the service worker automatically. Other options: prompt, manual
-        includeAssets: ["vite.svg"], // Includes static assets from  public folder in the precache. For offline usage
-        manifest: {
-          name: "Nexora",
-          short_name: "Nexora",
-          description: "All in one Super App platform",
-          theme_color: "#ffffff", // Browser toolbar/address bar color
-          background_color: "#ffffff", // Splash screen background color during loading
-          display: "standalone", // How the app appears when running
-          scope: "/",
-          start_url: "/home", // Where the app opens when launched
-          orientation: "portrait",
-          //  what icon to show on the home screen when the app is installed (atleast two icons: 192 and 512)
-          icons: [
-            {
-              src: "pwa-192.png",
-              sizes: "192x192", //
-              type: "image/png",
-              purpose: "any", //
-            },
-            {
-              src: "pwa-225.png",
-              sizes: "225x225",
-              type: "image/png",
-              purpose: "any", // For Android adaptive icons with padding
-            },
-            {
-              src: "pwa-512.png",
-              sizes: "512x512",
-              type: "image/png",
-              purpose: "any", // For Android adaptive icons with padding
-            },
-          ],
-        },
-        //This is where you define caching strategies
-        workbox: {
-          // Tells Workbox which file types to precache during build
-          globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
-          // runtimeCaching: [
-          //   {
-          //     urlPattern:
-          //       /^https:\/\/api\.example\.com\/.*\.(?:png|jpg|jpeg|svg)/,
-          //     handler: "StaleWhileRevalidate", // Use cache, update in background
-          //     options: {
-          //       cacheName: "api-image-cache",
-          //       expiration: {
-          //         maxEntries: 50,
-          //         maxAgeSeconds: 60 * 60 * 24, // 24 hours
-          //       },
-          //     },
-          //   },
-          // ],
-        },
-        devOptions: {
-          enabled: false, // Disable service worker in development for easier debugging
-        },
-      }),
+      // VitePWA({
+      //   registerType: "autoUpdate", // Updates the service worker automatically. Other options: prompt, manual
+      //   includeAssets: ["vite.svg"], // Includes static assets from  public folder in the precache. For offline usage
+      //   manifest: {
+      //     name: "Nexora",
+      //     short_name: "Nexora",
+      //     description: "All in one Super App platform",
+      //     theme_color: "#ffffff", // Browser toolbar/address bar color
+      //     background_color: "#ffffff", // Splash screen background color during loading
+      //     display: "standalone", // How the app appears when running
+      //     scope: "/",
+      //     start_url: "/home", // Where the app opens when launched
+      //     orientation: "portrait",
+      //     //  what icon to show on the home screen when the app is installed (atleast two icons: 192 and 512)
+      //     icons: [
+      //       {
+      //         src: "pwa-192.png",
+      //         sizes: "192x192", //
+      //         type: "image/png",
+      //         purpose: "any", //
+      //       },
+      //       {
+      //         src: "pwa-225.png",
+      //         sizes: "225x225",
+      //         type: "image/png",
+      //         purpose: "any", // For Android adaptive icons with padding
+      //       },
+      //       {
+      //         src: "pwa-512.png",
+      //         sizes: "512x512",
+      //         type: "image/png",
+      //         purpose: "any", // For Android adaptive icons with padding
+      //       },
+      //     ],
+      //   },
+      //   //This is where you define caching strategies
+      //   workbox: {
+      //     // Tells Workbox which file types to precache during build
+      //     globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+      //     // runtimeCaching: [
+      //     //   {
+      //     //     urlPattern:
+      //     //       /^https:\/\/api\.example\.com\/.*\.(?:png|jpg|jpeg|svg)/,
+      //     //     handler: "StaleWhileRevalidate", // Use cache, update in background
+      //     //     options: {
+      //     //       cacheName: "api-image-cache",
+      //     //       expiration: {
+      //     //         maxEntries: 50,
+      //     //         maxAgeSeconds: 60 * 60 * 24, // 24 hours
+      //     //       },
+      //     //     },
+      //     //   },
+      //     // ],
+      //   },
+      //   devOptions: {
+      //     enabled: false, // Disable service worker in development for easier debugging
+      //   },
+      // }),
 
       // federation({
       //   name: "shell",

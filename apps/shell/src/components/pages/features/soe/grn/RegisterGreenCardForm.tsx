@@ -43,11 +43,13 @@ import {
 import { GRNDraftResponseDTO } from "@api/soe/grn/types/response";
 import { useGreenCardStore } from "@store/soe/grn/greenCardStore";
 import { createGRN } from "@api/soe/grn";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { RegisterGRNFormSchema } from "@validations/soe/grn/RegisterGRNFormSchema";
 
 interface FormValues {
   unitId: Unit;
   placeAdditionalDescription: string;
-  greenCardType: GRNTypeOption[];
+  grnType: GRNTypeOption[];
   placeViewDescription: string;
   suggestionDescription: string;
   file: File[];
@@ -64,8 +66,8 @@ const formDataMapper = (
     return {
       unitId: data?.unitId?.id,
       placeViewDescription: data.placeViewDescription,
-      ...(data.greenCardType?.value && {
-        greenCardType: data.greenCardType.value,
+      ...(data.grnType?.value && {
+        grnType: data.grnType.value,
       }),
       viewDate: data.viewDate,
       placeAdditionalDescription: data.placeAdditionalDescription,
@@ -82,7 +84,7 @@ const formDataMapper = (
       ...(data.placeViewDescription && {
         placeViewDescription: data.placeViewDescription,
       }),
-      ...(data.greenCardType && { greenCardType: data.greenCardType?.value }),
+      ...(data.grnType && { grnType: data.grnType?.value }),
       ...(data.placeAdditionalDescription && {
         placeAdditionalDescription: data.placeAdditionalDescription,
       }),
@@ -100,7 +102,7 @@ const formDataMapper = (
 const DefaultValues = {
   unitId: undefined,
   file: [],
-  greenCardType: undefined,
+  grnType: undefined,
   time: undefined,
   date: undefined,
   placeAdditionalDescription: "",
@@ -137,7 +139,7 @@ const RegisterGreenCardForm = () => {
     setValue,
     // formState: { isDirty, dirtyFields },
   } = useForm<FormValues | any>({
-    // resolver: yupResolver(RegisterGreenCardFormSchema),
+    resolver: yupResolver(RegisterGRNFormSchema),
     defaultValues: DefaultValues,
   });
 
@@ -209,7 +211,7 @@ const RegisterGreenCardForm = () => {
       setDraft(null);
       setValue("unitId", null);
       setValue("placeAdditionalDescription", "");
-      setValue("greenCardType", null);
+      setValue("grnType", null);
       setValue("placeViewDescription", "");
       setValue("suggestionDescription", "");
       setValue("time", null);
@@ -332,7 +334,7 @@ const RegisterGreenCardForm = () => {
           <CustomComboBox
             label={Texts.features.soe.grn.grnType}
             control={control}
-            name="greenCardType"
+            name="grnType"
             options={GRNTypeOptions}
           />
         </div>
@@ -377,7 +379,6 @@ const RegisterGreenCardForm = () => {
           onFilesAccepted={handleAcceptedFiles}
           onFilesRejected={handleRejectedFiles}
           maxFiles={1}
-          required={true}
         />
         <div>
           <ul className="gap-2 flex flex-col">

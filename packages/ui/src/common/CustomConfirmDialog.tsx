@@ -90,10 +90,8 @@ export function CustomConfirmDialog() {
       <DialogActions sx={{ justifyContent: "flex-end" }}>
         {hasOkBtn && (
           <Button
-            sx={{
-              backgroundColor: theme.palette.success.light,
-              color: theme.palette.primary.main,
-            }}
+            variant="text"
+            color="success"
             disabled={isLoading}
             startIcon={isLoading ? <CircularProgress size={15} /> : undefined}
             onClick={handleOk}
@@ -104,13 +102,7 @@ export function CustomConfirmDialog() {
         )}
 
         {hasCancelBtn && (
-          <Button
-            sx={{
-              backgroundColor: theme.palette.error.light,
-              color: theme.palette.primary.main,
-            }}
-            onClick={handleCancel}
-          >
+          <Button color="error" variant="text" onClick={handleCancel}>
             {Shared_Text.common.cancel}
           </Button>
         )}

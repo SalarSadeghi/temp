@@ -5,9 +5,9 @@ import { Navigate, Outlet, useNavigation } from "react-router-dom";
 
 const FeatureLayout = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  if (!isAuthenticated) {
-    return <Navigate to="/auth/login" replace />;
-  }
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/auth/login" replace />;
+  // }
 
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";

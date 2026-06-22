@@ -4,8 +4,6 @@ import { InstallPWABanner } from "@components/common/InstallPWABanner";
 import AuthProvider from "@routing/auth/AuthProvider";
 
 function App() {
-  // useAuthInit();
-
   return (
     <>
       <AuthProvider>
